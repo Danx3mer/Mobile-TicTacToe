@@ -7,22 +7,6 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:foreground="@drawable/blank"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:scrollbarTrackHorizontal="@drawable/blank"
-        android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank" />
-
-    <ImageButton
         android:id="@+id/imageButton5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,43 +16,14 @@
         android:scrollbarSize="0dp"
         android:scrollbarTrackHorizontal="@drawable/blank"
         android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/blank" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:foreground="@drawable/blank"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:scrollbarTrackHorizontal="@drawable/blank"
-        android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
-        app:srcCompat="@drawable/blank" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:foreground="@drawable/blank"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:scrollbarTrackHorizontal="@drawable/blank"
-        android:scrollbarTrackVertical="@drawable/blank"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blank" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:foreground="@drawable/blank"
@@ -77,22 +32,9 @@
         android:scrollbarSize="0dp"
         android:scrollbarTrackHorizontal="@drawable/blank"
         android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:srcCompat="@drawable/blank" />
-
-    <ImageButton
-        android:id="@+id/imageButton9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:foreground="@drawable/blank"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:scrollbarTrackHorizontal="@drawable/blank"
-        android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/blank" />
 
     <ImageButton
@@ -105,22 +47,9 @@
         android:scrollbarSize="0dp"
         android:scrollbarTrackHorizontal="@drawable/blank"
         android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:srcCompat="@drawable/blank" />
-
-    <ImageButton
-        android:id="@+id/imageButton10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:foreground="@drawable/blank"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:scrollbarTrackHorizontal="@drawable/blank"
-        android:scrollbarTrackVertical="@drawable/blank"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
         app:srcCompat="@drawable/blank" />
 
     <ImageButton
@@ -134,7 +63,79 @@
         android:scrollbarTrackHorizontal="@drawable/blank"
         android:scrollbarTrackVertical="@drawable/blank"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blank" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/blank"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:scrollbarTrackHorizontal="@drawable/blank"
+        android:scrollbarTrackVertical="@drawable/blank"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:srcCompat="@drawable/blank" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/blank"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:scrollbarTrackHorizontal="@drawable/blank"
+        android:scrollbarTrackVertical="@drawable/blank"
+        app:layout_constraintStart_toEndOf="@+id/imageButton8"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+        app:srcCompat="@drawable/blank" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/blank"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:scrollbarTrackHorizontal="@drawable/blank"
+        android:scrollbarTrackVertical="@drawable/blank"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:srcCompat="@drawable/blank" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/blank"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:scrollbarTrackHorizontal="@drawable/blank"
+        android:scrollbarTrackVertical="@drawable/blank"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton8"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:srcCompat="@drawable/blank" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/blank"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:scrollbarTrackHorizontal="@drawable/blank"
+        android:scrollbarTrackVertical="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blank" />
 
