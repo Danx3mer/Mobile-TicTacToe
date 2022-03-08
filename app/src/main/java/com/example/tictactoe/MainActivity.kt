@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
+import androidx.core.graphics.drawable.toDrawable
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cellClick(v: View){
-      Log.i("Click!!!", v.id.toString())
+        //v.foreground=R.drawable.o.toDrawable()
+        val currentImageButton=findViewById<ImageButton>(v.id)
+        currentImageButton.setImageResource(R.drawable.x)
     }
 }
