@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--Todo: add "android:src="@drawable/blank"" to the end of every imagebutton decleration-->
     <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="100dp"

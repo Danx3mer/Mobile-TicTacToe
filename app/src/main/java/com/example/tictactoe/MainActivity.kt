@@ -17,5 +17,6 @@ class MainActivity : AppCompatActivity() {
         //v.foreground=R.drawable.o.toDrawable()
         val currentImageButton=findViewById<ImageButton>(v.id)
         currentImageButton.setImageResource(R.drawable.x)
+        //TODO: Make it so that all of the other buttons could be clicked, and add logic to the clicks.
     }
 }
