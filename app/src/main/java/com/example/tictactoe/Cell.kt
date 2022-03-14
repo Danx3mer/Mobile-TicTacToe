@@ -12,13 +12,15 @@ class Cell(imageButtonGiven:ImageButton): AppCompatActivity() {
 
     val boundImageButton = imageButtonGiven
 
-    fun cellClick(){
+    fun cellClick(): Boolean{
         when(this.image){
             ImageType.Blank -> {
                 this.boundImageButton.setImageResource(R.drawable.x) //TODO: after I made Engine, change this to a when(Engine.currentTurn) statement
                 this.image = ImageType.X                          //TODO: after I made Engine, change this to a when(Engine.currentTurn) statement
+                return true
             }
         }
+        return false
     }
 
     fun reset(){

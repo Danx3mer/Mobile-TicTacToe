@@ -39,9 +39,9 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        android:src="@drawable/blank"/>
+        app:layout_constraintStart_toEndOf="@+id/imageButton2" />
 
     <ImageButton
         android:id="@+id/imageButton4"

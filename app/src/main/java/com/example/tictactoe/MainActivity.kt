@@ -17,7 +17,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var cell7 :Cell
     lateinit var cell8 :Cell
     lateinit var cell9 :Cell
-    lateinit var currentTurnButton :ImageView
+
+    lateinit var currentTurnButton: ImageView
+
+    lateinit var engine: Engine
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +35,20 @@ class MainActivity : AppCompatActivity() {
         cell7=Cell(findViewById<ImageButton>(R.id.imageButton7))
         cell8=Cell(findViewById<ImageButton>(R.id.imageButton8))
         cell9=Cell(findViewById<ImageButton>(R.id.imageButton9))
+
+        val array = arrayOf(findViewById<ImageButton>(R.id.imageButton1),findViewById<ImageButton>(R.id.imageButton2),findViewById<ImageButton>(R.id.imageButton3)
+            ,findViewById<ImageButton>(R.id.imageButton4),findViewById<ImageButton>(R.id.imageButton5),findViewById<ImageButton>(R.id.imageButton6),findViewById<ImageButton>(R.id.imageButton7)
+            ,findViewById<ImageButton>(R.id.imageButton8),findViewById<ImageButton>(R.id.imageButton9))
+
+        engine = Engine(array)
+
         currentTurnButton=findViewById<ImageView>(R.id.imageView)
     }
 
     fun cellClick(v: View){
-        when(v.id) {
+        engine.fieldClick(v)
+
+       /* when(v.id) {
             cell1.boundImageButton.id -> cell1.cellClick()
             cell2.boundImageButton.id -> cell2.cellClick()
             cell3.boundImageButton.id -> cell3.cellClick()
@@ -58,6 +70,6 @@ class MainActivity : AppCompatActivity() {
                 cell9.reset()
             }
             else -> Log.i("ERROR","ID IS INVALID")
-        }
+        }*/
     }
 }
