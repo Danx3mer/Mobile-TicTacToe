@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--Todo: add "android:src="@drawable/blank"" to the end of every imagebutton decleration-->
     <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="100dp"
@@ -15,94 +14,141 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-        android:src="@drawable/o"/>
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2" />
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"/>
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton4"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton5"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton6"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton7"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintEnd_toStartOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton8"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
+        android:src="@drawable/blank"/>
 
     <ImageButton
         android:id="@+id/imageButton9"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         app:layout_constraintStart_toEndOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+        android:src="@drawable/blank"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="127dp"
+        android:layout_height="127dp"
+        android:onClick="cellClick"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505"
+        app:srcCompat="@drawable/blank" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/Widget.AppCompat.TextView"
+        android:layout_width="127dp"
+        android:layout_height="26dp"
+        android:gravity="center|center_vertical"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbars="none"
+        android:text="Current Turn:"
+        android:textColor="@color/black"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="@null"
+        android:textCursorDrawable="@null"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
