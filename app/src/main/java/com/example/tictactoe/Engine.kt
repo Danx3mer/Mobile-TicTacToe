@@ -56,7 +56,6 @@ class Engine(imageButtons: Array<ImageButton>, imageview: ImageView) {
     }
 
     fun winCheck(){
-
+        //TODO: make winCheck working and make gameOver function that takes in the parameter oWon: Boolean
     }
-
 }
