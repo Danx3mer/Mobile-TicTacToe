@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@android:style/ThemeOverlay.Material.Dark"
     tools:context=".MainActivity">
 
     <ImageButton
@@ -26,10 +27,10 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/blank"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -51,10 +52,10 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/blank"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -64,11 +65,11 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/blank"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -78,10 +79,10 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/blank"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -91,9 +92,9 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintEnd_toStartOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
-        android:src="@drawable/blank"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
 
     <ImageButton
         android:id="@+id/imageButton8"
@@ -103,10 +104,10 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
-        android:src="@drawable/blank"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
 
     <ImageButton
         android:id="@+id/imageButton9"
@@ -116,9 +117,9 @@
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
         app:layout_constraintStart_toEndOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
-        android:src="@drawable/blank"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -150,5 +151,19 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="reset"
+        android:text="Reset"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton8"
+        app:layout_constraintVertical_bias="0.45999998" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
