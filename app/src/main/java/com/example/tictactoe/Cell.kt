@@ -1,21 +1,16 @@
 package com.example.tictactoe
 
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
 
-//I have to inherit from Activity to use the findViewById function.
-class Cell(imageButtonGiven:ImageButton): AppCompatActivity() {
+class Cell(imageButtonGiven:ImageButton){
     enum class ImageType{Blank,O,X}
-
     var image:ImageType = ImageType.Blank
-        private set
+    private set
 
     val boundImageButton = imageButtonGiven
 
     fun cellClick(): Boolean{
-        when(this.image){
-            ImageType.Blank -> {
-
+        if(this.image==ImageType.Blank){
                 when(engine.currentTurn){
                     Engine.CurrentTurnType.X ->{
                         this.boundImageButton.setImageResource(R.drawable.x)
@@ -27,7 +22,6 @@ class Cell(imageButtonGiven:ImageButton): AppCompatActivity() {
                     }
                 }
                 return true
-            }
         }
         return false
     }
