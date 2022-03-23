@@ -97,7 +97,20 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
             cellMatchCounter = 0
         }
 
-        //TODO: make horizontal checks
+        //Checking diagonals
+        for (cellCounter in arrayOf(0,4,8)) {
+            if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
+
+            if (cellMatchCounter == 3) return true
+        }
+        cellMatchCounter = 0
+
+        for (cellCounter in arrayOf(2,4,6)) {
+            if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
+
+            if (cellMatchCounter == 3) return true
+        }
+        cellMatchCounter = 0
 
         return false
     }
