@@ -1,14 +1,16 @@
 package com.example.tictactoe
 
 import android.content.Context
-import android.util.Log
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
-class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton>, val imageView: ImageView) {
+class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton>, val imageView: ImageView, val imageViewLineDrawer: ImageView) {
     private val cells = arrayOf(Cell(imageButtons[0]),
         Cell(imageButtons[1]),
         Cell(imageButtons[2]),
@@ -118,6 +120,8 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
     private fun gameOver(oWon: Boolean){
         this.isGameOver = true
 
+        drawWinningLine()
+
         when(oWon){
             true -> AlertDialog.Builder(this.contextOfMainActivity)
                 .setTitle("WINNER!!!")
@@ -132,4 +136,22 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
                 .show()
         }
     }
+
+    private fun drawWinningLine(){
+        //Todo: make this function functional.
+
+        val bitmap = Bitmap.createBitmap(20, 700, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        canvas.drawColor(Color.BLACK)
+        val paint = Paint()
+        paint.color = Color.BLACK
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = 8F
+        paint.isAntiAlias = true
+        val offset = 50
+        canvas.drawLine(
+            offset.toFloat(), (canvas.height / 2).toFloat(), (canvas.width - offset).toFloat(), (canvas.height / 2).toFloat(), paint)
+        this.imageViewLineDrawer.setImageBitmap(bitmap)
+    }
+
 }
