@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton>, val imageView: ImageView) {
     private val cells = arrayOf(Cell(imageButtons[0]),
@@ -110,7 +111,6 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
 
             if (cellMatchCounter == 3) return true
         }
-        cellMatchCounter = 0
 
         return false
     }
@@ -118,10 +118,18 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
     private fun gameOver(oWon: Boolean){
         this.isGameOver = true
 
-        //TODO: Make gameover message nicer
         when(oWon){
-            true -> Toast.makeText(contextOfMainActivity, "O WON!!!", Toast.LENGTH_SHORT).show()
-            false -> Toast.makeText(contextOfMainActivity, "X WON!!!", Toast.LENGTH_SHORT).show()
+            true -> AlertDialog.Builder(this.contextOfMainActivity)
+                .setTitle("WINNER!!!")
+                .setMessage("O won!!!")
+                .setPositiveButton("OK") { dialog, which -> dialog.dismiss()}
+                .show()
+
+            false -> AlertDialog.Builder(this.contextOfMainActivity)
+                .setTitle("WINNER!!!")
+                .setMessage("X won!!!")
+                .setPositiveButton("OK") { dialog, which -> dialog.dismiss()}
+                .show()
         }
     }
 }
