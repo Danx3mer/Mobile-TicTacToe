@@ -27,5 +27,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cellClick(view: View) = engine.fieldClick(view)
-    fun reset(view: View) = engine.resetField()
+    fun newGame(view: View) = engine.startNewGame()
 }

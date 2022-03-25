@@ -10,7 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 
-class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton>, val imageView: ImageView, val imageViewLineDrawer: ImageView) {
+class Engine(private val contextOfMainActivity: Context, imageButtons: Array<ImageButton>, private val imageView: ImageView, private val imageViewLineDrawer: ImageView) {
     private val cells = arrayOf(Cell(imageButtons[0]),
         Cell(imageButtons[1]),
         Cell(imageButtons[2]),
@@ -22,10 +22,12 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
         Cell(imageButtons[8]))
 
     init {
-        this.resetField()
+        this.startNewGame()
     }
 
     private var numOfMoves = 0
+
+    enum class WinningLinePos{VLeft,VMiddle,VRight,HTop,HMiddle,HBottom,D1,D2,Fail}
 
     enum class CurrentTurnType{X,O}
     var currentTurn:CurrentTurnType = CurrentTurnType.O
@@ -38,15 +40,23 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
         for(i in 0..8){
             if(this.cells[i].boundImageButton.id == view.id){
                 if(this.cells[i].cellClick()){
-                    if(++this.numOfMoves>=5)
-                        if(this.winCheck()) {
+                    if(++this.numOfMoves >= 5) {
+                        val winCheckRes: WinningLinePos = this.winCheck()
+                        if (winCheckRes != WinningLinePos.Fail) {
                             gameOver(
                                 when (this.currentTurn) {
                                     CurrentTurnType.O -> true
                                     CurrentTurnType.X -> false
-                                }
-                            )
+                                }, winCheckRes)
                         }
+                        else if (this.numOfMoves == 9) {
+                            AlertDialog.Builder(this.contextOfMainActivity)
+                                .setTitle("TIE!!!")
+                                .setMessage("It is a tie!!!")
+                                .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                                .show()
+                        }
+                    }
                     this.switchTurns()
                 }
             }
@@ -66,14 +76,16 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
         }
     }
 
-    fun resetField(){
+    fun startNewGame(){
         for(i in 0..8) this.cells[i].reset()
         this.imageView.setImageResource(R.drawable.o)
         this.currentTurn = CurrentTurnType.O
         this.isGameOver = false
+        this.numOfMoves = 0
+        this.imageViewLineDrawer.setImageBitmap(Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)) //Clear the line drawing field
     }
 
-    private fun winCheck() :Boolean {
+    private fun winCheck() :WinningLinePos {
         var cellMatchCounter = 0
         val checkImage: Cell.ImageType = when(this.currentTurn){
             CurrentTurnType.X -> Cell.ImageType.X
@@ -85,7 +97,12 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
             for (cellCounter in i * 3..i * 3 + 2) {
                 if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
 
-                if (cellMatchCounter == 3) return true
+                if (cellMatchCounter == 3) return when(i){
+                    0 -> WinningLinePos.HTop
+                    1 -> WinningLinePos.HMiddle
+                    2 -> WinningLinePos.HBottom
+                    else -> WinningLinePos.Fail
+                }
             }
             cellMatchCounter = 0
         }
@@ -95,7 +112,12 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
             for (cellCounter in arrayOf(i,3+i,6+i)) {
                 if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
 
-                if (cellMatchCounter == 3) return true
+                if (cellMatchCounter == 3) return when(i){
+                    0 -> WinningLinePos.VLeft
+                    1 -> WinningLinePos.VMiddle
+                    2 -> WinningLinePos.VRight
+                    else -> WinningLinePos.Fail
+                }
             }
             cellMatchCounter = 0
         }
@@ -104,54 +126,85 @@ class Engine(val contextOfMainActivity: Context, imageButtons: Array<ImageButton
         for (cellCounter in arrayOf(0,4,8)) {
             if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
 
-            if (cellMatchCounter == 3) return true
+            if (cellMatchCounter == 3) return WinningLinePos.D1
         }
         cellMatchCounter = 0
 
         for (cellCounter in arrayOf(2,4,6)) {
             if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
 
-            if (cellMatchCounter == 3) return true
+            if (cellMatchCounter == 3) return WinningLinePos.D2
         }
 
-        return false
+        return WinningLinePos.Fail
     }
 
-    private fun gameOver(oWon: Boolean){
+    private fun gameOver(oWon: Boolean, winningLinePos: WinningLinePos){
         this.isGameOver = true
 
-        drawWinningLine()
+        drawWinningLine(winningLinePos)
 
         when(oWon){
-            true -> AlertDialog.Builder(this.contextOfMainActivity)
-                .setTitle("WINNER!!!")
-                .setMessage("O won!!!")
-                .setPositiveButton("OK") { dialog, which -> dialog.dismiss()}
-                .show()
+            true -> {
+                AlertDialog.Builder(this.contextOfMainActivity)
+                    .setTitle("WINNER!!!")
+                    .setMessage("O won!!!")
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss()}
+                    .show()
+                return
+            }
 
-            false -> AlertDialog.Builder(this.contextOfMainActivity)
-                .setTitle("WINNER!!!")
-                .setMessage("X won!!!")
-                .setPositiveButton("OK") { dialog, which -> dialog.dismiss()}
-                .show()
+            false -> {
+                AlertDialog.Builder(this.contextOfMainActivity)
+                    .setTitle("WINNER!!!")
+                    .setMessage("X won!!!")
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss()}
+                    .show()
+                return
+            }
         }
+
+
     }
 
-    private fun drawWinningLine(){
-        //Todo: make this function functional.
+    private fun drawWinningLine(winningLinePos: WinningLinePos){
+        val startX: Float = when(winningLinePos){
+            WinningLinePos.VLeft -> 50F
+            WinningLinePos.VMiddle -> 150F
+            WinningLinePos.VRight -> 250F
+            WinningLinePos.D2 -> 300F
+            else -> 300F
+        }
+        val startY: Float = when(winningLinePos){
+            WinningLinePos.HTop -> 50F
+            WinningLinePos.HMiddle -> 150F
+            WinningLinePos.HBottom -> 250F
+            WinningLinePos.D1 -> 300F
+            else -> 0F
+        }
+        val stopX: Float = when(winningLinePos){
+            WinningLinePos.VLeft -> startX
+            WinningLinePos.VMiddle -> startX
+            WinningLinePos.VRight -> startX
+            else -> 0F
+        }
+        val stopY: Float = when(winningLinePos){
+            WinningLinePos.HBottom -> startY
+            WinningLinePos.HMiddle -> startY
+            WinningLinePos.HTop -> startY
+            WinningLinePos.D1 -> 0F
+            else -> 300F
+        }
 
-        val bitmap = Bitmap.createBitmap(20, 700, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        canvas.drawColor(Color.BLACK)
         val paint = Paint()
         paint.color = Color.BLACK
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 8F
         paint.isAntiAlias = true
-        val offset = 50
-        canvas.drawLine(
-            offset.toFloat(), (canvas.height / 2).toFloat(), (canvas.width - offset).toFloat(), (canvas.height / 2).toFloat(), paint)
-        this.imageViewLineDrawer.setImageBitmap(bitmap)
+        canvas.drawLine(startX, startY, stopX, stopY, paint)
+        imageViewLineDrawer.setImageBitmap(bitmap)
     }
 
 }
