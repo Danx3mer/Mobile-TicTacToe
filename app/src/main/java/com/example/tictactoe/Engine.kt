@@ -10,7 +10,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 
-class Engine(private val contextOfMainActivity: Context, imageButtons: Array<ImageButton>, private val imageView: ImageView, private val imageViewLineDrawer: ImageView) {
+class Engine(private val contextOfMainActivity: Context,
+             imageButtons: Array<ImageButton>,
+             private val imageView: ImageView,
+             private val imageViewLineDrawer: ImageView) {
+
     private val cells = arrayOf(Cell(imageButtons[0]),
         Cell(imageButtons[1]),
         Cell(imageButtons[2]),
@@ -27,6 +31,8 @@ class Engine(private val contextOfMainActivity: Context, imageButtons: Array<Ima
 
     private var numOfMoves = 0
 
+    var computer: Computer = Computer(Difficulty.None)
+
     enum class WinningLinePos{VLeft,VMiddle,VRight,HTop,HMiddle,HBottom,D1,D2,Fail}
 
     enum class CurrentTurnType{X,O}
@@ -37,6 +43,7 @@ class Engine(private val contextOfMainActivity: Context, imageButtons: Array<Ima
     fun fieldClick(view: View){
         if(this.isGameOver) return
 
+        //Player goes here
         for(i in 0..8){
             if(this.cells[i].boundImageButton.id == view.id){
                 if(this.cells[i].cellClick()){
@@ -59,6 +66,28 @@ class Engine(private val contextOfMainActivity: Context, imageButtons: Array<Ima
                     }
                     this.switchTurns()
                 }
+            }
+        }
+
+        //Computer goes here
+        val computerPick = computer.pickCell()
+        if(computerPick==-1) return
+        this.cells[computerPick].cellClick()
+        if(++this.numOfMoves >= 5) {
+            val winCheckRes: WinningLinePos = this.winCheck()
+            if (winCheckRes != WinningLinePos.Fail) {
+                gameOver(
+                    when (this.currentTurn) {
+                        CurrentTurnType.O -> true
+                        CurrentTurnType.X -> false
+                    }, winCheckRes)
+            }
+            else if (this.numOfMoves == 9) {
+                AlertDialog.Builder(this.contextOfMainActivity)
+                    .setTitle("TIE!!!")
+                    .setMessage("It is a tie!!!")
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+                    .show()
             }
         }
     }

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
 lateinit var engine: Engine
+enum class Difficulty{None,Easy,Medium,Hard}
 
 class MainActivity : AppCompatActivity() {
 
