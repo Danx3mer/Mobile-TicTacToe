@@ -15,7 +15,7 @@ class Engine(private val contextOfMainActivity: Context,
              private val imageView: ImageView,
              private val imageViewLineDrawer: ImageView) {
 
-    private val cells = arrayOf(Cell(imageButtons[0]),
+    val cells = arrayOf(Cell(imageButtons[0]),
         Cell(imageButtons[1]),
         Cell(imageButtons[2]),
         Cell(imageButtons[3]),
@@ -31,7 +31,7 @@ class Engine(private val contextOfMainActivity: Context,
 
     private var numOfMoves = 0
 
-    var computer: Computer = Computer(Difficulty.None)
+    var computer: Computer = Computer(Difficulty.Easy)
 
     enum class WinningLinePos{VLeft,VMiddle,VRight,HTop,HMiddle,HBottom,D1,D2,Fail}
 
@@ -55,6 +55,7 @@ class Engine(private val contextOfMainActivity: Context,
                                     CurrentTurnType.O -> true
                                     CurrentTurnType.X -> false
                                 }, winCheckRes)
+                            return
                         }
                         else if (this.numOfMoves == 9) {
                             AlertDialog.Builder(this.contextOfMainActivity)
@@ -62,6 +63,7 @@ class Engine(private val contextOfMainActivity: Context,
                                 .setMessage("It is a tie!!!")
                                 .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
                                 .show()
+                            return
                         }
                     }
                     this.switchTurns()
@@ -90,6 +92,7 @@ class Engine(private val contextOfMainActivity: Context,
                     .show()
             }
         }
+        this.switchTurns()
     }
 
     private fun switchTurns(){
