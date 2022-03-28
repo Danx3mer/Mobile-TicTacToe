@@ -15,7 +15,7 @@ class Engine(private val contextOfMainActivity: Context,
              private val imageView: ImageView,
              private val imageViewLineDrawer: ImageView) {
 
-    val cells = arrayOf(Cell(imageButtons[0]),
+    private val cells = arrayOf(Cell(imageButtons[0]),
         Cell(imageButtons[1]),
         Cell(imageButtons[2]),
         Cell(imageButtons[3]),
@@ -29,7 +29,8 @@ class Engine(private val contextOfMainActivity: Context,
         this.startNewGame()
     }
 
-    private var numOfMoves = 0
+    var numOfMoves = 0
+    private set
 
     var computer: Computer = Computer(Difficulty.Easy)
 
@@ -73,7 +74,7 @@ class Engine(private val contextOfMainActivity: Context,
         }
 
         //Computer goes here
-        val computerPick = computer.pickCell()
+        val computerPick = computer.pickCell(this.cells)
         if(computerPick==-1) return
         this.cells[computerPick].cellClick()
         if(++this.numOfMoves >= 5) {
