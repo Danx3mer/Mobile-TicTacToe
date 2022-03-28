@@ -32,7 +32,7 @@ class Engine(private val contextOfMainActivity: Context,
     var numOfMoves = 0
     private set
 
-    var computer: Computer = Computer(Difficulty.Easy)
+    var computer: Computer = Computer(Difficulty.Medium)
 
     enum class WinningLinePos{VLeft,VMiddle,VRight,HTop,HMiddle,HBottom,D1,D2,Fail}
 
@@ -129,14 +129,13 @@ class Engine(private val contextOfMainActivity: Context,
         //Checking horizontals
         for(i in 0..2) {
             for (cellCounter in i * 3..i * 3 + 2) {
-                if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
-
-                if (cellMatchCounter == 3) return when(i){
-                    0 -> WinningLinePos.HTop
-                    1 -> WinningLinePos.HMiddle
-                    2 -> WinningLinePos.HBottom
-                    else -> WinningLinePos.Fail
-                }
+                if (this.cells[cellCounter].image == checkImage)
+                    if (++cellMatchCounter == 3) return when(i){
+                        0 -> WinningLinePos.HTop
+                        1 -> WinningLinePos.HMiddle
+                        2 -> WinningLinePos.HBottom
+                        else -> WinningLinePos.Fail
+                    }
             }
             cellMatchCounter = 0
         }
@@ -144,30 +143,28 @@ class Engine(private val contextOfMainActivity: Context,
         //Checking verticals
         for(i in 0..2) {
             for (cellCounter in arrayOf(i,3+i,6+i)) {
-                if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
-
-                if (cellMatchCounter == 3) return when(i){
-                    0 -> WinningLinePos.VLeft
-                    1 -> WinningLinePos.VMiddle
-                    2 -> WinningLinePos.VRight
-                    else -> WinningLinePos.Fail
-                }
+                if (this.cells[cellCounter].image == checkImage)
+                    if (++cellMatchCounter == 3) return when(i){
+                        0 -> WinningLinePos.VLeft
+                        1 -> WinningLinePos.VMiddle
+                        2 -> WinningLinePos.VRight
+                        else -> WinningLinePos.Fail
+                    }
             }
             cellMatchCounter = 0
         }
 
-        //Checking diagonals
+        //Checking diagonals #1
         for (cellCounter in arrayOf(0,4,8)) {
-            if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
-
-            if (cellMatchCounter == 3) return WinningLinePos.D1
+            if (this.cells[cellCounter].image == checkImage)
+                if (++cellMatchCounter == 3) return WinningLinePos.D1
         }
         cellMatchCounter = 0
 
+        //Checking diagonals #2
         for (cellCounter in arrayOf(2,4,6)) {
-            if (this.cells[cellCounter].image == checkImage) cellMatchCounter++
-
-            if (cellMatchCounter == 3) return WinningLinePos.D2
+            if (this.cells[cellCounter].image == checkImage)
+                if (++cellMatchCounter == 3) return WinningLinePos.D2
         }
 
         return WinningLinePos.Fail
