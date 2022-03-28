@@ -68,6 +68,7 @@ class Engine(private val contextOfMainActivity: Context,
                     }
                     this.switchTurns()
                 }
+                else return //So that the computer doesn't go in the case that you clicked on a cell that already was clicked on.
             }
         }
 
