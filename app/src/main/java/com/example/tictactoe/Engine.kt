@@ -59,7 +59,10 @@ class Engine(private val contextOfMainActivity: Context,
                                 }, winCheckRes)
                             return
                         }
-                        else if (this.numOfMoves == 9) Toast.makeText(contextOfMainActivity,"It's a tie!",Toast.LENGTH_SHORT).show()
+                        else if (this.numOfMoves == 9) {
+                            Toast.makeText(contextOfMainActivity,"It's a tie!",Toast.LENGTH_SHORT).show()
+                            return //So that the computer doesn't go because it can't pick out any available cells.
+                        }
                     }
                     this.switchTurns()
                 }
