@@ -88,11 +88,7 @@ class Engine(private val contextOfMainActivity: Context,
                     }, winCheckRes)
             }
             else if (this.numOfMoves == 9) {
-                AlertDialog.Builder(this.contextOfMainActivity)
-                    .setTitle("TIE!!!")
-                    .setMessage("It is a tie!!!")
-                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-                    .show()
+                Toast.makeText(contextOfMainActivity,"It's a tie!",Toast.LENGTH_SHORT).show()
             }
         }
         this.switchTurns()
