@@ -8,6 +8,7 @@ import android.graphics.Paint
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 class Engine(private val contextOfMainActivity: Context,
@@ -179,26 +180,9 @@ class Engine(private val contextOfMainActivity: Context,
         drawWinningLine(winningLinePos)
 
         when(oWon){
-            true -> {
-                AlertDialog.Builder(this.contextOfMainActivity)
-                    .setTitle("WINNER!!!")
-                    .setMessage("O won!!!")
-                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss()}
-                    .show()
-                return
-            }
-
-            false -> {
-                AlertDialog.Builder(this.contextOfMainActivity)
-                    .setTitle("WINNER!!!")
-                    .setMessage("X won!!!")
-                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss()}
-                    .show()
-                return
-            }
+            true -> Toast.makeText(contextOfMainActivity,"O won!!!",Toast.LENGTH_SHORT).show()
+            false -> Toast.makeText(contextOfMainActivity,"X won!!!",Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
     private fun drawWinningLine(winningLinePos: WinningLinePos){
