@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8448AFF"
     tools:context=".MainActivity">
 
     <ImageButton
@@ -152,7 +153,7 @@
         android:scrollbarFadeDuration="0"
         android:scrollbars="none"
         android:text="Current Turn:"
-        android:textColor="#736565"
+        android:textColor="#000000"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="@null"
         android:textCursorDrawable="@null"
@@ -176,9 +177,9 @@
         android:layout_width="145dp"
         android:layout_height="62dp"
         android:background="@drawable/buttonroundedright"
+        android:backgroundTint="#AF8FE9"
         android:onClick="newPCGame"
         android:text="New Game VS Bot"
-        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageButton9"
@@ -191,7 +192,7 @@
         android:background="@drawable/buttonroundedleft"
         android:onClick="newGame"
         android:text="New Game VS Player"
-        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageButton7"
@@ -200,13 +201,15 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="5dp"
-        android:layout_height="1dp"
-        android:background="@color/white"
+        android:layout_height="62dp"
+        android:background="#212121"
+        android:backgroundTint="#212121"
+        android:scrollbarSize="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton8"
         app:layout_constraintVertical_bias="0.45"
-        app:srcCompat="@drawable/blank" />
+        app:srcCompat="@drawable/middleline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
