@@ -29,4 +29,5 @@ class MainActivity : AppCompatActivity() {
 
     fun cellClick(view: View) = engine.fieldClick(view)
     fun newGame(view: View) = engine.startNewGame()
+    fun newPCGame(view: View) = engine.startNewGame(Difficulty.Medium)
 }

@@ -25,14 +25,14 @@ class Engine(private val contextOfMainActivity: Context,
         Cell(imageButtons[7]),
         Cell(imageButtons[8]))
 
+    private val computer: Computer = Computer(Difficulty.Medium)
+
     init {
         this.startNewGame()
     }
 
     var numOfMoves = 0
     private set
-
-    var computer: Computer = Computer(Difficulty.Medium)
 
     enum class WinningLinePos{VLeft,VMiddle,VRight,HTop,HMiddle,HBottom,D1,D2,Fail}
 
@@ -110,12 +110,15 @@ class Engine(private val contextOfMainActivity: Context,
         }
     }
 
-    fun startNewGame(){
+    fun startNewGame(difficulty: Difficulty = Difficulty.None){
         for(i in 0..8) this.cells[i].reset()
         this.imageView.setImageResource(R.drawable.o)
         this.currentTurn = CurrentTurnType.O
         this.isGameOver = false
         this.numOfMoves = 0
+
+        computer.difficulty = difficulty
+
         this.imageViewLineDrawer.setImageBitmap(Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)) //Clear the line drawing field
     }
 
