@@ -16,12 +16,12 @@ class Computer(var difficulty: Difficulty) {
             Difficulty.Medium -> {
                 if(availableCells.contains(4)) return 4 //This is the middle
 
-                val offenseRes = this.checkForImage(cells, Cell.ImageType.O) /*I send in the image that the function is checking for. For attack,
+                val offenseRes = this.checkForImage(cells, Cell.ImageType.X) /*I send in the image that the function is checking for. For attack,
                                                                               I put in O (because it is checking for the user's cells),
                                                                               but for defense I put X (because it is looking for it's own cells.)*/
                 if(offenseRes != -1) return offenseRes
 
-                val defendRes = this.checkForImage(cells, Cell.ImageType.X) /*I send in the image that the function is checking for. For attack,
+                val defendRes = this.checkForImage(cells, Cell.ImageType.O) /*I send in the image that the function is checking for. For attack,
                                                                               I put in X (because it is looking for it's own cells),
                                                                               but for offense I put O (because it is checking for the user's cells)*/
                 if(defendRes != -1) return defendRes
