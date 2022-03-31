@@ -11,9 +11,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.title_screen)
 
-        engine = Engine(this,
+        //TODO: Make Engine functional
+        /*engine = Engine(this,
             arrayOf(findViewById(R.id.imageButton1),
             findViewById(R.id.imageButton2),
             findViewById(R.id.imageButton3),
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.imageButton8),
             findViewById(R.id.imageButton9)),
             findViewById(R.id.imageView),
-            findViewById(R.id.imageView2))
+            findViewById(R.id.imageView2))*/
     }
 
     fun cellClick(view: View) = engine.fieldClick(view)
