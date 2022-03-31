@@ -171,46 +171,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="145dp"
-        android:layout_height="62dp"
-        android:background="@drawable/buttonroundedright"
-        android:backgroundTint="#AF8FE9"
-        android:contentDescription="Creates a new game against a bot."
-        android:onClick="newPCGame"
-        android:text="New Game VS Bot"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton9"
-        app:layout_constraintVertical_bias="0.45" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="145dp"
-        android:layout_height="62dp"
-        android:background="@drawable/buttonroundedleft"
-        android:contentDescription="Creates a new game that you can play locally with your friend on this dvevice."
-        android:onClick="newGame"
-
-        android:text="New Game VS Player"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton7"
-        app:layout_constraintVertical_bias="0.45" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="5dp"
-        android:layout_height="62dp"
-        android:background="#212121"
-        android:backgroundTint="#212121"
-        android:scrollbarSize="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton8"
-        app:layout_constraintVertical_bias="0.45"
-        app:srcCompat="@drawable/middleline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
