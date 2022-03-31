@@ -11,7 +11,8 @@
         android:theme="@style/Theme.TicTacToe">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"> <!--I put the last line down to lock the screen orientation to portrait mode only.-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
