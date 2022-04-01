@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8448AFF"
+    android:background="#212121"
     tools:context=".MainActivity">
 
     <ImageButton
         android:id="@+id/imageButton1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 1st clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
@@ -18,12 +18,16 @@
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2" />
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 2nd clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
@@ -32,12 +36,14 @@
         android:src="@drawable/blank"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFrame"
+        app:layout_constraintVertical_bias="0.25" />
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 3rd clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
@@ -45,90 +51,111 @@
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
         app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 4th clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
         app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 5th clickable cell (The middle)"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <ImageButton
         android:id="@+id/imageButton6"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 6th clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 7th clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
         app:layout_constraintEnd_toStartOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:layout_constraintVertical_bias="1" />
 
     <ImageButton
         android:id="@+id/imageButton8"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 8th clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
+        app:layout_constraintVertical_bias="0.75" />
 
     <ImageButton
         android:id="@+id/imageButton9"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="The 9th clickable cell"
         android:onClick="cellClick"
         android:scrollbarDefaultDelayBeforeFade="0"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="0dp"
         android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -139,7 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.505"
+        app:layout_constraintVertical_bias="0.52"
         app:srcCompat="@drawable/blank" />
 
     <TextView
@@ -152,7 +179,7 @@
         android:scrollbarFadeDuration="0"
         android:scrollbars="none"
         android:text="Current Turn:"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="@null"
         android:textCursorDrawable="@null"
@@ -162,6 +189,18 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:id="@+id/imageViewFrame"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57"
+        app:srcCompat="@drawable/tictactoeframe" />
+
+    <ImageView
         android:id="@+id/imageView2"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -169,7 +208,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
