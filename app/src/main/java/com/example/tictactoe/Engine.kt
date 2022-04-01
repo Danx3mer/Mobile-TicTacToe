@@ -94,18 +94,18 @@ class Engine(private val contextOfMainActivity: Context,
         when(this.currentTurn){
             CurrentTurnType.O -> {
                 this.currentTurn=CurrentTurnType.X
-                this.imageView.setImageResource(R.drawable.x)
+                this.imageView.setImageResource(R.drawable.x_new)
             }
             CurrentTurnType.X -> {
                 this.currentTurn=CurrentTurnType.O
-                this.imageView.setImageResource(R.drawable.o)
+                this.imageView.setImageResource(R.drawable.o_new)
             }
         }
     }
 
     fun startNewGame(difficulty: Difficulty = Difficulty.None){
         for(i in 0..8) this.cells[i].reset()
-        this.imageView.setImageResource(R.drawable.o)
+        this.imageView.setImageResource(R.drawable.o_new)
         this.currentTurn = CurrentTurnType.O
         this.isGameOver = false
         this.numOfMoves = 0

@@ -13,11 +13,11 @@ class Cell(imageButtonGiven:ImageButton){
         if(this.image==ImageType.Blank){
                 when(engine.currentTurn){
                     Engine.CurrentTurnType.X ->{
-                        this.boundImageButton.setImageResource(R.drawable.x)
+                        this.boundImageButton.setImageResource(R.drawable.x_new)
                         this.image = ImageType.X
                     }
                     Engine.CurrentTurnType.O ->{
-                        this.boundImageButton.setImageResource(R.drawable.o)
+                        this.boundImageButton.setImageResource(R.drawable.o_new)
                         this.image = ImageType.O
                     }
                 }
