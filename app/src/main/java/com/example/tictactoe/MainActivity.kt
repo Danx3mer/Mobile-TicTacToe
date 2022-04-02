@@ -12,8 +12,6 @@ lateinit var engine: Engine
 enum class Difficulty{None,Easy,Medium,Hard}
 
 class MainActivity : AppCompatActivity() {
-
-    private var engineInitialized: Boolean = false
     private lateinit var detector: GestureDetectorCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,21 +67,28 @@ class MainActivity : AppCompatActivity() {
                 findViewById(R.id.imageButton9)),
             findViewById(R.id.imageView),
             findViewById(R.id.imageView2))
-
-        engineInitialized = true
     }
 
     fun cellClick(view: View) = engine.fieldClick(view)
 
-    fun newGame(view: View){
+    fun newGame(view: View){ //This creates a new game so that you can play vs another person on one device.
         setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame()
     }
 
-    fun newPCGame(view: View){
+    fun newPCGame(view: View){ //This creates a new game with a bot.
         setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame(Difficulty.Medium)
+    }
+
+    fun restartGame(view: View){ //This creates a new game with the previous difficulty.
+        setContentView(R.layout.activity_main)
+
+        val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
+
+        initEngine()
+        engine.startNewGame(difficulty)
     }
 }

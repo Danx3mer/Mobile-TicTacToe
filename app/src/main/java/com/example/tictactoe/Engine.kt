@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 
 class Engine(private val contextOfMainActivity: Context,
              imageButtons: Array<ImageButton>,
@@ -27,6 +26,7 @@ class Engine(private val contextOfMainActivity: Context,
         Cell(imageButtons[8]))
 
     private val computer: Computer = Computer(Difficulty.Medium)
+    var currentDifficulty: Difficulty = this.computer.difficulty
 
     init {
         this.startNewGame()
@@ -111,6 +111,7 @@ class Engine(private val contextOfMainActivity: Context,
         this.numOfMoves = 0
 
         computer.difficulty = difficulty
+        currentDifficulty = difficulty
 
         this.imageViewLineDrawer.setImageBitmap(Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)) //Clear the line drawing field
     }
