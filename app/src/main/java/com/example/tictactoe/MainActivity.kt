@@ -1,9 +1,12 @@
 package com.example.tictactoe
 
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
+import kotlin.math.abs
 
 lateinit var engine: Engine
 enum class Difficulty{None,Easy,Medium,Hard}
@@ -11,10 +14,46 @@ enum class Difficulty{None,Easy,Medium,Hard}
 class MainActivity : AppCompatActivity() {
 
     private var engineInitialized: Boolean = false
+    private lateinit var detector: GestureDetectorCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.title_screen)
+
+        detector = GestureDetectorCompat(this,GestureListener())
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return if(detector.onTouchEvent(event)) true
+        else super.onTouchEvent(event)
+    }
+
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
+
+        private val SWIPE_THRESHOLD = 100
+        private val SWIPE_VELOCITY_THRESHOLD = 70
+
+        override fun onFling(
+            pointerDown: MotionEvent?,
+            moveEvent: MotionEvent?,
+            velocityX: Float,
+            velocityY: Float): Boolean {
+            var diffX = moveEvent?.x?.minus(pointerDown!!.x) ?:0F
+            var diffY = moveEvent?.y?.minus(pointerDown!!.y) ?:0F
+
+            if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
+                if(abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) //If this is a real swipe
+                    if(diffX > 0) // l -> r (right) swipe
+                        this@MainActivity.onSwipeRight()
+
+            return super.onFling(pointerDown, moveEvent, velocityX, velocityY)
+        }
+
+    }
+
+    private fun onSwipeRight() {
+        setContentView(R.layout.title_screen)
+        engine.startNewGame()
     }
 
     private fun initEngine(){
@@ -38,13 +77,13 @@ class MainActivity : AppCompatActivity() {
 
     fun newGame(view: View){
         setContentView(R.layout.activity_main)
-        if(!engineInitialized) initEngine()
+        initEngine()
         engine.startNewGame()
     }
 
     fun newPCGame(view: View){
         setContentView(R.layout.activity_main)
-        if(!engineInitialized) initEngine()
+        initEngine()
         engine.startNewGame(Difficulty.Medium)
     }
 }
