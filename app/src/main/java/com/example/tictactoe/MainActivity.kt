@@ -42,14 +42,14 @@ class MainActivity : AppCompatActivity() {
             if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
                 if(abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) //If this is a real swipe
                     if(diffX > 0) // l -> r (right) swipe
-                        this@MainActivity.onSwipeRight()
+                        this@MainActivity.backToTitleScreen()
 
             return super.onFling(pointerDown, moveEvent, velocityX, velocityY)
         }
 
     }
 
-    private fun onSwipeRight() {
+    fun backToTitleScreen(v:View? = null) {
         setContentView(R.layout.title_screen)
         engine.startNewGame()
     }
