@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
 
-        private val SWIPE_THRESHOLD = 100
-        private val SWIPE_VELOCITY_THRESHOLD = 70
+        private val SWIPE_THRESHOLD = 50
+        private val SWIPE_VELOCITY_THRESHOLD = 50
 
         override fun onFling(
             pointerDown: MotionEvent?,

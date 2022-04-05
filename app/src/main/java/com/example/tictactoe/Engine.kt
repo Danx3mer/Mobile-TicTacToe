@@ -26,7 +26,7 @@ class Engine(private val contextOfMainActivity: Context,
         Cell(imageButtons[8]))
 
     private val computer: Computer = Computer(Difficulty.Medium)
-    var currentDifficulty: Difficulty = this.computer.difficulty
+    lateinit var currentDifficulty: Difficulty
 
     init {
         this.startNewGame()
@@ -110,8 +110,8 @@ class Engine(private val contextOfMainActivity: Context,
         this.isGameOver = false
         this.numOfMoves = 0
 
-        computer.difficulty = difficulty
-        currentDifficulty = difficulty
+        this.currentDifficulty = difficulty
+        computer.reset(difficulty) //resets the computer
 
         this.imageViewLineDrawer.setImageBitmap(Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)) //Clear the line drawing field
     }
