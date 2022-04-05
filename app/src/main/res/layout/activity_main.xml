@@ -213,7 +213,7 @@
 
     <Button
         android:id="@+id/buttonNewGame"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="65dp"
         android:background="@drawable/fullyroundedbutton"
         android:onClick="restartGame"
