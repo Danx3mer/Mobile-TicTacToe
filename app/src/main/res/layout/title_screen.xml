@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/tictactoe">
 
+    <ImageButton
+        android:id="@+id/imageButtonInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:contentDescription="This button is used to go back to the title screen."
+        android:onClick="backToTitleScreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00999999"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="172dp"

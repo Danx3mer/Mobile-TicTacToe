@@ -159,34 +159,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="127dp"
-        android:layout_height="127dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:contentDescription="The imageview that shows whose turn it is to go."
         app:layout_constraintBottom_toTopOf="@+id/imageButton2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
+        app:layout_constraintVertical_bias="0.8"
         app:srcCompat="@drawable/blank" />
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/Widget.AppCompat.TextView"
-        android:layout_width="127dp"
-        android:layout_height="26dp"
-        android:gravity="center|center_vertical"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbars="none"
-        android:text="Current Turn:"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="@null"
-        android:textCursorDrawable="@null"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewFrame"
@@ -235,8 +216,61 @@
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985
+"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:defaultFocusHighlightEnabled="false"
+        android:focusedByDefault="false"
+        android:soundEffectsEnabled="false"
+        app:checkedChip="@id/chip6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00999999"
-        app:srcCompat="@drawable/back" />
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:layout_width="100dp"
+            android:layout_height="52dp"
+            android:checkable="true"
+            android:defaultFocusHighlightEnabled="false"
+            android:focusedByDefault="false"
+            android:gravity="center"
+            android:text="Easy"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            android:layout_width="125dp"
+            android:layout_height="52dp"
+            android:checkable="true"
+            android:text="Medium"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            android:layout_width="100dp"
+            android:layout_height="52dp"
+            android:checkable="true"
+            android:text="Hard"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.chip.ChipGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
