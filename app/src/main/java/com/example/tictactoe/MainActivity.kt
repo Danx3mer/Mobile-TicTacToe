@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.fragment.app.FragmentActivity
 import kotlin.math.abs
 
 lateinit var engine: Engine
 enum class Difficulty{None,Easy,Medium,Hard}
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
     private lateinit var detector: GestureDetectorCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,4 +91,6 @@ class MainActivity : AppCompatActivity() {
         initEngine()
         engine.startNewGame(difficulty)
     }
+
+    fun setScreenAbout(view: View) = setContentView(R.layout.info_screen)
 }

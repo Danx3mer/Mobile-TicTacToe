@@ -166,7 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintVertical_bias="0.75"
         app:srcCompat="@drawable/blank" />
 
     <ImageView
@@ -179,7 +179,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.57"
-        app:srcCompat="@drawable/tictactoeframe" />
+        android:src="@drawable/tictactoeframe" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -216,9 +216,8 @@
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985
-"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        app:layout_constraintVertical_bias="0.985"
+        android:src="@android:drawable/ic_menu_revert" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
