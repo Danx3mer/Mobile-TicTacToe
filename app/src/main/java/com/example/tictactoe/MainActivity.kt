@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newPCGameEasy(view: View) {
-        setContentView(R.layout.activity_main)
+         //setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame(Difficulty.Easy)
     }
@@ -95,11 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newPCGameHard(view: View) {
-        findViewById<Chip>(R.id.chip5).isChecked = false
-        findViewById<Chip>(R.id.chip6).isChecked = false
-        findViewById<Chip>(R.id.chip7).isChecked = true
-
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame(Difficulty.Hard)
     }
