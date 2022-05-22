@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         engine.startNewGame()
     }
 
-    private fun initEngine(){
+    private fun initEngine(difficulty: Difficulty = Difficulty.None){
         engine = Engine(this,
             arrayOf(findViewById(R.id.imageButton1),
                 findViewById(R.id.imageButton2),
@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById(R.id.imageButton9)),
             findViewById(R.id.imageView),
             findViewById(R.id.imageView2))
+        engine.startNewGame(difficulty)
     }
 
     fun cellClick(view: View) = engine.fieldClick(view)
@@ -83,7 +84,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newPCGameEasy(view: View) {
-         //setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame(Difficulty.Easy)
     }
@@ -95,14 +95,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newPCGameHard(view: View) {
-        //setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame(Difficulty.Hard)
     }
 
     fun restartGame(view: View) { //This creates a new game with the previous difficulty.
-        setContentView(R.layout.activity_main)
-
         val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
 
         initEngine()
