@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
-import androidx.fragment.app.FragmentActivity
+import com.google.android.material.chip.Chip
 import kotlin.math.abs
 
 lateinit var engine: Engine
 enum class Difficulty{None,Easy,Medium,Hard}
 
-class MainActivity : FragmentActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var detector: GestureDetectorCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,26 +72,57 @@ class MainActivity : FragmentActivity() {
 
     fun cellClick(view: View) = engine.fieldClick(view)
 
-    fun newGame(view: View){ //This creates a new game so that you can play vs another person on one device.
+    fun newGame(view: View) { //This creates a new game so that you can play vs another person on one device.
         setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame()
+
+        findViewById<Chip>(R.id.chip5).visibility = View.GONE
+        findViewById<Chip>(R.id.chip6).visibility = View.GONE
+        findViewById<Chip>(R.id.chip7).visibility = View.GONE
     }
 
-    fun newPCGame(view: View){ //This creates a new game with a bot.
+    fun newPCGameEasy(view: View) {
+        setContentView(R.layout.activity_main)
+        initEngine()
+        engine.startNewGame(Difficulty.Easy)
+    }
+
+    fun newPCGameMedium(view: View) {
         setContentView(R.layout.activity_main)
         initEngine()
         engine.startNewGame(Difficulty.Medium)
     }
 
-    fun restartGame(view: View){ //This creates a new game with the previous difficulty.
+    fun newPCGameHard(view: View) {
+        findViewById<Chip>(R.id.chip5).isChecked = false
+        findViewById<Chip>(R.id.chip6).isChecked = false
+        findViewById<Chip>(R.id.chip7).isChecked = true
+
+        setContentView(R.layout.activity_main)
+        initEngine()
+        engine.startNewGame(Difficulty.Hard)
+    }
+
+    fun restartGame(view: View) { //This creates a new game with the previous difficulty.
         setContentView(R.layout.activity_main)
 
         val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
 
         initEngine()
         engine.startNewGame(difficulty)
+
+        if(difficulty == Difficulty.None){
+            findViewById<Chip>(R.id.chip5).visibility = View.GONE
+            findViewById<Chip>(R.id.chip6).visibility = View.GONE
+            findViewById<Chip>(R.id.chip7).visibility = View.GONE
+        }
+        else {
+            findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
+            findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
+            findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
+        }
     }
 
-    fun setScreenAbout(view: View) = setContentView(R.layout.info_screen)
+    fun setScreenAbout(view :View) = setContentView(R.layout.info_screen)
 }

@@ -220,6 +220,54 @@
         android:src="@android:drawable/ic_menu_revert" />
 
     <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:singleSelection="true"
+        app:layout_constraintVertical_bias="0.00999999">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:onClick="newPCGameEasy"
+            android:textAlignment="center"
+            android:checkable="true"
+            android:text="Easy"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="100dp"
+            android:layout_height="52dp"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            android:onClick="newPCGameMedium"
+            android:textAlignment="center"
+            android:checkable="true"
+            android:text="Medium"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="125dp"
+            android:layout_height="52dp"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            android:onClick="newPCGameHard"
+            android:textAlignment="center"
+            android:checkable="true"
+            android:text="Hard"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="100dp"
+            android:layout_height="52dp"
+            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <!--<com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
         android:layout_height="52dp"
@@ -233,43 +281,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00999999"
         app:selectionRequired="true"
+        app:singleLine="true"
         app:singleSelection="true">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip5"
-            android:layout_width="100dp"
-            android:layout_height="52dp"
-            android:checkable="true"
-            android:defaultFocusHighlightEnabled="false"
-            android:focusedByDefault="false"
-            android:gravity="center"
-            android:text="Easy"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip6"
-            android:layout_width="125dp"
-            android:layout_height="52dp"
-            android:checkable="true"
-            android:text="Medium"
-            android:textAlignment="center"
-            android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip7"
-            android:layout_width="100dp"
-            android:layout_height="52dp"
-            android:checkable="true"
-            android:text="Hard"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </com.google.android.material.chip.ChipGroup>
-
+    </com.google.android.material.chip.ChipGroup>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
