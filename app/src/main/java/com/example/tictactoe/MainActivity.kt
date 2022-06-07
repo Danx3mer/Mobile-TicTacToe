@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     fun backToTitleScreen(v:View? = null) {
         setContentView(R.layout.title_screen)
-        engine.startNewGame()
     }
 
     private fun initEngine(difficulty: Difficulty = Difficulty.None){

@@ -4,7 +4,7 @@ class Computer(private var difficulty: Difficulty) {
 
     private var movesDone = mutableListOf<Int>()
 
-    private enum class Strategies{DiagonalStrategyOffense, DiagonalStrategyDefense, MiddleStrategyDefense, MiddleStrategyOffense, None}
+    private enum class Strategies{DiagonalStrategy, MiddleStrategy, None}
     private var currentStrategy: Strategies = Strategies.None
 
     fun pickCell(cells: Array<Cell>): Int {
@@ -35,19 +35,11 @@ class Computer(private var difficulty: Difficulty) {
             }
 
             Difficulty.Hard -> {
-                val diagonals = mutableListOf(0,2,6,8)
-                val edges = mutableListOf(1,3,5,7)
-                
-                when(engine.numOfMoves){
-                    0 -> this.currentStrategy = arrayListOf(Strategies.DiagonalStrategyOffense, Strategies.MiddleStrategyOffense).random() //Going on the offense
-                    1 -> this.currentStrategy = arrayListOf(Strategies.DiagonalStrategyDefense, Strategies.MiddleStrategyDefense).random() //Going on the defense
-                }
+                this.currentStrategy = arrayListOf(Strategies.DiagonalStrategy, Strategies.MiddleStrategy).random()
 
                 val strategyRes = when(this.currentStrategy){
-                    Strategies.DiagonalStrategyOffense -> diagonalStrategy(true, availableCells)
-                    Strategies.DiagonalStrategyDefense -> diagonalStrategy(false, availableCells)
-                    Strategies.MiddleStrategyOffense -> middleStrategy(true, availableCells)
-                    Strategies.MiddleStrategyDefense -> middleStrategy(false, availableCells)
+                    Strategies.DiagonalStrategy -> diagonalStrategy(availableCells)
+                    Strategies.MiddleStrategy -> middleStrategy(availableCells)
                     else -> -1
                 }
 
@@ -150,14 +142,14 @@ class Computer(private var difficulty: Difficulty) {
         return -1
     }
 
-    fun diagonalStrategy(offense: Boolean, availableCells: MutableList<Int>): Int{
+    private fun diagonalStrategy(availableCells: MutableList<Int>): Int{
         when(engine.numOfMoves){
             0 -> return mutableListOf(0,2,6,8).random()
         }
         return -1
     }
 
-    fun middleStrategy(offense: Boolean, availableCells: MutableList<Int>): Int{
+    private fun middleStrategy(availableCells: MutableList<Int>): Int{
         when(engine.numOfMoves){
             0 -> return 4
             1 -> if(4 in availableCells) return 4
