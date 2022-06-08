@@ -35,13 +35,7 @@ class Computer(private var difficulty: Difficulty) {
             }
 
             Difficulty.Hard -> {
-                this.currentStrategy = arrayListOf(Strategies.DiagonalStrategy, Strategies.MiddleStrategy).random()
-
-                val strategyRes = when(this.currentStrategy){
-                    Strategies.DiagonalStrategy -> diagonalStrategy(availableCells)
-                    Strategies.MiddleStrategy -> middleStrategy(availableCells)
-                    else -> -1
-                }
+                val strategyRes = diagonalStrategy(cells, availableCells)
 
                 if(strategyRes != -1) return strategyRes
 
@@ -142,19 +136,150 @@ class Computer(private var difficulty: Difficulty) {
         return -1
     }
 
-    private fun diagonalStrategy(availableCells: MutableList<Int>): Int{
+    private fun diagonalStrategy(cells: Array<Cell>, availableCells: MutableList<Int>): Int{
+        //Every even number is the strategy for when you go first.
+        //Every odd number is the strategy for when you go second.
         when(engine.numOfMoves){
-            0 -> return mutableListOf(0,2,6,8).random()
+            0 -> {
+                this.movesDone.add(mutableListOf(0,2,6,8).random())
+                return this.movesDone[0]
+            }
+            1 -> {
+                var diagonals = mutableListOf<Int>();
+                if(0 in availableCells && 8 in availableCells){
+                    diagonals.add(0)
+                    diagonals.add(8)
+                }
+                else {
+                    this.movesDone.add(4)
+                    return 4
+                }
+                if(2 in availableCells&& 6 in availableCells){
+                    diagonals.add(2)
+                    diagonals.add(6)
+                }
+                else {
+                    this.movesDone.add(4)
+                    return 4
+                }
+                this.movesDone.add(diagonals.random())
+                return this.movesDone[0]
+            }
+            2 -> {
+                when(this.movesDone[0]){
+                    0 -> {
+                        if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
+                            this.movesDone.add(8) //8 is the directly opposite diagonal
+                            return 8
+                        }
+                    }
+                    2 -> {
+                        if(0 !in availableCells || 4 !in availableCells || 8 !in availableCells) { //means that the user went there
+                            this.movesDone.add(6) //6 is the directly opposite diagonal
+                            return 6
+                        }
+                    }
+                    6 -> {
+                        if(0 !in availableCells || 4 !in availableCells || 8 !in availableCells) { //means that the user went there
+                            this.movesDone.add(2) //2 is the directly opposite diagonal
+                            return 2
+                        }
+                    }
+                    8 -> {
+                        if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
+                            this.movesDone.add(0) //0 is the directly opposite diagonal
+                            return 0
+                        }
+                    }
+                }
+            }
+            3 -> {
+                if((cells[2].image==Cell.ImageType.O && cells[6].image==Cell.ImageType.O) || (cells[0].image==Cell.ImageType.O && cells[8].image==Cell.ImageType.O)){
+                    this.movesDone.add(arrayListOf(1,3,5,7).random())
+                    return this.movesDone[1]
+                }
+                if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
+                if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                when(this.movesDone[0]){
+                    0 -> {
+                        if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
+                            if(8 !in availableCells) {
+                                this.movesDone.add(arrayListOf(2,6).random())
+                                return this.movesDone[1]
+                            }
+                            this.movesDone.add(8) //8 is the directly opposite diagonal
+                            return 8
+                        }
+                    }
+                    2 -> {
+                        if(0 !in availableCells || 4 !in availableCells || 8 !in availableCells) { //means that the user went there
+                            if(6 !in availableCells) {
+                                this.movesDone.add(arrayListOf(0,8).random())
+                                return this.movesDone[1]
+                            }
+                            this.movesDone.add(6) //8 is the directly opposite diagonal
+                            return 6
+                        }
+                    }
+                    6 -> {
+                        if(0 !in availableCells || 4 !in availableCells || 8 !in availableCells) { //means that the user went there
+                            if(2 !in availableCells) {
+                                this.movesDone.add(arrayListOf(0,8).random())
+                                return this.movesDone[1]
+                            }
+                            this.movesDone.add(2) //8 is the directly opposite diagonal
+                            return 2
+                        }
+                    }
+                    8 -> {
+                        if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
+                            if(0 !in availableCells) {
+                                this.movesDone.add(arrayListOf(0,8).random())
+                                return this.movesDone[1]
+                            }
+                            this.movesDone.add(0) //8 is the directly opposite diagonal
+                            return 0
+                        }
+                    }
+                }
+            }
+            4 -> {
+                if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
+                if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                if (0 in movesDone && 8 in movesDone) {
+                    var diagonals = mutableListOf<Int>();
+                    if (2 in availableCells) diagonals.add(2)
+                    if (6 in availableCells) diagonals.add(6)
+                    this.movesDone.add(diagonals.random())
+                    return this.movesDone[2]
+                }
+                else if (2 in movesDone && 6 in movesDone) {
+                    var diagonals = mutableListOf<Int>();
+                    if (0 in availableCells) diagonals.add(2)
+                    if (8 in availableCells) diagonals.add(6)
+                    this.movesDone.add(diagonals.random())
+                    return this.movesDone[2]
+                }
+            }
+            5 -> {
+                if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
+                if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                if(0 in movesDone && 8 in movesDone) {
+                    var diagonals = mutableListOf<Int>();
+                    if(2 in availableCells) diagonals.add(2)
+                    if(6 in availableCells) diagonals.add(6)
+                    this.movesDone.add(diagonals.random())
+                    return this.movesDone[2]
+                }
+                else if(2 in movesDone && 6 in movesDone) {
+                    var diagonals = mutableListOf<Int>();
+                    if(0 in availableCells) diagonals.add(2)
+                    if(8 in availableCells) diagonals.add(6)
+                    this.movesDone.add(diagonals.random())
+                    return this.movesDone[2]
+                }
+            }
         }
-        return -1
-    }
-
-    private fun middleStrategy(availableCells: MutableList<Int>): Int{
-        when(engine.numOfMoves){
-            0 -> return 4
-            1 -> if(4 in availableCells) return 4
-        }
-
         return -1
     }
 
