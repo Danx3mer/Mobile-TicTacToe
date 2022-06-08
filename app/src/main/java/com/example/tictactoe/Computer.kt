@@ -234,7 +234,7 @@ class Computer(private var difficulty: Difficulty) {
                     8 -> {
                         if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
                             if(0 !in availableCells) {
-                                this.movesDone.add(arrayListOf(0,8).random())
+                                this.movesDone.add(arrayListOf(2,6).random())
                                 return this.movesDone[1]
                             }
                             this.movesDone.add(0) //8 is the directly opposite diagonal
