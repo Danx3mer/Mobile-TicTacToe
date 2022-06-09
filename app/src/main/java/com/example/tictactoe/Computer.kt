@@ -56,7 +56,6 @@ class Computer(private var difficulty: Difficulty) {
 
             else -> return -1
         }
-        return -1
     }
 
     private fun checkForImage(cells: Array<Cell>, checkImage: Cell.ImageType): Int{
@@ -145,7 +144,7 @@ class Computer(private var difficulty: Difficulty) {
                 return this.movesDone[0]
             }
             1 -> {
-                var diagonals = mutableListOf<Int>();
+                val diagonals = mutableListOf<Int>()
                 if(0 in availableCells && 8 in availableCells){
                     diagonals.add(0)
                     diagonals.add(8)
@@ -192,6 +191,7 @@ class Computer(private var difficulty: Difficulty) {
                         }
                     }
                 }
+                return 4 //go to the middle in case if the user goes to the side edges
             }
             3 -> {
                 if((cells[2].image==Cell.ImageType.O && cells[6].image==Cell.ImageType.O) || (cells[0].image==Cell.ImageType.O && cells[8].image==Cell.ImageType.O)){
@@ -217,7 +217,7 @@ class Computer(private var difficulty: Difficulty) {
                                 this.movesDone.add(arrayListOf(0,8).random())
                                 return this.movesDone[1]
                             }
-                            this.movesDone.add(6) //8 is the directly opposite diagonal
+                            this.movesDone.add(6) //6 is the directly opposite diagonal
                             return 6
                         }
                     }
@@ -227,7 +227,7 @@ class Computer(private var difficulty: Difficulty) {
                                 this.movesDone.add(arrayListOf(0,8).random())
                                 return this.movesDone[1]
                             }
-                            this.movesDone.add(2) //8 is the directly opposite diagonal
+                            this.movesDone.add(2) //2 is the directly opposite diagonal
                             return 2
                         }
                     }
@@ -237,24 +237,25 @@ class Computer(private var difficulty: Difficulty) {
                                 this.movesDone.add(arrayListOf(2,6).random())
                                 return this.movesDone[1]
                             }
-                            this.movesDone.add(0) //8 is the directly opposite diagonal
+                            this.movesDone.add(0) //0 is the directly opposite diagonal
                             return 0
                         }
                     }
                 }
+                return 4 //go to the middle in case if the user goes to the side edges
             }
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
                 if (0 in movesDone && 8 in movesDone) {
-                    var diagonals = mutableListOf<Int>();
+                    val diagonals = mutableListOf<Int>()
                     if (2 in availableCells) diagonals.add(2)
                     if (6 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
                     return this.movesDone[2]
                 }
                 else if (2 in movesDone && 6 in movesDone) {
-                    var diagonals = mutableListOf<Int>();
+                    val diagonals = mutableListOf<Int>()
                     if (0 in availableCells) diagonals.add(2)
                     if (8 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
@@ -265,14 +266,14 @@ class Computer(private var difficulty: Difficulty) {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
                 if(0 in movesDone && 8 in movesDone) {
-                    var diagonals = mutableListOf<Int>();
+                    val diagonals = mutableListOf<Int>()
                     if(2 in availableCells) diagonals.add(2)
                     if(6 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
                     return this.movesDone[2]
                 }
                 else if(2 in movesDone && 6 in movesDone) {
-                    var diagonals = mutableListOf<Int>();
+                    val diagonals = mutableListOf<Int>()
                     if(0 in availableCells) diagonals.add(2)
                     if(8 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())

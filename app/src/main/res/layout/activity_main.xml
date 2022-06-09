@@ -251,7 +251,7 @@
             android:text="Medium"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="52dp"
             style="@style/Widget.MaterialComponents.Chip.Filter"/>
 
