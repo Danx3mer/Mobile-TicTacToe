@@ -8,13 +8,11 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="391dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
@@ -24,7 +22,7 @@
             android:background="#00FFFFFF"
             android:contentDescription="This button is used to go back to the title screen."
             android:onClick="backToTitleScreen"
-            android:src="?attr/homeAsUpIndicator"/>
+            android:src="?attr/homeAsUpIndicator" />
 
         <TextView
             android:id="@+id/toolbarTextView"
@@ -57,16 +55,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="250dp"
         android:layout_height="250dp"
+        android:src="@drawable/tictactoe_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:src="@drawable/tictactoe_logo" />
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
         android:id="@+id/textView3"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.17000002" />
 
     <TextView
         android:id="@+id/textView4"
