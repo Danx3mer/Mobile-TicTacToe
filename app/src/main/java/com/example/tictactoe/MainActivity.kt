@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import com.google.android.material.chip.Chip
@@ -50,9 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun backToTitleScreen(v:View? = null) {
-        setContentView(R.layout.title_screen)
-    }
+    fun backToTitleScreen(v:View? = null) = setContentView(R.layout.title_screen)
 
     private fun initEngine(difficulty: Difficulty = Difficulty.None){
         engine = Engine(this,
@@ -75,44 +74,40 @@ class MainActivity : AppCompatActivity() {
     fun newGame(view: View) { //This creates a new game so that you can play vs another person on one device.
         setContentView(R.layout.activity_main)
         initEngine()
-        engine.startNewGame()
 
         findViewById<Chip>(R.id.chip5).visibility = View.GONE
         findViewById<Chip>(R.id.chip6).visibility = View.GONE
         findViewById<Chip>(R.id.chip7).visibility = View.GONE
+        findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
     }
 
-    fun newPCGameEasy(view: View) {
-        initEngine()
-        engine.startNewGame(Difficulty.Easy)
-    }
+    fun newPCGameEasy(view: View) = initEngine(Difficulty.Easy)
 
-    fun newPCGameMedium(view: View) {
+    fun newPCGameMedium(view: View) = initEngine(Difficulty.Medium)
+
+    fun newPCGameHard(view: View) = initEngine(Difficulty.Hard)
+
+    fun pcGameStartup(view: View) {
         setContentView(R.layout.activity_main)
-        initEngine()
-        engine.startNewGame(Difficulty.Medium)
-    }
-
-    fun newPCGameHard(view: View) {
-        initEngine()
-        engine.startNewGame(Difficulty.Hard)
+        initEngine(Difficulty.Medium)
     }
 
     fun restartGame(view: View) { //This creates a new game with the previous difficulty.
         val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
 
-        initEngine()
-        engine.startNewGame(difficulty)
+        initEngine(engine.currentDifficulty)
 
         if(difficulty == Difficulty.None){
             findViewById<Chip>(R.id.chip5).visibility = View.GONE
             findViewById<Chip>(R.id.chip6).visibility = View.GONE
             findViewById<Chip>(R.id.chip7).visibility = View.GONE
+            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
         }
         else {
             findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
             findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
             findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
+            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
         }
     }
 

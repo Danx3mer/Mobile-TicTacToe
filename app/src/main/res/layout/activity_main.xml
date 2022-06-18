@@ -174,12 +174,12 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerInParent="true"
+        android:src="@drawable/tictactoeframe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57"
-        android:src="@drawable/tictactoeframe" />
+        app:layout_constraintVertical_bias="0.57" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -211,61 +211,82 @@
         android:background="#00FFFFFF"
         android:contentDescription="This button is used to go back to the title screen."
         android:onClick="backToTitleScreen"
+        android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985"
-        android:src="@android:drawable/ic_menu_revert" />
+        app:layout_constraintVertical_bias="0.985" />
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        app:checkedChip="@id/chip6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:singleSelection="true"
-        app:checkedChip="@id/chip6"
+        app:layout_constraintVertical_bias="0.00999999"
         app:selectionRequired="true"
-        app:layout_constraintVertical_bias="0.00999999">
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip5"
-            android:onClick="newPCGameEasy"
-            android:textAlignment="center"
-            android:checkable="true"
-            android:text="Easy"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="100dp"
             android:layout_height="52dp"
-            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+            android:checkable="true"
+            android:onClick="newPCGameEasy"
+            android:text="Easy"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip6"
-            android:onClick="newPCGameMedium"
-            android:textAlignment="center"
-            android:checkable="true"
-            android:text="Medium"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="130dp"
             android:layout_height="52dp"
-            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+            android:checkable="true"
+            android:onClick="newPCGameMedium"
+            android:text="Medium"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip7"
-            android:onClick="newPCGameHard"
-            android:textAlignment="center"
-            android:checkable="true"
-            android:text="Hard"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="100dp"
             android:layout_height="52dp"
-            style="@style/Widget.MaterialComponents.Chip.Filter"/>
+            android:checkable="true"
+            android:onClick="newPCGameHard"
+            android:text="Hard"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </com.google.android.material.chip.ChipGroup>
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="345dp"
+        android:layout_height="40dp"
+        android:background="@drawable/fullyroundedbutton"
+        android:checked="true"
+        android:clickable="true"
+        android:editable="false"
+        android:text="ToggleButton"
+        android:textOff="Player goes first"
+        android:textOn="Computer goes first"
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        app:layout_constraintVertical_bias="0.38" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
