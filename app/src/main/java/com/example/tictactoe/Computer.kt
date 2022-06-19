@@ -247,6 +247,7 @@ class Computer(private var difficulty: Difficulty) {
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+
                 if (0 in movesDone && 8 in movesDone) {
                     val diagonals = mutableListOf<Int>()
                     if (2 in availableCells) diagonals.add(2)

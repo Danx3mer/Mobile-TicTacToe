@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
 
-        private val SWIPE_THRESHOLD = 50
-        private val SWIPE_VELOCITY_THRESHOLD = 50
+        private val swipeThreshold = 50
+        private val swipeVelocityThreshold = 50
 
         override fun onFling(
             pointerDown: MotionEvent?,
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             val diffY = moveEvent?.y?.minus(pointerDown!!.y) ?:0F
 
             if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
-                if(abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) //If this is a real swipe
+                if(abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) //If this is a real swipe
                     if(diffX > 0) // l -> r (right) swipe
                         this@MainActivity.backToTitleScreen()
 
