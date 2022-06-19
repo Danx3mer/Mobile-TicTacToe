@@ -13,7 +13,8 @@ import android.widget.Toast
 class Engine(private val contextOfMainActivity: Context,
              imageButtons: Array<ImageButton>,
              private val imageView: ImageView,
-             private val imageViewLineDrawer: ImageView) {
+             private val imageViewLineDrawer: ImageView,
+             val computerGoesFirst:Boolean) {
 
     private val cells = arrayOf(Cell(imageButtons[0]),
         Cell(imageButtons[1]),
@@ -40,7 +41,21 @@ class Engine(private val contextOfMainActivity: Context,
     enum class CurrentTurnType{X,O}
     var currentTurn:CurrentTurnType = CurrentTurnType.O
 
-    private var isGameOver: Boolean = false
+    private var isGameOver = false
+
+    fun firstMove(){
+        if(this.computerGoesFirst)
+        {
+            this.switchTurns() //To make sure that the computer is X
+            //Computer goes here
+            val computerPick = computer.pickCell(this.cells)
+            if(computerPick==-1) return
+            this.cells[computerPick].cellClick()
+            ++this.numOfMoves
+            this.switchTurns()
+        }
+
+    }
 
     fun fieldClick(view: View){
         if(this.isGameOver) return
@@ -69,25 +84,24 @@ class Engine(private val contextOfMainActivity: Context,
                 else return //So that the computer doesn't go in the case that you clicked on a cell that already was clicked on.
             }
         }
-
-        //Computer goes here
-        val computerPick = computer.pickCell(this.cells)
-        if(computerPick==-1) return
-        this.cells[computerPick].cellClick()
-        if(++this.numOfMoves >= 5) {
-            val winCheckRes: WinningLinePos = this.winCheck()
-            if (winCheckRes != WinningLinePos.Fail) {
-                gameOver(
-                    when (this.currentTurn) {
-                        CurrentTurnType.O -> true
-                        CurrentTurnType.X -> false
-                    }, winCheckRes)
+            //Computer goes here
+            val computerPick = computer.pickCell(this.cells)
+            if (computerPick == -1) return
+            this.cells[computerPick].cellClick()
+            if (++this.numOfMoves >= 5) {
+                val winCheckRes: WinningLinePos = this.winCheck()
+                if (winCheckRes != WinningLinePos.Fail) {
+                    gameOver(
+                        when (this.currentTurn) {
+                            CurrentTurnType.O -> true
+                            CurrentTurnType.X -> false
+                        }, winCheckRes
+                    )
+                } else if (this.numOfMoves == 9) {
+                    Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT).show()
+                }
             }
-            else if (this.numOfMoves == 9) {
-                Toast.makeText(contextOfMainActivity,"It's a tie!",Toast.LENGTH_SHORT).show()
-            }
-        }
-        this.switchTurns()
+            this.switchTurns()
     }
 
     private fun switchTurns(){

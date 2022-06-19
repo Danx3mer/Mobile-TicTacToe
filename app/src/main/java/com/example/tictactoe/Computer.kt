@@ -136,8 +136,8 @@ class Computer(private var difficulty: Difficulty) {
     }
 
     private fun diagonalStrategy(cells: Array<Cell>, availableCells: MutableList<Int>): Int{
-        //Every even number is the strategy for when you go first.
-        //Every odd number is the strategy for when you go second.
+        //Every even number is the strategy for when the bot goes first.
+        //Every odd number is the strategy for when the bot goes second.
         when(engine.numOfMoves){
             0 -> {
                 this.movesDone.add(mutableListOf(0,2,6,8).random())

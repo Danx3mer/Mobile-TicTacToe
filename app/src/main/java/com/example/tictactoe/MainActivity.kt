@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     fun backToTitleScreen(v:View? = null) = setContentView(R.layout.title_screen)
 
-    private fun initEngine(difficulty: Difficulty = Difficulty.None){
+    private fun initEngine(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false){
         engine = Engine(this,
             arrayOf(findViewById(R.id.imageButton1),
                 findViewById(R.id.imageButton2),
@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
                 findViewById(R.id.imageButton8),
                 findViewById(R.id.imageButton9)),
             findViewById(R.id.imageView),
-            findViewById(R.id.imageView2))
+            findViewById(R.id.imageView2),
+            computerGoesFirst)
         engine.startNewGame(difficulty)
     }
 
@@ -92,10 +93,10 @@ class MainActivity : AppCompatActivity() {
         initEngine(Difficulty.Medium)
     }
 
-    fun restartGame(view: View) { //This creates a new game with the previous difficulty.
+    fun switchFirstTurn(view: View) {
         val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
 
-        initEngine(engine.currentDifficulty)
+        initEngine(engine.currentDifficulty, !engine.computerGoesFirst)
 
         if(difficulty == Difficulty.None){
             findViewById<Chip>(R.id.chip5).visibility = View.GONE
@@ -109,6 +110,27 @@ class MainActivity : AppCompatActivity() {
             findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
             findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
         }
+        engine.firstMove()
+    }
+
+    fun restartGame(view: View) { //This creates a new game with the previous difficulty.
+        val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
+
+        initEngine(engine.currentDifficulty, engine.computerGoesFirst)
+
+        if(difficulty == Difficulty.None){
+            findViewById<Chip>(R.id.chip5).visibility = View.GONE
+            findViewById<Chip>(R.id.chip6).visibility = View.GONE
+            findViewById<Chip>(R.id.chip7).visibility = View.GONE
+            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
+        }
+        else {
+            findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
+            findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
+            findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
+            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
+        }
+        engine.firstMove()
     }
 
     fun setScreenAbout(view :View) = setContentView(R.layout.info_screen)
