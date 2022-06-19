@@ -128,6 +128,7 @@ class Engine(private val contextOfMainActivity: Context,
         computer.reset(difficulty) //resets the computer
 
         this.imageViewLineDrawer.setImageBitmap(Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)) //Clear the line drawing field
+        if(this.computerGoesFirst) this.firstMove()
     }
 
     private fun winCheck() :WinningLinePos {

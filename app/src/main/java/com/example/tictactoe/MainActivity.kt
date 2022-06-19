@@ -38,8 +38,8 @@ class MainActivity : AppCompatActivity() {
             moveEvent: MotionEvent?,
             velocityX: Float,
             velocityY: Float): Boolean {
-            var diffX = moveEvent?.x?.minus(pointerDown!!.x) ?:0F
-            var diffY = moveEvent?.y?.minus(pointerDown!!.y) ?:0F
+            val diffX = moveEvent?.x?.minus(pointerDown!!.x) ?:0F
+            val diffY = moveEvent?.y?.minus(pointerDown!!.y) ?:0F
 
             if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
                 if(abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) //If this is a real swipe
@@ -82,11 +82,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
     }
 
-    fun newPCGameEasy(view: View) = initEngine(Difficulty.Easy)
+    fun newPCGameEasy(view: View) = initEngine(Difficulty.Easy, engine.computerGoesFirst)
 
-    fun newPCGameMedium(view: View) = initEngine(Difficulty.Medium)
+    fun newPCGameMedium(view: View) = initEngine(Difficulty.Medium, engine.computerGoesFirst)
 
-    fun newPCGameHard(view: View) = initEngine(Difficulty.Hard)
+    fun newPCGameHard(view: View) = initEngine(Difficulty.Hard, engine.computerGoesFirst)
 
     fun pcGameStartup(view: View) {
         setContentView(R.layout.activity_main)
@@ -94,11 +94,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun switchFirstTurn(view: View) {
-        val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
-
         initEngine(engine.currentDifficulty, !engine.computerGoesFirst)
 
-        if(difficulty == Difficulty.None){
+        if(engine.currentDifficulty == Difficulty.None){
             findViewById<Chip>(R.id.chip5).visibility = View.GONE
             findViewById<Chip>(R.id.chip6).visibility = View.GONE
             findViewById<Chip>(R.id.chip7).visibility = View.GONE
@@ -110,15 +108,12 @@ class MainActivity : AppCompatActivity() {
             findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
             findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
         }
-        engine.firstMove()
     }
 
     fun restartGame(view: View) { //This creates a new game with the previous difficulty.
-        val difficulty = engine.currentDifficulty //I do this to save the previous difficulty after Engine has been reset.
-
         initEngine(engine.currentDifficulty, engine.computerGoesFirst)
 
-        if(difficulty == Difficulty.None){
+        if(engine.currentDifficulty == Difficulty.None){
             findViewById<Chip>(R.id.chip5).visibility = View.GONE
             findViewById<Chip>(R.id.chip6).visibility = View.GONE
             findViewById<Chip>(R.id.chip7).visibility = View.GONE
@@ -130,7 +125,6 @@ class MainActivity : AppCompatActivity() {
             findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
             findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
         }
-        engine.firstMove()
     }
 
     fun setScreenAbout(view :View) = setContentView(R.layout.info_screen)
