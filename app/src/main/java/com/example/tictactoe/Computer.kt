@@ -191,6 +191,7 @@ class Computer(private var difficulty: Difficulty) {
                         }
                     }
                 }
+                this.movesDone.add(4)
                 return 4 //go to the middle in case if the user goes to the side edges
             }
             3 -> {
@@ -242,11 +243,18 @@ class Computer(private var difficulty: Difficulty) {
                         }
                     }
                 }
+                this.movesDone.add(4)
                 return 4 //go to the middle in case if the user goes to the side edges
             }
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+
+                if(4 in movesDone)
+                    if(0 in movesDone) return arrayListOf(1,2).random()
+                    else if(2 in movesDone) return arrayListOf(0,1).random()
+                    else if(6 in movesDone) return arrayListOf(0,3).random()
+                    else if(8 in movesDone) return arrayListOf(6,7).random()
 
                 if (0 in movesDone && 8 in movesDone) {
                     val diagonals = mutableListOf<Int>()
