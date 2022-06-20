@@ -243,8 +243,20 @@ class Computer(private var difficulty: Difficulty) {
                         }
                     }
                 }
-                this.movesDone.add(4)
-                return 4 //go to the middle in case if the user goes to the side edges
+                return if(4 in availableCells)
+                {
+                    this.movesDone.add(4)
+                    4 //go to the middle in case if the user goes to the side edges
+                }
+                else
+                {
+                    val diagonals = mutableListOf<Int>()
+                    if(0 in availableCells) diagonals.add(0)
+                    if(2 in availableCells) diagonals.add(2)
+                    if(6 in availableCells) diagonals.add(6)
+                    if(8 in availableCells) diagonals.add(8)
+                    diagonals.random()
+                }
             }
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
