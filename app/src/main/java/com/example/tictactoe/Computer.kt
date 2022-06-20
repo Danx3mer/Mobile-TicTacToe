@@ -4,9 +4,6 @@ class Computer(private var difficulty: Difficulty) {
 
     private var movesDone = mutableListOf<Int>()
 
-    private enum class Strategies{DiagonalStrategy, MiddleStrategy, None}
-    private var currentStrategy: Strategies = Strategies.None
-
     fun pickCell(cells: Array<Cell>): Int {
         val availableCells = mutableListOf(0,1,2,3,4,5,6,7,8)
         for(i in 0..8){
@@ -314,7 +311,6 @@ class Computer(private var difficulty: Difficulty) {
     }
 
     fun reset(difficulty: Difficulty){
-        this.currentStrategy = Strategies.None
         this.movesDone = mutableListOf()
         this.difficulty = difficulty
     }
