@@ -1,7 +1,8 @@
 package com.example.tictactoe
 
 class Computer(private var difficulty: Difficulty) {
-
+    private enum class Strategies{Diagonal, Middle, None}
+    private var currentStrategy: Strategies = Strategies.None
     private var movesDone = mutableListOf<Int>()
 
     fun pickCell(cells: Array<Cell>): Int {
@@ -32,7 +33,9 @@ class Computer(private var difficulty: Difficulty) {
             }
 
             Difficulty.Hard -> {
-                val strategyRes = diagonalStrategy(cells, availableCells)
+                if(currentStrategy == Strategies.None) currentStrategy = arrayListOf(Strategies.Diagonal,Strategies.Middle).random() //Selecting which strategy to be executed if not picked already.
+                val strategyRes: Int = //if(currentStrategy == Strategies.Diagonal) diagonalStrategy(cells, availableCells) //Executing strategy based on the "currentStrategy" variable
+                /*else*/ middleStrategy(cells, availableCells)
 
                 if(strategyRes != -1) return strategyRes
 
@@ -150,7 +153,7 @@ class Computer(private var difficulty: Difficulty) {
                     this.movesDone.add(4)
                     return 4
                 }
-                if(2 in availableCells&& 6 in availableCells){
+                if(2 in availableCells && 6 in availableCells){
                     diagonals.add(2)
                     diagonals.add(6)
                 }
@@ -310,8 +313,46 @@ class Computer(private var difficulty: Difficulty) {
         return -1
     }
 
+    private fun middleStrategy(cells: Array<Cell>, availableCells: MutableList<Int>): Int {
+        //Every even number is the strategy for when the bot goes first.
+        //Every odd number is the strategy for when the bot goes second.
+        when(engine.numOfMoves){
+            0 -> {
+                this.movesDone.add(4)
+                return 4
+            }
+            1 -> {
+                if(4 in availableCells)
+                this.movesDone.add(4)
+                else this.movesDone.add(arrayListOf(0,2,6,8).random())
+                return this.movesDone[0]
+            }
+            2 -> {
+                if(0 !in availableCells || 1 !in availableCells || 3 !in availableCells)
+                {
+                    this.movesDone.add(8)
+                }
+                else if(1 !in availableCells || 2 !in availableCells || 5 !in availableCells)
+                {
+                    this.movesDone.add(6)
+                }
+                if(3 !in availableCells || 6 !in availableCells || 7 !in availableCells)
+                {
+                    this.movesDone.add(2)
+                }
+                else if(7 !in availableCells || 8 !in availableCells || 5 !in availableCells)
+                {
+                    this.movesDone.add(0)
+                }
+                return this.movesDone[1]
+            }
+        }
+        return -1
+    }
+
     fun reset(difficulty: Difficulty){
         this.movesDone = mutableListOf()
         this.difficulty = difficulty
+        this.currentStrategy = Strategies.None
     }
 }
