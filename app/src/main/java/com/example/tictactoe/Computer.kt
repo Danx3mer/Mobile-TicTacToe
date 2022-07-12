@@ -141,7 +141,7 @@ class Computer(private var difficulty: Difficulty) {
         when(engine.numOfMoves){
             0 -> {
                 this.movesDone.add(mutableListOf(0,2,6,8).random())
-                return this.movesDone[0]
+                return this.movesDone.last()
             }
             1 -> {
                 val diagonals = mutableListOf<Int>()
@@ -151,7 +151,7 @@ class Computer(private var difficulty: Difficulty) {
                 }
                 else {
                     this.movesDone.add(4)
-                    return 4
+                    return this.movesDone.last()
                 }
                 if(2 in availableCells && 6 in availableCells){
                     diagonals.add(2)
@@ -159,10 +159,10 @@ class Computer(private var difficulty: Difficulty) {
                 }
                 else {
                     this.movesDone.add(4)
-                    return 4
+                    return this.movesDone.last()
                 }
                 this.movesDone.add(diagonals.random())
-                return this.movesDone[0]
+                return this.movesDone.last()
             }
             2 -> {
                 when(this.movesDone[0]){
@@ -197,7 +197,7 @@ class Computer(private var difficulty: Difficulty) {
             3 -> {
                 if((cells[2].image==Cell.ImageType.O && cells[6].image==Cell.ImageType.O) || (cells[0].image==Cell.ImageType.O && cells[8].image==Cell.ImageType.O)){
                     this.movesDone.add(arrayListOf(1,3,5,7).random())
-                    return this.movesDone[1]
+                    return this.movesDone.last()
                 }
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
@@ -206,47 +206,47 @@ class Computer(private var difficulty: Difficulty) {
                         if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
                             if(8 !in availableCells) {
                                 this.movesDone.add(arrayListOf(2,6).random())
-                                return this.movesDone[1]
+                                return this.movesDone.last()
                             }
                             this.movesDone.add(8) //8 is the directly opposite diagonal
-                            return 8
+                            return this.movesDone.last()
                         }
                     }
                     2 -> {
                         if(0 !in availableCells || 4 !in availableCells || 8 !in availableCells) { //means that the user went there
                             if(6 !in availableCells) {
                                 this.movesDone.add(arrayListOf(0,8).random())
-                                return this.movesDone[1]
+                                return this.movesDone.last()
                             }
                             this.movesDone.add(6) //6 is the directly opposite diagonal
-                            return 6
+                            return this.movesDone.last()
                         }
                     }
                     6 -> {
                         if(0 !in availableCells || 4 !in availableCells || 8 !in availableCells) { //means that the user went there
                             if(2 !in availableCells) {
                                 this.movesDone.add(arrayListOf(0,8).random())
-                                return this.movesDone[1]
+                                return this.movesDone.last()
                             }
                             this.movesDone.add(2) //2 is the directly opposite diagonal
-                            return 2
+                            return this.movesDone.last()
                         }
                     }
                     8 -> {
                         if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
                             if(0 !in availableCells) {
                                 this.movesDone.add(arrayListOf(2,6).random())
-                                return this.movesDone[1]
+                                return this.movesDone.last()
                             }
                             this.movesDone.add(0) //0 is the directly opposite diagonal
-                            return 0
+                            return this.movesDone.last()
                         }
                     }
                 }
                 return if(4 in availableCells)
                 {
                     this.movesDone.add(4)
-                    4 //go to the middle in case if the user goes to the side edges
+                    this.movesDone.last() //go to the middle in case if the user goes to the side edges
                 }
                 else
                 {
@@ -281,14 +281,14 @@ class Computer(private var difficulty: Difficulty) {
                     if (2 in availableCells) diagonals.add(2)
                     if (6 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
-                    return this.movesDone[2]
+                    return this.movesDone.last()
                 }
                 else if (2 in movesDone && 6 in movesDone) {
                     val diagonals = mutableListOf<Int>()
                     if (0 in availableCells) diagonals.add(2)
                     if (8 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
-                    return this.movesDone[2]
+                    return this.movesDone.last()
                 }
             }
             5 -> {
@@ -299,14 +299,14 @@ class Computer(private var difficulty: Difficulty) {
                     if(2 in availableCells) diagonals.add(2)
                     if(6 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
-                    return this.movesDone[2]
+                    return this.movesDone.last()
                 }
                 else if(2 in movesDone && 6 in movesDone) {
                     val diagonals = mutableListOf<Int>()
                     if(0 in availableCells) diagonals.add(2)
                     if(8 in availableCells) diagonals.add(6)
                     this.movesDone.add(diagonals.random())
-                    return this.movesDone[2]
+                    return this.movesDone.last()
                 }
             }
         }
@@ -319,13 +319,13 @@ class Computer(private var difficulty: Difficulty) {
         when(engine.numOfMoves){
             0 -> {
                 this.movesDone.add(4)
-                return 4
+                return this.movesDone.last()
             }
             1 -> {
                 if(4 in availableCells)
                 this.movesDone.add(4)
                 else this.movesDone.add(arrayListOf(0,2,6,8).random())
-                return this.movesDone[0]
+                return this.movesDone.last()
             }
             2 -> {
                 if(0 !in availableCells || 1 !in availableCells || 3 !in availableCells)
@@ -344,7 +344,75 @@ class Computer(private var difficulty: Difficulty) {
                 {
                     this.movesDone.add(0)
                 }
-                return this.movesDone[1]
+                return this.movesDone.last()
+            }
+            3 -> {
+                if((cells[2].image==Cell.ImageType.O && cells[6].image==Cell.ImageType.O) || (cells[0].image==Cell.ImageType.O && cells[8].image==Cell.ImageType.O)){
+                    this.movesDone.add(arrayListOf(1,3,5,7).random())
+                    return this.movesDone.last()
+                }
+                if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
+                if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                if(this.movesDone[0] == 4) {
+                    if (0 !in availableCells || 1 !in availableCells || 3 !in availableCells) {
+                        if (8 in availableCells) this.movesDone.add(8)
+                        else this.movesDone.add(arrayListOf(2, 6).random())
+                    } else if (1 !in availableCells || 2 !in availableCells || 5 !in availableCells) {
+                        if (6 in availableCells) this.movesDone.add(6)
+                        else this.movesDone.add(arrayListOf(0, 8).random())
+                    }
+                    if (3 !in availableCells || 6 !in availableCells || 7 !in availableCells) {
+                        if (2 in availableCells) this.movesDone.add(2)
+                        else this.movesDone.add(arrayListOf(0, 8).random())
+                    } else if (7 !in availableCells || 8 !in availableCells || 5 !in availableCells) {
+                        if (0 in availableCells) this.movesDone.add(0)
+                        else this.movesDone.add(arrayListOf(2, 6).random())
+                    }
+                }
+                else {
+                    when(this.movesDone[0]) {
+                        0 -> {
+                            if (8 in availableCells) this.movesDone.add(8)
+                            else this.movesDone.add(arrayListOf(2, 6).random())
+                        }
+                        2 -> {
+                            if (6 in availableCells) this.movesDone.add(6)
+                            else this.movesDone.add(arrayListOf(0, 8).random())
+                        }
+                        6 -> {
+                            if (2 in availableCells) this.movesDone.add(2)
+                            else this.movesDone.add(arrayListOf(0, 8).random())
+                        }
+                        8 -> {
+                            if (0 in availableCells) this.movesDone.add(0)
+                            else this.movesDone.add(arrayListOf(2, 6).random())
+                        }
+                    }
+                }
+                return this.movesDone.last()
+            }
+            4 -> {
+                if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
+                if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                when(this.movesDone[1]){
+                    0 -> {
+                        if(cells[3].image==Cell.ImageType.O) this.movesDone.add(2)
+                        else if(cells[1].image==Cell.ImageType.O) this.movesDone.add(6)
+                    }
+                    2 -> {
+                        if(cells[1].image==Cell.ImageType.O) this.movesDone.add(8)
+                        else if(cells[5].image==Cell.ImageType.O) this.movesDone.add(0)
+                    }
+                    6 -> {
+                        if(cells[3].image==Cell.ImageType.O) this.movesDone.add(8)
+                        else if(cells[7].image==Cell.ImageType.O) this.movesDone.add(0)
+                    }
+                    8 -> {
+                        if(cells[7].image==Cell.ImageType.O) this.movesDone.add(2)
+                        else if(cells[5].image==Cell.ImageType.O) this.movesDone.add(6)
+                    }
+                }
+                return this.movesDone.last()
             }
         }
         return -1
