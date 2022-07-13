@@ -34,8 +34,8 @@ class Computer(private var difficulty: Difficulty) {
 
             Difficulty.Hard -> {
                 if(currentStrategy == Strategies.None) currentStrategy = arrayListOf(Strategies.Diagonal,Strategies.Middle).random() //Selecting which strategy to be executed if not picked already.
-                val strategyRes: Int = //if(currentStrategy == Strategies.Diagonal) diagonalStrategy(cells, availableCells) //Executing strategy based on the "currentStrategy" variable
-                /*else*/ middleStrategy(cells, availableCells)
+                val strategyRes: Int = if(currentStrategy == Strategies.Diagonal) diagonalStrategy(cells, availableCells) //Executing strategy based on the "currentStrategy" variable
+                else middleStrategy(cells, availableCells)
 
                 if(strategyRes != -1) return strategyRes
 

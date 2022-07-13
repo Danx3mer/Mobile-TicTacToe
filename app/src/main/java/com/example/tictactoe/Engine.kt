@@ -43,7 +43,7 @@ class Engine(private val contextOfMainActivity: Context,
 
     private var isGameOver = false
 
-    fun firstMove(){
+    private fun firstMove(){
         if(this.computerGoesFirst)
         {
             this.switchTurns() //To make sure that the computer is X
