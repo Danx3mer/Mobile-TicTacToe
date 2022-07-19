@@ -104,7 +104,7 @@
         android:layout_height="59dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Email: dashingdaniel05@gmail.com"
+        android:text="Email: danielthedev5@gmail.com"
         android:textAlignment="gravity"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

@@ -261,6 +261,11 @@ class Computer(private var difficulty: Difficulty) {
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                //TODO: check for if the fork is about to go into action, and if so go to the middle.
+                if((1 !in availableCells && 6 !in availableCells) || (1 !in availableCells && 8 !in availableCells) ||
+                    (3 !in availableCells && 2 !in availableCells) || (3 !in availableCells && 8 !in availableCells) ||
+                    (5 !in availableCells && 0 !in availableCells) || (5 !in availableCells && 6 !in availableCells) ||
+                    (7 !in availableCells && 0 !in availableCells) || (7 !in availableCells && 2 !in availableCells)) if(4 in availableCells) return 4
 
                 if(4 in movesDone)
                     if(0 in movesDone)
@@ -394,6 +399,7 @@ class Computer(private var difficulty: Difficulty) {
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+                //TODO: check for if the fork is about to go into action, and if so go onto the opposite diagonal.
                 when(this.movesDone[1]){
                     0 -> {
                         if(cells[3].image==Cell.ImageType.O) this.movesDone.add(2)
