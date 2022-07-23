@@ -145,6 +145,24 @@ class Computer(private var difficulty: Difficulty) {
             }
             1 -> {
                 val diagonals = mutableListOf<Int>()
+
+                if(1 !in availableCells) {
+                    this.movesDone.add(mutableListOf(0,2).random())
+                    return this.movesDone.last()
+                }
+                if(3 !in availableCells) {
+                    this.movesDone.add(mutableListOf(0,6).random())
+                    return this.movesDone.last()
+                }
+                if(5 !in availableCells) {
+                    this.movesDone.add(mutableListOf(2,8).random())
+                    return this.movesDone.last()
+                }
+                if(7 !in availableCells) {
+                    this.movesDone.add(mutableListOf(6,8).random())
+                    return this.movesDone.last()
+                }
+
                 if(0 in availableCells && 8 in availableCells){
                     diagonals.add(0)
                     diagonals.add(8)
@@ -201,6 +219,17 @@ class Computer(private var difficulty: Difficulty) {
                 }
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+
+                val playerCells = mutableListOf<Int>()
+                for (i in 0..cells.size)
+                    if(i !in availableCells && i !in this.movesDone)
+                        playerCells.add(i)
+
+                if((1 in playerCells && 6 in playerCells) || (1 in playerCells && 8 in playerCells) ||
+                    (3 in playerCells && 2 in playerCells) || (3 in playerCells && 8 in playerCells) ||
+                    (5 in playerCells && 0 in playerCells) || (5 in playerCells && 6 in playerCells) ||
+                    (7 in playerCells && 0 in playerCells) || (7 in playerCells && 2 in playerCells)) if(4 in availableCells) return 4
+
                 when(this.movesDone[0]){
                     0 -> {
                         if(2 !in availableCells || 4 !in availableCells || 6 !in availableCells) { //means that the user went there
@@ -261,11 +290,6 @@ class Computer(private var difficulty: Difficulty) {
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
-                //TODO: check for if the fork is about to go into action, and if so go to the middle.
-                if((1 !in availableCells && 6 !in availableCells) || (1 !in availableCells && 8 !in availableCells) ||
-                    (3 !in availableCells && 2 !in availableCells) || (3 !in availableCells && 8 !in availableCells) ||
-                    (5 !in availableCells && 0 !in availableCells) || (5 !in availableCells && 6 !in availableCells) ||
-                    (7 !in availableCells && 0 !in availableCells) || (7 !in availableCells && 2 !in availableCells)) if(4 in availableCells) return 4
 
                 if(4 in movesDone)
                     if(0 in movesDone)
@@ -358,6 +382,16 @@ class Computer(private var difficulty: Difficulty) {
                 }
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
+
+                val playerCells = mutableListOf<Int>()
+                for (i in 0..cells.size)
+                    if(i !in availableCells && i !in this.movesDone)
+                        playerCells.add(i)
+                if((7 in playerCells && 0 in playerCells)) if(6 in availableCells) return 6
+                if((7 in playerCells && 2 in playerCells)) if(8 in availableCells) return 8
+                if((3 in playerCells && 2 in playerCells)) if(0 in availableCells) return 0
+                if((3 in playerCells && 8 in playerCells)) if(6 in availableCells) return 6
+
                 if(this.movesDone[0] == 4) {
                     if (0 !in availableCells || 1 !in availableCells || 3 !in availableCells) {
                         if (8 in availableCells) this.movesDone.add(8)
@@ -399,7 +433,6 @@ class Computer(private var difficulty: Difficulty) {
             4 -> {
                 if(this.checkForImage(cells, Cell.ImageType.X) != -1) return this.checkForImage(cells, Cell.ImageType.X)
                 if(this.checkForImage(cells, Cell.ImageType.O) != -1) return this.checkForImage(cells, Cell.ImageType.O)
-                //TODO: check for if the fork is about to go into action, and if so go onto the opposite diagonal.
                 when(this.movesDone[1]){
                     0 -> {
                         if(cells[3].image==Cell.ImageType.O) this.movesDone.add(2)
