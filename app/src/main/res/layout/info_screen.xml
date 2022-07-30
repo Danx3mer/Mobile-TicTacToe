@@ -13,7 +13,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <ImageButton
             android:id="@+id/imageButtonInfo"
@@ -21,14 +22,14 @@
             android:layout_height="35dp"
             android:background="#00FFFFFF"
             android:contentDescription="This button is used to go back to the title screen."
-            android:onClick="backToTitleScreen"
+            android:onClick="backToLastScreen"
             android:src="?attr/homeAsUpIndicator" />
 
         <TextView
             android:id="@+id/toolbarTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"

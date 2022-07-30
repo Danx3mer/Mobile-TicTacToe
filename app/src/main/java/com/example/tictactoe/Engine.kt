@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -64,6 +65,7 @@ class Engine(private val contextOfMainActivity: Context,
         for(i in 0..8){
             if(this.cells[i].boundImageButton.id == view.id){
                 if(this.cells[i].cellClick()){
+                    playSound(R.raw.click, contextOfMainActivity)
                     if(++this.numOfMoves >= 5) {
                         val winCheckRes: WinningLinePos = this.winCheck()
                         if (winCheckRes != WinningLinePos.Fail) {
@@ -72,10 +74,13 @@ class Engine(private val contextOfMainActivity: Context,
                                     CurrentTurnType.O -> true
                                     CurrentTurnType.X -> false
                                 }, winCheckRes)
+                            playSound(R.raw.win, contextOfMainActivity)
                             return
                         }
                         else if (this.numOfMoves == 9) {
-                            Toast.makeText(contextOfMainActivity,"It's a tie!",Toast.LENGTH_SHORT).show()
+                            val toast = Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
                             return //So that the computer doesn't go because it can't pick out any available cells.
                         }
                     }
@@ -88,6 +93,7 @@ class Engine(private val contextOfMainActivity: Context,
             val computerPick = computer.pickCell(this.cells)
             if (computerPick == -1) return
             this.cells[computerPick].cellClick()
+        playSound(R.raw.click, contextOfMainActivity)
             if (++this.numOfMoves >= 5) {
                 val winCheckRes: WinningLinePos = this.winCheck()
                 if (winCheckRes != WinningLinePos.Fail) {
@@ -95,10 +101,12 @@ class Engine(private val contextOfMainActivity: Context,
                         when (this.currentTurn) {
                             CurrentTurnType.O -> true
                             CurrentTurnType.X -> false
-                        }, winCheckRes
-                    )
+                        }, winCheckRes)
+                    playSound(R.raw.win, contextOfMainActivity)
                 } else if (this.numOfMoves == 9) {
-                    Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT).show()
+                    val toast = Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
             }
             this.switchTurns()
@@ -188,8 +196,27 @@ class Engine(private val contextOfMainActivity: Context,
         drawWinningLine(winningLinePos)
 
         when(oWon){
-            true -> Toast.makeText(contextOfMainActivity,"O won!!!",Toast.LENGTH_SHORT).show()
-            false -> Toast.makeText(contextOfMainActivity,"X won!!!",Toast.LENGTH_SHORT).show()
+            true -> {
+
+                /*val customToast = Toast(contextOfMainActivity).also {
+                    // View and duration has to be set
+                    val view = LayoutInflater.from(context).inflate(R.layout.foo_custom_toast, null)
+                    it.setView(view)
+                    it.duration = Toast.LENGTH_LONG
+
+                    it.setGravity(Gravity.START, 0, 0)
+                    it.setMargin(0.1f, 0.2f)
+                }*/
+
+                val toast:Toast = Toast.makeText(contextOfMainActivity,"O won!!!",Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            }
+            false -> {
+                val toast:Toast = Toast.makeText(contextOfMainActivity,"X won!!!",Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            }
         }
     }
 

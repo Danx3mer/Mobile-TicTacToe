@@ -13,6 +13,11 @@ class Computer(private var difficulty: Difficulty) {
         when(difficulty){
 
             Difficulty.Easy -> {
+                val offenseRes = this.checkForImage(cells, Cell.ImageType.X) /*I send in the image that the function is checking for. For attack,
+                                                                              I put in X (because it is looking for it's own cells),
+                                                                              but for defense I put O (because it is checking for the user's cells.)*/
+                if(offenseRes != -1) return offenseRes
+
                 return availableCells.random()
             }
 

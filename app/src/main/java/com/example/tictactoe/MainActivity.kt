@@ -1,5 +1,7 @@
 package com.example.tictactoe
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -13,14 +15,35 @@ import kotlin.math.abs
 lateinit var engine: Engine
 enum class Difficulty{None,Easy,Medium,Hard}
 
+private var mediaPlayer: MediaPlayer? = null
+fun playSound(resource: Int, context: Context) {
+    if (mediaPlayer != null) {
+        mediaPlayer!!.stop()
+        mediaPlayer!!.release()
+        mediaPlayer = null
+    }
+    mediaPlayer = MediaPlayer.create(context, resource)
+    mediaPlayer!!.isLooping = false
+    mediaPlayer!!.start()
+}
+
 class MainActivity : AppCompatActivity() {
     private lateinit var detector: GestureDetectorCompat
+    private lateinit var screenTracker: ScreenTracker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.title_screen)
-
         detector = GestureDetectorCompat(this,GestureListener())
+        screenTracker = ScreenTracker(R.layout.title_screen)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (mediaPlayer != null) {
+            mediaPlayer!!.release()
+            mediaPlayer = null
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -30,8 +53,8 @@ class MainActivity : AppCompatActivity() {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
 
-        private val swipeThreshold = 50
-        private val swipeVelocityThreshold = 50
+        private val swipeThreshold = 350
+        private val swipeVelocityThreshold = 250
 
         override fun onFling(
             pointerDown: MotionEvent?,
@@ -44,14 +67,32 @@ class MainActivity : AppCompatActivity() {
             if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
                 if(abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) //If this is a real swipe
                     if(diffX > 0) // l -> r (right) swipe
-                        this@MainActivity.backToTitleScreen()
+                        this@MainActivity.backToLastScreen()
 
             return super.onFling(pointerDown, moveEvent, velocityX, velocityY)
         }
-
     }
 
-    fun backToTitleScreen(v:View? = null) = setContentView(R.layout.title_screen)
+    private inner class ScreenTracker(initialScreen: Int) {
+        var currentScreen: Int = initialScreen
+        private set
+
+        var pastScreen: Int = initialScreen
+        private set
+
+        fun updateScreen(newScreen: Int) {
+            pastScreen = when(newScreen)
+            {
+                R.layout.activity_main -> R.layout.title_screen
+                R.layout.title_screen -> R.layout.title_screen
+                else -> this.currentScreen
+            }
+            this.currentScreen = newScreen
+            setContentView(newScreen)
+        }
+    }
+
+    fun backToLastScreen(v:View? = null) = screenTracker.updateScreen(screenTracker.pastScreen)
 
     private fun initEngine(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false){
         engine = Engine(this,
@@ -73,7 +114,7 @@ class MainActivity : AppCompatActivity() {
     fun cellClick(view: View) = engine.fieldClick(view)
 
     fun newGame(view: View) { //This creates a new game so that you can play vs another person on one device.
-        setContentView(R.layout.activity_main)
+        screenTracker.updateScreen(R.layout.activity_main)
         initEngine()
 
         findViewById<Chip>(R.id.chip5).visibility = View.GONE
@@ -89,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     fun newPCGameHard(view: View) = initEngine(Difficulty.Hard, engine.computerGoesFirst)
 
     fun pcGameStartup(view: View) {
-        setContentView(R.layout.activity_main)
+        screenTracker.updateScreen(R.layout.activity_main)
         initEngine(Difficulty.Medium)
     }
 
@@ -127,5 +168,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setScreenAbout(view :View) = setContentView(R.layout.info_screen)
+    fun setScreenAbout(view :View) = screenTracker.updateScreen(R.layout.info_screen)
+    fun setScreenSettings(view :View) = screenTracker.updateScreen(R.layout.settings)
 }
