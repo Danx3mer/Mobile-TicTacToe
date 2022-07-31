@@ -11,7 +11,7 @@ class Cell(imageButtonGiven:ImageButton){
 
     fun cellClick(): Boolean{
         if(this.image==ImageType.Blank){
-                when(engine.currentTurn){
+                when(engine!!.currentTurn){
                     Engine.CurrentTurnType.X ->{
                         this.boundImageButton.setImageResource(R.drawable.x)
                         this.image = ImageType.X

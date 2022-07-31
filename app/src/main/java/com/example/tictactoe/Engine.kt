@@ -102,7 +102,7 @@ class Engine(private val contextOfMainActivity: Context,
                             CurrentTurnType.O -> true
                             CurrentTurnType.X -> false
                         }, winCheckRes)
-                    playSound(R.raw.win, contextOfMainActivity)
+                    playSound(R.raw.lose, contextOfMainActivity)
                 } else if (this.numOfMoves == 9) {
                     val toast = Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT)
                     toast.setGravity(Gravity.CENTER, 0, 0)
@@ -197,17 +197,6 @@ class Engine(private val contextOfMainActivity: Context,
 
         when(oWon){
             true -> {
-
-                /*val customToast = Toast(contextOfMainActivity).also {
-                    // View and duration has to be set
-                    val view = LayoutInflater.from(context).inflate(R.layout.foo_custom_toast, null)
-                    it.setView(view)
-                    it.duration = Toast.LENGTH_LONG
-
-                    it.setGravity(Gravity.START, 0, 0)
-                    it.setMargin(0.1f, 0.2f)
-                }*/
-
                 val toast:Toast = Toast.makeText(contextOfMainActivity,"O won!!!",Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.CENTER, 0, 0)
                 toast.show()
