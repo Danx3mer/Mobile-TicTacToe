@@ -11,27 +11,33 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 
-class Engine(private val contextOfMainActivity: Context,
-             imageButtons: Array<ImageButton>,
-             private val imageView: ImageView,
-             private val imageViewLineDrawer: ImageView,
-             val computerGoesFirst:Boolean) {
+class Engine(private val contextOfMainActivity: Context) {
+    var isInitialized = false
+    private set
 
-    private val cells = arrayOf(Cell(imageButtons[0]),
-        Cell(imageButtons[1]),
-        Cell(imageButtons[2]),
-        Cell(imageButtons[3]),
-        Cell(imageButtons[4]),
-        Cell(imageButtons[5]),
-        Cell(imageButtons[6]),
-        Cell(imageButtons[7]),
-        Cell(imageButtons[8]))
+    private lateinit var imageView: ImageView
+    private lateinit var imageViewLineDrawer: ImageView
+    var computerGoesFirst: Boolean = true
+    private set
+
+    private lateinit var cells: Array<Cell>
 
     private val computer: Computer = Computer(Difficulty.Medium)
     lateinit var currentDifficulty: Difficulty
 
-    init {
-        this.startNewGame()
+    fun fullInit(imageButtons: Array<ImageButton>, imageView: ImageView, imageViewLineDrawer: ImageView){
+        cells = arrayOf(Cell(imageButtons[0]),
+            Cell(imageButtons[1]),
+            Cell(imageButtons[2]),
+            Cell(imageButtons[3]),
+            Cell(imageButtons[4]),
+            Cell(imageButtons[5]),
+            Cell(imageButtons[6]),
+            Cell(imageButtons[7]),
+            Cell(imageButtons[8]))
+        this.imageView = imageView
+        this.imageViewLineDrawer = imageViewLineDrawer
+        this.startNewGame(computerGoesFirst = false)
     }
 
     var numOfMoves = 0
@@ -43,6 +49,8 @@ class Engine(private val contextOfMainActivity: Context,
     var currentTurn:CurrentTurnType = CurrentTurnType.O
 
     private var isGameOver = false
+    var soundOn: Boolean = false
+    var defaultDifficulty: Difficulty = Difficulty.Medium
 
     private fun firstMove(){
         if(this.computerGoesFirst)
@@ -125,13 +133,14 @@ class Engine(private val contextOfMainActivity: Context,
         }
     }
 
-    fun startNewGame(difficulty: Difficulty = Difficulty.None){
+    fun startNewGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean){
         for(i in 0..8) this.cells[i].reset()
         this.imageView.setImageResource(R.drawable.o)
         this.currentTurn = CurrentTurnType.O
         this.isGameOver = false
         this.numOfMoves = 0
 
+        this.computerGoesFirst = computerGoesFirst
         this.currentDifficulty = difficulty
         computer.reset(difficulty) //resets the computer
 
@@ -250,3 +259,4 @@ class Engine(private val contextOfMainActivity: Context,
     }
 
 }
+
