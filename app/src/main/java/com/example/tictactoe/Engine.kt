@@ -12,18 +12,16 @@ import android.widget.ImageView
 import android.widget.Toast
 
 class Engine(private val contextOfMainActivity: Context) {
-    var isInitialized = false
-    private set
-
     private lateinit var imageView: ImageView
     private lateinit var imageViewLineDrawer: ImageView
-    var computerGoesFirst: Boolean = true
-    private set
-
-    private lateinit var cells: Array<Cell>
 
     private val computer: Computer = Computer(Difficulty.Medium)
-    lateinit var currentDifficulty: Difficulty
+    private lateinit var cells: Array<Cell>
+    var computerGoesFirst: Boolean = false
+    private set
+
+    var defaultDifficulty: Difficulty = Difficulty.Medium
+    var currentDifficulty: Difficulty = this.defaultDifficulty
 
     fun fullInit(imageButtons: Array<ImageButton>, imageView: ImageView, imageViewLineDrawer: ImageView){
         cells = arrayOf(Cell(imageButtons[0]),
@@ -50,7 +48,6 @@ class Engine(private val contextOfMainActivity: Context) {
 
     private var isGameOver = false
     var soundOn: Boolean = false
-    var defaultDifficulty: Difficulty = Difficulty.Medium
 
     private fun firstMove(){
         if(this.computerGoesFirst)

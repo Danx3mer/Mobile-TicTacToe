@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         var pastScreen: Int = initialScreen
         private set
 
-        fun updateScreen(newScreen: Int) {
+        fun updateScreen(newScreen: Int, restartGame: Boolean = true) {
             stopAllSounds()
             pastScreen = when(newScreen)
             {
@@ -94,10 +94,7 @@ class MainActivity : AppCompatActivity() {
             this.currentScreen = newScreen
             setContentView(newScreen)
 
-            if(engine.isInitialized) {
-                if(newScreen == R.layout.activity_main) restartGame(null)
-                else startGame(engine.currentDifficulty, engine.computerGoesFirst)
-            }
+            if(newScreen == R.layout.activity_main && restartGame) restartGame()
         }
     }
 
@@ -105,112 +102,87 @@ class MainActivity : AppCompatActivity() {
 
     private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false){
         if(reInitEngine)
-            engine.fullInit(arrayOf(findViewById(R.id.imageButton1),
-            findViewById(R.id.imageButton2),
-            findViewById(R.id.imageButton3),
-            findViewById(R.id.imageButton4),
-            findViewById(R.id.imageButton5),
-            findViewById(R.id.imageButton6),
-            findViewById(R.id.imageButton7),
-            findViewById(R.id.imageButton8),
-            findViewById(R.id.imageButton9)),
-            findViewById(R.id.imageView),
-            findViewById(R.id.imageView2))
+            engine.fullInit(arrayOf(this.findViewById(R.id.imageButton1),
+                this.findViewById(R.id.imageButton2),
+                this.findViewById(R.id.imageButton3),
+                this.findViewById(R.id.imageButton4),
+                this.findViewById(R.id.imageButton5),
+                this.findViewById(R.id.imageButton6),
+                this.findViewById(R.id.imageButton7),
+                this.findViewById(R.id.imageButton8),
+                this.findViewById(R.id.imageButton9)),
+                this.findViewById(R.id.imageView),
+                this.findViewById(R.id.imageView2))
         engine.startNewGame(difficulty, computerGoesFirst)
+
+        if(engine.currentDifficulty == Difficulty.None){
+            this.findViewById<Chip>(R.id.chip5).visibility = View.GONE
+            this.findViewById<Chip>(R.id.chip6).visibility = View.GONE
+            this.findViewById<Chip>(R.id.chip7).visibility = View.GONE
+            this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
+        }
+        else {
+            this.findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
+            this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
+        }
     }
 
     fun cellClick(view: View) = engine.fieldClick(view)
 
-    fun newGame(view: View) { //This creates a new game so that you can play vs another person on one device.
-        dataTracker.updateScreen(R.layout.activity_main)
-        startGame(reInitEngine = true)
+    fun newGame(view: View?) {
+        dataTracker.updateScreen(R.layout.activity_main, false)
+        val difficulty = when(view!!.id) {
+            this.findViewById<Chip>(R.id.chip5).id -> Difficulty.Easy
+            this.findViewById<Chip>(R.id.chip6).id -> Difficulty.Medium
+            this.findViewById<Chip>(R.id.chip7).id -> Difficulty.Hard
+            R.id.button2 -> Difficulty.None
+            R.id.buttonNewGame -> engine.currentDifficulty
+            else -> engine.defaultDifficulty
+        }
+        startGame(difficulty, engine.computerGoesFirst, true)
 
-        findViewById<Chip>(R.id.chip5).visibility = View.GONE
-        findViewById<Chip>(R.id.chip6).visibility = View.GONE
-        findViewById<Chip>(R.id.chip7).visibility = View.GONE
-        findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
-    }
-
-    fun newPCGameEasy(view: View) = startGame(Difficulty.Easy, engine.computerGoesFirst, true)
-
-    fun newPCGameMedium(view: View) = startGame(Difficulty.Medium, engine.computerGoesFirst, true)
-
-    fun newPCGameHard(view: View) = startGame(Difficulty.Hard, engine.computerGoesFirst, true)
-
-    fun pcGameStartup(view: View) {
-        dataTracker.updateScreen(R.layout.activity_main)
-        startGame(engine.defaultDifficulty, reInitEngine = true)
-
-        findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
-        findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
-        findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
-        findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
-        when(engine.currentDifficulty){
-            Difficulty.Easy -> findViewById<Chip>(R.id.chip5).isChecked = true
-            Difficulty.Medium -> findViewById<Chip>(R.id.chip6).isChecked = true
-            Difficulty.Hard -> findViewById<Chip>(R.id.chip7).isChecked = true
+        when (engine.currentDifficulty) {
+            Difficulty.Easy -> this.findViewById<Chip>(R.id.chip5).isChecked = true
+            Difficulty.Medium -> this.findViewById<Chip>(R.id.chip6).isChecked = true
+            Difficulty.Hard -> this.findViewById<Chip>(R.id.chip7).isChecked = true
+            Difficulty.None -> startGame(reInitEngine = true)
         }
     }
 
-    fun switchFirstTurn(view: View) {
-        startGame(engine.currentDifficulty, !engine.computerGoesFirst)
-
-        if(engine.currentDifficulty == Difficulty.None){
-            findViewById<Chip>(R.id.chip5).visibility = View.GONE
-            findViewById<Chip>(R.id.chip6).visibility = View.GONE
-            findViewById<Chip>(R.id.chip7).visibility = View.GONE
-            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
-        }
-        else {
-            findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
-            findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
-            findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
-            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
-        }
-    }
-
-    fun restartGame(view: View?) { //This creates a new game with the previous difficulty.
-        stopAllSounds()
+    fun restartGame() {
         startGame(engine.currentDifficulty, engine.computerGoesFirst, true)
 
-        if(engine.currentDifficulty == Difficulty.None){
-            findViewById<Chip>(R.id.chip5).visibility = View.GONE
-            findViewById<Chip>(R.id.chip6).visibility = View.GONE
-            findViewById<Chip>(R.id.chip7).visibility = View.GONE
-            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
-        }
-        else {
-            findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
-            findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
-            findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
-            findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
-
-            when(engine.currentDifficulty){
-                Difficulty.Easy -> findViewById<Chip>(R.id.chip5).isChecked = true
-                Difficulty.Medium -> findViewById<Chip>(R.id.chip6).isChecked = true
-                Difficulty.Hard -> findViewById<Chip>(R.id.chip7).isChecked = true
-            }
+        when (engine.currentDifficulty) {
+            Difficulty.Easy -> this.findViewById<Chip>(R.id.chip5).isChecked = true
+            Difficulty.Medium -> this.findViewById<Chip>(R.id.chip6).isChecked = true
+            Difficulty.Hard -> this.findViewById<Chip>(R.id.chip7).isChecked = true
+            else -> return
         }
     }
+
+    fun switchFirstTurn(view: View) = startGame(engine.currentDifficulty, !engine.computerGoesFirst)
 
     fun setScreenAbout(view :View) = dataTracker.updateScreen(R.layout.info_screen)
     fun setScreenSettings(view :View) {
         dataTracker.updateScreen(R.layout.settings)
-        findViewById<ToggleButton>(R.id.toggleButton2).isChecked = engine.soundOn
+        this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = engine.soundOn
         when (engine.defaultDifficulty) {
-            Difficulty.Easy -> findViewById<Chip>(R.id.chip8).isChecked = true
-            Difficulty.Medium -> findViewById<Chip>(R.id.chip9).isChecked = true
-            Difficulty.Hard -> findViewById<Chip>(R.id.chip10).isChecked = true
+            Difficulty.Easy -> this.findViewById<Chip>(R.id.chip8).isChecked = true
+            Difficulty.Medium -> this.findViewById<Chip>(R.id.chip9).isChecked = true
+            Difficulty.Hard -> this.findViewById<Chip>(R.id.chip10).isChecked = true
+            else -> this.findViewById<Chip>(R.id.chip9).isChecked = true
         }
     }
-    fun toggleSound(view: View) {
-        engine.soundOn = !engine.soundOn
-    }
+
+    fun toggleSound(view: View) { engine.soundOn = !engine.soundOn }
+
     fun setDefaultDifficulty(view: View) {
         when(view){
-            findViewById<Chip>(R.id.chip8) -> engine.defaultDifficulty = Difficulty.Easy
-            findViewById<Chip>(R.id.chip9) -> engine.defaultDifficulty = Difficulty.Medium
-            findViewById<Chip>(R.id.chip10) -> engine.defaultDifficulty = Difficulty.Hard
+            this.findViewById<Chip>(R.id.chip8) -> engine.defaultDifficulty = Difficulty.Easy
+            this.findViewById<Chip>(R.id.chip9) -> engine.defaultDifficulty = Difficulty.Medium
+            this.findViewById<Chip>(R.id.chip10) -> engine.defaultDifficulty = Difficulty.Hard
         }
     }
 }
