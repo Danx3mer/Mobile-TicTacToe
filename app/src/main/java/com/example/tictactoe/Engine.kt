@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -83,9 +84,7 @@ class Engine(private val contextOfMainActivity: Context) {
                             return
                         }
                         else if (this.numOfMoves == 9) {
-                            val toast = Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT)
-                            toast.setGravity(Gravity.CENTER, 0, 0)
-                            toast.show()
+                            Toast(this.contextOfMainActivity).showCustomToast ("It's a tie!", this.contextOfMainActivity as Activity)
                             return //So that the computer doesn't go because it can't pick out any available cells.
                         }
                     }
@@ -198,19 +197,14 @@ class Engine(private val contextOfMainActivity: Context) {
 
     private fun gameOver(oWon: Boolean, winningLinePos: WinningLinePos){
         this.isGameOver = true
-
-        drawWinningLine(winningLinePos)
+        this.drawWinningLine(winningLinePos)
 
         when(oWon){
             true -> {
-                val toast:Toast = Toast.makeText(contextOfMainActivity,"O won!!!",Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                Toast(this.contextOfMainActivity).showCustomToast ("O won!!!", this.contextOfMainActivity as Activity)
             }
             false -> {
-                val toast:Toast = Toast.makeText(contextOfMainActivity,"X won!!!",Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                Toast(this.contextOfMainActivity).showCustomToast ("X won!!!", this.contextOfMainActivity as Activity)
             }
         }
     }
