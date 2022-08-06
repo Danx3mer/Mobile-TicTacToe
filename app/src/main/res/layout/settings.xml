@@ -69,9 +69,9 @@
         android:textOff="Off"
         android:textOn="On"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonIcon"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonIcon"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonIcon"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.89" />
 
@@ -115,9 +115,10 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonIcon"
         android:layout_width="110dp"
         android:layout_height="115dp"
+        android:onClick="swapIcons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
@@ -135,11 +136,11 @@
         android:text="Your icon:"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonIcon" />
 
     <TextView
         android:id="@+id/editTextTextPersonName2"
@@ -218,7 +219,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:text="Easy"
+                android:text="Wins"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -230,7 +231,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:text="Medium"
+                android:text="Losses"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -242,7 +243,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:text="Hard"
+                android:text="Ties"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -268,8 +269,9 @@
                 android:layout_height="wrap_content"
 
                 android:layout_weight="4"
-                android:padding="10dp"
-                android:text="Wins"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Easy"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -315,7 +317,7 @@
                 android:layout_weight="4"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
         </TableRow>
 
         <TableRow
@@ -327,8 +329,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:padding="10dp"
-                android:text="Losses"
+                android:gravity="clip_vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Medium"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -374,7 +378,7 @@
                 android:layout_weight="4"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
         </TableRow>
 
         <TableRow
@@ -386,8 +390,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:padding="10dp"
-                android:text="Ties"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Hard"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -433,7 +438,7 @@
                 android:layout_weight="4"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
         </TableRow>
     </TableLayout>
 

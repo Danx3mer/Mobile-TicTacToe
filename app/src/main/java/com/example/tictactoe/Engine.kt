@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.view.Gravity
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -50,6 +49,23 @@ class Engine(private val contextOfMainActivity: Context) {
     private var isGameOver = false
     var soundOn: Boolean = false
 
+    var personIcon = Cell.ImageType.O
+    private set
+
+    var computerIcon = Cell.ImageType.X
+    private set
+
+    fun swapIcons(): Boolean {
+        val tempIcon = personIcon
+        personIcon = computerIcon
+        computerIcon = tempIcon
+        return when(personIcon){
+            Cell.ImageType.O -> true
+            Cell.ImageType.X -> false
+            else -> false
+        }
+    }
+
     private fun firstMove(){
         if(this.computerGoesFirst)
         {
@@ -84,7 +100,7 @@ class Engine(private val contextOfMainActivity: Context) {
                             return
                         }
                         else if (this.numOfMoves == 9) {
-                            Toast(this.contextOfMainActivity).showCustomToast ("It's a tie!", this.contextOfMainActivity as Activity)
+                            Toast(this.contextOfMainActivity).showCustomToast("It's a tie!", this.contextOfMainActivity as Activity)
                             return //So that the computer doesn't go because it can't pick out any available cells.
                         }
                     }
@@ -108,9 +124,7 @@ class Engine(private val contextOfMainActivity: Context) {
                         }, winCheckRes)
                     playSound(R.raw.lose, contextOfMainActivity)
                 } else if (this.numOfMoves == 9) {
-                    val toast = Toast.makeText(contextOfMainActivity, "It's a tie!", Toast.LENGTH_SHORT)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
+                    Toast(this.contextOfMainActivity).showCustomToast("It's a tie!", this.contextOfMainActivity as Activity)
                 }
             }
             this.switchTurns()
@@ -131,10 +145,20 @@ class Engine(private val contextOfMainActivity: Context) {
 
     fun startNewGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean){
         for(i in 0..8) this.cells[i].reset()
-        this.imageView.setImageResource(R.drawable.o)
-        this.currentTurn = CurrentTurnType.O
         this.isGameOver = false
         this.numOfMoves = 0
+
+        this.imageView.setImageResource(when(this.personIcon){
+            Cell.ImageType.O -> R.drawable.o
+            Cell.ImageType.X -> R.drawable.x
+            else -> R.drawable.o
+        })
+
+        this.currentTurn = when(this.personIcon) {
+            Cell.ImageType.O -> CurrentTurnType.O
+            Cell.ImageType.X -> CurrentTurnType.X
+            else -> CurrentTurnType.O
+        }
 
         this.computerGoesFirst = computerGoesFirst
         this.currentDifficulty = difficulty
@@ -198,6 +222,20 @@ class Engine(private val contextOfMainActivity: Context) {
     private fun gameOver(oWon: Boolean, winningLinePos: WinningLinePos){
         this.isGameOver = true
         this.drawWinningLine(winningLinePos)
+
+        if(engine.currentDifficulty!=Difficulty.None){
+            when(oWon){
+                true -> {
+                    if(this.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast ("You won!!!", this.contextOfMainActivity as Activity)
+                    else if(this.personIcon == Cell.ImageType.X) Toast(this.contextOfMainActivity).showCustomToast ("Bot Won!!!", this.contextOfMainActivity as Activity)
+                }
+                false -> {
+                    if(this.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast ("Bot won!!!", this.contextOfMainActivity as Activity)
+                    else if(this.personIcon == Cell.ImageType.X) Toast(this.contextOfMainActivity).showCustomToast ("You Won!!!", this.contextOfMainActivity as Activity)
+                }
+            }
+            return
+        }
 
         when(oWon){
             true -> {

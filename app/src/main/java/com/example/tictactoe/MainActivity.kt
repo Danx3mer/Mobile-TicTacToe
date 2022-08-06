@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
@@ -167,6 +168,8 @@ class MainActivity : AppCompatActivity() {
     fun setScreenAbout(view :View) = dataTracker.updateScreen(R.layout.info_screen)
     fun setScreenSettings(view :View) {
         dataTracker.updateScreen(R.layout.settings)
+
+        if(engine.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
         this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = engine.soundOn
         when (engine.defaultDifficulty) {
             Difficulty.Easy -> this.findViewById<Chip>(R.id.chip8).isChecked = true
@@ -184,5 +187,14 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<Chip>(R.id.chip9) -> engine.defaultDifficulty = Difficulty.Medium
             this.findViewById<Chip>(R.id.chip10) -> engine.defaultDifficulty = Difficulty.Hard
         }
+    }
+
+    fun swapIcons(view: View) {
+        val res = engine.swapIcons()
+        if(!res){
+            this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
+            return
+        }
+        else if(res) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.o)
     }
 }
