@@ -12,6 +12,102 @@ import android.widget.ImageView
 import android.widget.Toast
 
 class Engine(private val contextOfMainActivity: Context) {
+    enum class GameOverCode { Win, Loss, Tie }
+    inner class Settings{
+        var soundOn: Boolean = false
+        var personIcon = Cell.ImageType.O
+        var computerIcon = Cell.ImageType.X
+        var defaultDifficulty: Difficulty = Difficulty.Medium
+        inner class Statistics{
+            var winsHard = 0
+                private set
+            var winsMedium = 0
+                private set
+            var winsEasy = 0
+                private set
+            var tiesHard = 0
+                private set
+            var tiesMedium = 0
+                private set
+            var tiesEasy = 0
+                private set
+            var lossesHard = 0
+                private set
+            var lossesMedium = 0
+                private set
+            var lossesEasy = 0
+                private set
+            fun updateStats(gameOverCode: GameOverCode? = null, difficulty: Difficulty? = null, buttonResetView: View? = null) {
+              if(buttonResetView != null) {
+                  when(buttonResetView.id) {
+                      R.id.buttonReset1 -> {
+                          this.winsHard = 0
+                          this.winsMedium = 0
+                          this.winsEasy = 0
+                          this.tiesHard = 0
+                          this.tiesMedium = 0
+                          this.tiesEasy = 0
+                          this.lossesHard = 0
+                          this.lossesMedium = 0
+                          this.lossesEasy = 0
+                      }
+                      R.id.buttonReset2 -> {
+                          this.winsEasy = 0
+                          this.tiesEasy = 0
+                          this.lossesEasy = 0
+                      }
+                      R.id.buttonReset3 -> {
+                          this.winsMedium = 0
+                          this.tiesMedium = 0
+                          this.lossesMedium = 0
+                      }
+                      R.id.buttonReset4 -> {
+                          this.winsHard = 0
+                          this.tiesHard = 0
+                          this.lossesHard = 0
+                      }
+                  }
+                  return
+              }
+                when(gameOverCode!!){
+                    GameOverCode.Win -> {
+                        when(difficulty!!){
+                            Difficulty.Easy -> this.winsEasy++
+                            Difficulty.Medium -> this.winsMedium++
+                            Difficulty.Hard -> this.winsHard++
+                            else -> return
+                        }
+                    }
+                    GameOverCode.Tie -> {
+                        when(difficulty!!){
+                            Difficulty.Easy -> this.tiesEasy++
+                            Difficulty.Medium -> this.tiesMedium++
+                            Difficulty.Hard -> this.tiesHard++
+                            else -> return
+                        }
+                    }
+                    GameOverCode.Loss -> {
+                        when(difficulty!!){
+                            Difficulty.Easy -> this.lossesEasy++
+                            Difficulty.Medium -> this.lossesMedium++
+                            Difficulty.Hard -> this.lossesHard++
+                            else -> return
+                        }
+                    }
+                }
+            }
+        }
+        val stats = Statistics()
+
+        fun loadSettings(){
+
+        }
+        fun writeNewSettings(){
+
+        }
+    }
+    val settings = Settings()
+
     private lateinit var imageView: ImageView
     private lateinit var imageViewLineDrawer: ImageView
 
@@ -20,8 +116,7 @@ class Engine(private val contextOfMainActivity: Context) {
     var computerGoesFirst: Boolean = false
     private set
 
-    var defaultDifficulty: Difficulty = Difficulty.Medium
-    var currentDifficulty: Difficulty = this.defaultDifficulty
+    var currentDifficulty: Difficulty = this.settings.defaultDifficulty
 
     fun fullInit(imageButtons: Array<ImageButton>, imageView: ImageView, imageViewLineDrawer: ImageView){
         cells = arrayOf(Cell(imageButtons[0]),
@@ -47,19 +142,12 @@ class Engine(private val contextOfMainActivity: Context) {
     var currentTurn:CurrentTurnType = CurrentTurnType.O
 
     private var isGameOver = false
-    var soundOn: Boolean = false
-
-    var personIcon = Cell.ImageType.O
-    private set
-
-    var computerIcon = Cell.ImageType.X
-    private set
 
     fun swapIcons(): Boolean {
-        val tempIcon = personIcon
-        personIcon = computerIcon
-        computerIcon = tempIcon
-        return when(personIcon){
+        val tempIcon = this.settings.personIcon
+        this.settings.personIcon = this.settings.computerIcon
+        this.settings.computerIcon = tempIcon
+        return when(this.settings.personIcon){
             Cell.ImageType.O -> true
             Cell.ImageType.X -> false
             else -> false
@@ -84,23 +172,29 @@ class Engine(private val contextOfMainActivity: Context) {
         if(this.isGameOver) return
 
         //Player goes here
-        for(i in 0..8){
-            if(this.cells[i].boundImageButton.id == view.id){
-                if(this.cells[i].cellClick()){
+        for(i in 0..8) {
+            if(this.cells[i].boundImageButton.id == view.id) {
+                if(this.cells[i].cellClick()) {
                     playSound(R.raw.click, contextOfMainActivity)
                     if(++this.numOfMoves >= 5) {
                         val winCheckRes: WinningLinePos = this.winCheck()
                         if (winCheckRes != WinningLinePos.Fail) {
                             gameOver(
-                                when (this.currentTurn) {
-                                    CurrentTurnType.O -> true
-                                    CurrentTurnType.X -> false
+                                when(this.currentTurn) {
+                                    CurrentTurnType.O -> {
+                                        if(this.settings.personIcon == Cell.ImageType.O) GameOverCode.Win
+                                        else GameOverCode.Loss
+                                    }
+                                    CurrentTurnType.X -> {
+                                        if(this.settings.personIcon == Cell.ImageType.O) GameOverCode.Loss
+                                        else GameOverCode.Win
+                                    }
                                 }, winCheckRes)
                             playSound(R.raw.win, contextOfMainActivity)
                             return
                         }
                         else if (this.numOfMoves == 9) {
-                            Toast(this.contextOfMainActivity).showCustomToast("It's a tie!", this.contextOfMainActivity as Activity)
+                            gameOver(GameOverCode.Tie, null)
                             return //So that the computer doesn't go because it can't pick out any available cells.
                         }
                     }
@@ -109,35 +203,33 @@ class Engine(private val contextOfMainActivity: Context) {
                 else return //So that the computer doesn't go in the case that you clicked on a cell that already was clicked on.
             }
         }
-            //Computer goes here
-            val computerPick = computer.pickCell(this.cells)
-            if (computerPick == -1) return
-            this.cells[computerPick].cellClick()
+
+        //Computer goes here
+        val computerPick = computer.pickCell(this.cells)
+        if (computerPick == -1) return
+        this.cells[computerPick].cellClick()
         playSound(R.raw.click, contextOfMainActivity)
-            if (++this.numOfMoves >= 5) {
-                val winCheckRes: WinningLinePos = this.winCheck()
-                if (winCheckRes != WinningLinePos.Fail) {
-                    gameOver(
-                        when (this.currentTurn) {
-                            CurrentTurnType.O -> true
-                            CurrentTurnType.X -> false
-                        }, winCheckRes)
-                    playSound(R.raw.lose, contextOfMainActivity)
-                } else if (this.numOfMoves == 9) {
-                    Toast(this.contextOfMainActivity).showCustomToast("It's a tie!", this.contextOfMainActivity as Activity)
-                }
+        if (++this.numOfMoves >= 5) {
+            val winCheckRes: WinningLinePos = this.winCheck()
+            if (winCheckRes != WinningLinePos.Fail) {
+                gameOver(GameOverCode.Loss, winCheckRes)
+                playSound(R.raw.lose, contextOfMainActivity)
             }
-            this.switchTurns()
+            else if (this.numOfMoves == 9) {
+                gameOver(GameOverCode.Tie, winCheckRes)
+            }
+        }
+        this.switchTurns()
     }
 
     private fun switchTurns(){
         when(this.currentTurn){
             CurrentTurnType.O -> {
-                this.currentTurn=CurrentTurnType.X
+                this.currentTurn = CurrentTurnType.X
                 this.imageView.setImageResource(R.drawable.x)
             }
             CurrentTurnType.X -> {
-                this.currentTurn=CurrentTurnType.O
+                this.currentTurn = CurrentTurnType.O
                 this.imageView.setImageResource(R.drawable.o)
             }
         }
@@ -148,13 +240,13 @@ class Engine(private val contextOfMainActivity: Context) {
         this.isGameOver = false
         this.numOfMoves = 0
 
-        this.imageView.setImageResource(when(this.personIcon){
+        this.imageView.setImageResource(when(this.settings.personIcon){
             Cell.ImageType.O -> R.drawable.o
             Cell.ImageType.X -> R.drawable.x
             else -> R.drawable.o
         })
 
-        this.currentTurn = when(this.personIcon) {
+        this.currentTurn = when(this.settings.personIcon) {
             Cell.ImageType.O -> CurrentTurnType.O
             Cell.ImageType.X -> CurrentTurnType.X
             else -> CurrentTurnType.O
@@ -171,8 +263,8 @@ class Engine(private val contextOfMainActivity: Context) {
     private fun winCheck() :WinningLinePos {
         var cellMatchCounter = 0
         val checkImage: Cell.ImageType = when(this.currentTurn){
-            CurrentTurnType.X -> Cell.ImageType.X
             CurrentTurnType.O -> Cell.ImageType.O
+            CurrentTurnType.X -> Cell.ImageType.X
         }
 
         //Checking horizontals
@@ -219,30 +311,46 @@ class Engine(private val contextOfMainActivity: Context) {
         return WinningLinePos.Fail
     }
 
-    private fun gameOver(oWon: Boolean, winningLinePos: WinningLinePos){
+    private fun gameOver(gameOverCode: GameOverCode, winningLinePos: WinningLinePos?){
         this.isGameOver = true
-        this.drawWinningLine(winningLinePos)
+        if(winningLinePos != null) this.drawWinningLine(winningLinePos)
+        this.settings.stats.updateStats(gameOverCode, this.currentDifficulty)
 
-        if(engine.currentDifficulty!=Difficulty.None){
-            when(oWon){
-                true -> {
-                    if(this.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast ("You won!!!", this.contextOfMainActivity as Activity)
-                    else if(this.personIcon == Cell.ImageType.X) Toast(this.contextOfMainActivity).showCustomToast ("Bot Won!!!", this.contextOfMainActivity as Activity)
-                }
-                false -> {
-                    if(this.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast ("Bot won!!!", this.contextOfMainActivity as Activity)
-                    else if(this.personIcon == Cell.ImageType.X) Toast(this.contextOfMainActivity).showCustomToast ("You Won!!!", this.contextOfMainActivity as Activity)
+        when(this.currentDifficulty){
+            Difficulty.Hard -> {
+                when(gameOverCode){
+                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
                 }
             }
-            return
-        }
-
-        when(oWon){
-            true -> {
-                Toast(this.contextOfMainActivity).showCustomToast ("O won!!!", this.contextOfMainActivity as Activity)
+            Difficulty.Medium -> {
+                when(gameOverCode){
+                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
+                }
             }
-            false -> {
-                Toast(this.contextOfMainActivity).showCustomToast ("X won!!!", this.contextOfMainActivity as Activity)
+            Difficulty.Easy -> {
+                when(gameOverCode){
+                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
+                }
+            }
+            Difficulty.None -> {
+                when(gameOverCode){
+                    GameOverCode.Win -> {
+                        if(this.settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                        else Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                    }
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+
+                    GameOverCode.Loss -> {
+                        if(this.settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                        else Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                    }
+                }
             }
         }
     }

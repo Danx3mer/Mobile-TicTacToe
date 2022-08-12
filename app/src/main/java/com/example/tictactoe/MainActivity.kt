@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
@@ -18,7 +19,7 @@ enum class Difficulty{None,Easy,Medium,Hard}
 private var mediaPlayer: MediaPlayer? = null
 
 fun playSound(resource: Int, context: Context) {
-    if(!engine.soundOn) return
+    if(!engine.settings.soundOn) return
     stopAllSounds()
     mediaPlayer = MediaPlayer.create(context, resource)
     mediaPlayer!!.isLooping = false
@@ -99,6 +100,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun showStats() {
+        this.findViewById<TextView>(R.id.textView17).text = engine.settings.stats.winsEasy.toString()
+        this.findViewById<TextView>(R.id.textView18).text = engine.settings.stats.lossesEasy.toString()
+        this.findViewById<TextView>(R.id.textView19).text = engine.settings.stats.tiesEasy.toString()
+
+        this.findViewById<TextView>(R.id.textView21).text = engine.settings.stats.winsMedium.toString()
+        this.findViewById<TextView>(R.id.textView22).text = engine.settings.stats.lossesMedium.toString()
+        this.findViewById<TextView>(R.id.textView23).text = engine.settings.stats.tiesMedium.toString()
+
+        this.findViewById<TextView>(R.id.textView25).text = engine.settings.stats.winsHard.toString()
+        this.findViewById<TextView>(R.id.textView26).text = engine.settings.stats.lossesHard.toString()
+        this.findViewById<TextView>(R.id.textView27).text = engine.settings.stats.tiesHard.toString()
+    }
+
     fun backToLastScreen(v:View? = null) = dataTracker.updateScreen(dataTracker.pastScreen)
 
     private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false){
@@ -140,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<Chip>(R.id.chip7).id -> Difficulty.Hard
             R.id.button2 -> Difficulty.None
             R.id.buttonNewGame -> engine.currentDifficulty
-            else -> engine.defaultDifficulty
+            else -> engine.settings.defaultDifficulty
         }
         startGame(difficulty, engine.computerGoesFirst, true)
 
@@ -169,23 +184,25 @@ class MainActivity : AppCompatActivity() {
     fun setScreenSettings(view :View) {
         dataTracker.updateScreen(R.layout.settings)
 
-        if(engine.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
-        this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = engine.soundOn
-        when (engine.defaultDifficulty) {
+        if(engine.settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
+        this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = engine.settings.soundOn
+        when (engine.settings.defaultDifficulty) {
             Difficulty.Easy -> this.findViewById<Chip>(R.id.chip8).isChecked = true
             Difficulty.Medium -> this.findViewById<Chip>(R.id.chip9).isChecked = true
             Difficulty.Hard -> this.findViewById<Chip>(R.id.chip10).isChecked = true
             else -> this.findViewById<Chip>(R.id.chip9).isChecked = true
         }
+
+        this.showStats()
     }
 
-    fun toggleSound(view: View) { engine.soundOn = !engine.soundOn }
+    fun toggleSound(view: View) { engine.settings.soundOn = !engine.settings.soundOn }
 
     fun setDefaultDifficulty(view: View) {
         when(view){
-            this.findViewById<Chip>(R.id.chip8) -> engine.defaultDifficulty = Difficulty.Easy
-            this.findViewById<Chip>(R.id.chip9) -> engine.defaultDifficulty = Difficulty.Medium
-            this.findViewById<Chip>(R.id.chip10) -> engine.defaultDifficulty = Difficulty.Hard
+            this.findViewById<Chip>(R.id.chip8) -> engine.settings.defaultDifficulty = Difficulty.Easy
+            this.findViewById<Chip>(R.id.chip9) -> engine.settings.defaultDifficulty = Difficulty.Medium
+            this.findViewById<Chip>(R.id.chip10) -> engine.settings.defaultDifficulty = Difficulty.Hard
         }
     }
 
@@ -196,5 +213,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
         else if(res) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.o)
+    }
+
+    fun resetStats(view: View) {
+        engine.settings.stats.updateStats(buttonResetView = view)
+        this.showStats()
     }
 }
