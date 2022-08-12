@@ -13,100 +13,6 @@ import android.widget.Toast
 
 class Engine(private val contextOfMainActivity: Context) {
     enum class GameOverCode { Win, Loss, Tie }
-    inner class Settings{
-        var soundOn: Boolean = false
-        var personIcon = Cell.ImageType.O
-        var computerIcon = Cell.ImageType.X
-        var defaultDifficulty: Difficulty = Difficulty.Medium
-        inner class Statistics{
-            var winsHard = 0
-                private set
-            var winsMedium = 0
-                private set
-            var winsEasy = 0
-                private set
-            var tiesHard = 0
-                private set
-            var tiesMedium = 0
-                private set
-            var tiesEasy = 0
-                private set
-            var lossesHard = 0
-                private set
-            var lossesMedium = 0
-                private set
-            var lossesEasy = 0
-                private set
-            fun updateStats(gameOverCode: GameOverCode? = null, difficulty: Difficulty? = null, buttonResetView: View? = null) {
-              if(buttonResetView != null) {
-                  when(buttonResetView.id) {
-                      R.id.buttonReset1 -> {
-                          this.winsHard = 0
-                          this.winsMedium = 0
-                          this.winsEasy = 0
-                          this.tiesHard = 0
-                          this.tiesMedium = 0
-                          this.tiesEasy = 0
-                          this.lossesHard = 0
-                          this.lossesMedium = 0
-                          this.lossesEasy = 0
-                      }
-                      R.id.buttonReset2 -> {
-                          this.winsEasy = 0
-                          this.tiesEasy = 0
-                          this.lossesEasy = 0
-                      }
-                      R.id.buttonReset3 -> {
-                          this.winsMedium = 0
-                          this.tiesMedium = 0
-                          this.lossesMedium = 0
-                      }
-                      R.id.buttonReset4 -> {
-                          this.winsHard = 0
-                          this.tiesHard = 0
-                          this.lossesHard = 0
-                      }
-                  }
-                  return
-              }
-                when(gameOverCode!!){
-                    GameOverCode.Win -> {
-                        when(difficulty!!){
-                            Difficulty.Easy -> this.winsEasy++
-                            Difficulty.Medium -> this.winsMedium++
-                            Difficulty.Hard -> this.winsHard++
-                            else -> return
-                        }
-                    }
-                    GameOverCode.Tie -> {
-                        when(difficulty!!){
-                            Difficulty.Easy -> this.tiesEasy++
-                            Difficulty.Medium -> this.tiesMedium++
-                            Difficulty.Hard -> this.tiesHard++
-                            else -> return
-                        }
-                    }
-                    GameOverCode.Loss -> {
-                        when(difficulty!!){
-                            Difficulty.Easy -> this.lossesEasy++
-                            Difficulty.Medium -> this.lossesMedium++
-                            Difficulty.Hard -> this.lossesHard++
-                            else -> return
-                        }
-                    }
-                }
-            }
-        }
-        val stats = Statistics()
-
-        fun loadSettings(){
-
-        }
-        fun writeNewSettings(){
-
-        }
-    }
-    val settings = Settings()
 
     private lateinit var imageView: ImageView
     private lateinit var imageViewLineDrawer: ImageView
@@ -116,7 +22,7 @@ class Engine(private val contextOfMainActivity: Context) {
     var computerGoesFirst: Boolean = false
     private set
 
-    var currentDifficulty: Difficulty = this.settings.defaultDifficulty
+    var currentDifficulty: Difficulty = settings.defaultDifficulty
 
     fun fullInit(imageButtons: Array<ImageButton>, imageView: ImageView, imageViewLineDrawer: ImageView){
         cells = arrayOf(Cell(imageButtons[0]),
@@ -144,10 +50,10 @@ class Engine(private val contextOfMainActivity: Context) {
     private var isGameOver = false
 
     fun swapIcons(): Boolean {
-        val tempIcon = this.settings.personIcon
-        this.settings.personIcon = this.settings.computerIcon
-        this.settings.computerIcon = tempIcon
-        return when(this.settings.personIcon){
+        val tempIcon = settings.personIcon
+        settings.personIcon = settings.computerIcon
+        settings.computerIcon = tempIcon
+        return when(settings.personIcon){
             Cell.ImageType.O -> true
             Cell.ImageType.X -> false
             else -> false
@@ -182,11 +88,11 @@ class Engine(private val contextOfMainActivity: Context) {
                             gameOver(
                                 when(this.currentTurn) {
                                     CurrentTurnType.O -> {
-                                        if(this.settings.personIcon == Cell.ImageType.O) GameOverCode.Win
+                                        if(settings.personIcon == Cell.ImageType.O) GameOverCode.Win
                                         else GameOverCode.Loss
                                     }
                                     CurrentTurnType.X -> {
-                                        if(this.settings.personIcon == Cell.ImageType.O) GameOverCode.Loss
+                                        if(settings.personIcon == Cell.ImageType.O) GameOverCode.Loss
                                         else GameOverCode.Win
                                     }
                                 }, winCheckRes)
@@ -240,13 +146,13 @@ class Engine(private val contextOfMainActivity: Context) {
         this.isGameOver = false
         this.numOfMoves = 0
 
-        this.imageView.setImageResource(when(this.settings.personIcon){
+        this.imageView.setImageResource(when(settings.personIcon){
             Cell.ImageType.O -> R.drawable.o
             Cell.ImageType.X -> R.drawable.x
             else -> R.drawable.o
         })
 
-        this.currentTurn = when(this.settings.personIcon) {
+        this.currentTurn = when(settings.personIcon) {
             Cell.ImageType.O -> CurrentTurnType.O
             Cell.ImageType.X -> CurrentTurnType.X
             else -> CurrentTurnType.O
@@ -314,7 +220,7 @@ class Engine(private val contextOfMainActivity: Context) {
     private fun gameOver(gameOverCode: GameOverCode, winningLinePos: WinningLinePos?){
         this.isGameOver = true
         if(winningLinePos != null) this.drawWinningLine(winningLinePos)
-        this.settings.stats.updateStats(gameOverCode, this.currentDifficulty)
+        settings.stats.updateStats(gameOverCode, this.currentDifficulty)
 
         when(this.currentDifficulty){
             Difficulty.Hard -> {
@@ -341,13 +247,13 @@ class Engine(private val contextOfMainActivity: Context) {
             Difficulty.None -> {
                 when(gameOverCode){
                     GameOverCode.Win -> {
-                        if(this.settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
                         else Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
                     }
                     GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
 
                     GameOverCode.Loss -> {
-                        if(this.settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
                         else Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
                     }
                 }

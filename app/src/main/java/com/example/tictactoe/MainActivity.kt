@@ -15,11 +15,12 @@ import com.google.android.material.chip.Chip
 import kotlin.math.abs
 
 lateinit var engine: Engine
+val settings = Settings()
 enum class Difficulty{None,Easy,Medium,Hard}
 private var mediaPlayer: MediaPlayer? = null
 
 fun playSound(resource: Int, context: Context) {
-    if(!engine.settings.soundOn) return
+    if(!settings.soundOn) return
     stopAllSounds()
     mediaPlayer = MediaPlayer.create(context, resource)
     mediaPlayer!!.isLooping = false
@@ -101,17 +102,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showStats() {
-        this.findViewById<TextView>(R.id.textView17).text = engine.settings.stats.winsEasy.toString()
-        this.findViewById<TextView>(R.id.textView18).text = engine.settings.stats.lossesEasy.toString()
-        this.findViewById<TextView>(R.id.textView19).text = engine.settings.stats.tiesEasy.toString()
+        this.findViewById<TextView>(R.id.textView17).text = settings.stats.winsEasy.toString()
+        this.findViewById<TextView>(R.id.textView18).text = settings.stats.lossesEasy.toString()
+        this.findViewById<TextView>(R.id.textView19).text = settings.stats.tiesEasy.toString()
 
-        this.findViewById<TextView>(R.id.textView21).text = engine.settings.stats.winsMedium.toString()
-        this.findViewById<TextView>(R.id.textView22).text = engine.settings.stats.lossesMedium.toString()
-        this.findViewById<TextView>(R.id.textView23).text = engine.settings.stats.tiesMedium.toString()
+        this.findViewById<TextView>(R.id.textView21).text = settings.stats.winsMedium.toString()
+        this.findViewById<TextView>(R.id.textView22).text = settings.stats.lossesMedium.toString()
+        this.findViewById<TextView>(R.id.textView23).text = settings.stats.tiesMedium.toString()
 
-        this.findViewById<TextView>(R.id.textView25).text = engine.settings.stats.winsHard.toString()
-        this.findViewById<TextView>(R.id.textView26).text = engine.settings.stats.lossesHard.toString()
-        this.findViewById<TextView>(R.id.textView27).text = engine.settings.stats.tiesHard.toString()
+        this.findViewById<TextView>(R.id.textView25).text = settings.stats.winsHard.toString()
+        this.findViewById<TextView>(R.id.textView26).text = settings.stats.lossesHard.toString()
+        this.findViewById<TextView>(R.id.textView27).text = settings.stats.tiesHard.toString()
     }
 
     fun backToLastScreen(v:View? = null) = dataTracker.updateScreen(dataTracker.pastScreen)
@@ -155,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<Chip>(R.id.chip7).id -> Difficulty.Hard
             R.id.button2 -> Difficulty.None
             R.id.buttonNewGame -> engine.currentDifficulty
-            else -> engine.settings.defaultDifficulty
+            else -> settings.defaultDifficulty
         }
         startGame(difficulty, engine.computerGoesFirst, true)
 
@@ -184,9 +185,9 @@ class MainActivity : AppCompatActivity() {
     fun setScreenSettings(view :View) {
         dataTracker.updateScreen(R.layout.settings)
 
-        if(engine.settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
-        this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = engine.settings.soundOn
-        when (engine.settings.defaultDifficulty) {
+        if(settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
+        this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = settings.soundOn
+        when (settings.defaultDifficulty) {
             Difficulty.Easy -> this.findViewById<Chip>(R.id.chip8).isChecked = true
             Difficulty.Medium -> this.findViewById<Chip>(R.id.chip9).isChecked = true
             Difficulty.Hard -> this.findViewById<Chip>(R.id.chip10).isChecked = true
@@ -196,13 +197,13 @@ class MainActivity : AppCompatActivity() {
         this.showStats()
     }
 
-    fun toggleSound(view: View) { engine.settings.soundOn = !engine.settings.soundOn }
+    fun toggleSound(view: View) { settings.soundOn = !settings.soundOn }
 
     fun setDefaultDifficulty(view: View) {
         when(view){
-            this.findViewById<Chip>(R.id.chip8) -> engine.settings.defaultDifficulty = Difficulty.Easy
-            this.findViewById<Chip>(R.id.chip9) -> engine.settings.defaultDifficulty = Difficulty.Medium
-            this.findViewById<Chip>(R.id.chip10) -> engine.settings.defaultDifficulty = Difficulty.Hard
+            this.findViewById<Chip>(R.id.chip8) -> settings.defaultDifficulty = Difficulty.Easy
+            this.findViewById<Chip>(R.id.chip9) -> settings.defaultDifficulty = Difficulty.Medium
+            this.findViewById<Chip>(R.id.chip10) -> settings.defaultDifficulty = Difficulty.Hard
         }
     }
 
@@ -216,7 +217,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun resetStats(view: View) {
-        engine.settings.stats.updateStats(buttonResetView = view)
+        settings.stats.updateStats(buttonResetView = view)
         this.showStats()
     }
 }

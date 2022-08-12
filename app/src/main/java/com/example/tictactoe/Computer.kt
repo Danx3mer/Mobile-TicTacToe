@@ -13,7 +13,7 @@ class Computer(private var difficulty: Difficulty) {
         when(difficulty){
 
             Difficulty.Easy -> {
-                val offenseRes = this.checkForImage(cells, engine.settings.computerIcon) /*I send in the image that the function is checking for. For attack,
+                val offenseRes = this.checkForImage(cells, settings.computerIcon) /*I send in the image that the function is checking for. For attack,
                                                                               I put in X (because it is looking for it's own cells),
                                                                               but for defense I put O (because it is checking for the user's cells.)*/
                 if(offenseRes != -1) return offenseRes
@@ -24,12 +24,12 @@ class Computer(private var difficulty: Difficulty) {
             Difficulty.Medium -> {
                 if(availableCells.contains(4)) return 4 //This is the middle
 
-                val offenseRes = this.checkForImage(cells, engine.settings.computerIcon) /*I send in the image that the function is checking for. For attack,
+                val offenseRes = this.checkForImage(cells, settings.computerIcon) /*I send in the image that the function is checking for. For attack,
                                                                               I put in X (because it is looking for it's own cells),
                                                                               but for defense I put O (because it is checking for the user's cells.)*/
                 if(offenseRes != -1) return offenseRes
 
-                val defendRes = this.checkForImage(cells, engine.settings.personIcon) /*I send in the image that the function is checking for. For attack,
+                val defendRes = this.checkForImage(cells, settings.personIcon) /*I send in the image that the function is checking for. For attack,
                                                                               I put in O (because it is checking for the user's cells),
                                                                               but for offense I put X (because it is looking for it's own cells.)*/
                 if(defendRes != -1) return defendRes
@@ -46,12 +46,12 @@ class Computer(private var difficulty: Difficulty) {
 
                 //Switch to playing like medium mode
 
-                val offenseRes = this.checkForImage(cells, engine.settings.computerIcon) /*I send in the image that the function is checking for. For attack,
+                val offenseRes = this.checkForImage(cells, settings.computerIcon) /*I send in the image that the function is checking for. For attack,
                                                                               I put in X (because it is looking for it's own cells),
                                                                               but for defense I put O (because it is checking for the user's cells.)*/
                 if(offenseRes != -1) return offenseRes
 
-                val defendRes = this.checkForImage(cells, engine.settings.personIcon) /*I send in the image that the function is checking for. For attack,
+                val defendRes = this.checkForImage(cells, settings.personIcon) /*I send in the image that the function is checking for. For attack,
                                                                               I put in O (because it is checking for the user's cells),
                                                                               but for offense I put X (because it is looking for it's own cells.)*/
                 if(defendRes != -1) return defendRes
@@ -218,12 +218,12 @@ class Computer(private var difficulty: Difficulty) {
                 return 4 //go to the middle in case if the user goes to the side edges
             }
             3 -> {
-                if((cells[2].image==engine.settings.personIcon && cells[6].image==engine.settings.personIcon) || (cells[0].image==engine.settings.personIcon && cells[8].image==engine.settings.personIcon)){
+                if((cells[2].image==settings.personIcon && cells[6].image==settings.personIcon) || (cells[0].image==settings.personIcon && cells[8].image==settings.personIcon)){
                     this.movesDone.add(arrayListOf(1,3,5,7).random())
                     return this.movesDone.last()
                 }
-                if(this.checkForImage(cells, engine.settings.computerIcon) != -1) return this.checkForImage(cells, engine.settings.computerIcon)
-                if(this.checkForImage(cells, engine.settings.personIcon) != -1) return this.checkForImage(cells, engine.settings.personIcon)
+                if(this.checkForImage(cells, settings.computerIcon) != -1) return this.checkForImage(cells, settings.computerIcon)
+                if(this.checkForImage(cells, settings.personIcon) != -1) return this.checkForImage(cells, settings.personIcon)
 
                 val playerCells = mutableListOf<Int>()
                 for (i in 0..cells.size)
@@ -293,8 +293,8 @@ class Computer(private var difficulty: Difficulty) {
                 }
             }
             4 -> {
-                if(this.checkForImage(cells, engine.settings.computerIcon) != -1) return this.checkForImage(cells, engine.settings.computerIcon)
-                if(this.checkForImage(cells, engine.settings.personIcon) != -1) return this.checkForImage(cells, engine.settings.personIcon)
+                if(this.checkForImage(cells, settings.computerIcon) != -1) return this.checkForImage(cells, settings.computerIcon)
+                if(this.checkForImage(cells, settings.personIcon) != -1) return this.checkForImage(cells, settings.personIcon)
 
                 if(4 in movesDone)
                     if(0 in movesDone)
@@ -326,8 +326,8 @@ class Computer(private var difficulty: Difficulty) {
                 }
             }
             5 -> {
-                if(this.checkForImage(cells, engine.settings.computerIcon) != -1) return this.checkForImage(cells, engine.settings.computerIcon)
-                if(this.checkForImage(cells, engine.settings.personIcon) != -1) return this.checkForImage(cells, engine.settings.personIcon)
+                if(this.checkForImage(cells, settings.computerIcon) != -1) return this.checkForImage(cells, settings.computerIcon)
+                if(this.checkForImage(cells, settings.personIcon) != -1) return this.checkForImage(cells, settings.personIcon)
                 if(0 in movesDone && 8 in movesDone) {
                     val diagonals = mutableListOf<Int>()
                     if(2 in availableCells) diagonals.add(2)
@@ -381,12 +381,12 @@ class Computer(private var difficulty: Difficulty) {
                 return this.movesDone.last()
             }
             3 -> {
-                if((cells[2].image==engine.settings.personIcon && cells[6].image==engine.settings.personIcon) || (cells[0].image==engine.settings.personIcon && cells[8].image==engine.settings.personIcon)){
+                if((cells[2].image==settings.personIcon && cells[6].image==settings.personIcon) || (cells[0].image==settings.personIcon && cells[8].image==settings.personIcon)){
                     this.movesDone.add(arrayListOf(1,3,5,7).random())
                     return this.movesDone.last()
                 }
-                if(this.checkForImage(cells, engine.settings.computerIcon) != -1) return this.checkForImage(cells, engine.settings.computerIcon)
-                if(this.checkForImage(cells, engine.settings.personIcon) != -1) return this.checkForImage(cells, engine.settings.personIcon)
+                if(this.checkForImage(cells, settings.computerIcon) != -1) return this.checkForImage(cells, settings.computerIcon)
+                if(this.checkForImage(cells, settings.personIcon) != -1) return this.checkForImage(cells, settings.personIcon)
 
                 val playerCells = mutableListOf<Int>()
                 for (i in 0..cells.size)
@@ -442,24 +442,24 @@ class Computer(private var difficulty: Difficulty) {
                 return this.movesDone.last()
             }
             4 -> {
-                if(this.checkForImage(cells, engine.settings.computerIcon) != -1) return this.checkForImage(cells, engine.settings.computerIcon)
-                if(this.checkForImage(cells, engine.settings.personIcon) != -1) return this.checkForImage(cells, engine.settings.personIcon)
+                if(this.checkForImage(cells, settings.computerIcon) != -1) return this.checkForImage(cells, settings.computerIcon)
+                if(this.checkForImage(cells, settings.personIcon) != -1) return this.checkForImage(cells, settings.personIcon)
                 when(this.movesDone[1]){
                     0 -> {
-                        if(cells[3].image==engine.settings.personIcon) this.movesDone.add(2)
-                        else if(cells[1].image==engine.settings.personIcon) this.movesDone.add(6)
+                        if(cells[3].image==settings.personIcon) this.movesDone.add(2)
+                        else if(cells[1].image==settings.personIcon) this.movesDone.add(6)
                     }
                     2 -> {
-                        if(cells[1].image==engine.settings.personIcon) this.movesDone.add(8)
-                        else if(cells[5].image==engine.settings.personIcon) this.movesDone.add(0)
+                        if(cells[1].image==settings.personIcon) this.movesDone.add(8)
+                        else if(cells[5].image==settings.personIcon) this.movesDone.add(0)
                     }
                     6 -> {
-                        if(cells[3].image==engine.settings.personIcon) this.movesDone.add(8)
-                        else if(cells[7].image==engine.settings.personIcon) this.movesDone.add(0)
+                        if(cells[3].image==settings.personIcon) this.movesDone.add(8)
+                        else if(cells[7].image==settings.personIcon) this.movesDone.add(0)
                     }
                     8 -> {
-                        if(cells[7].image==engine.settings.personIcon) this.movesDone.add(2)
-                        else if(cells[5].image==engine.settings.personIcon) this.movesDone.add(6)
+                        if(cells[7].image==settings.personIcon) this.movesDone.add(2)
+                        else if(cells[5].image==settings.personIcon) this.movesDone.add(6)
                     }
                 }
                 return this.movesDone.last()
