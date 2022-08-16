@@ -5,7 +5,7 @@ import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
 
-fun Toast.showCustomToast(message: String, activity: Activity)
+fun Toast.showCustomToast(message: String, activity: Activity): Toast
 {
     val layout = activity.layoutInflater.inflate(R.layout.toast, activity.findViewById(R.id.toast_container))
 
@@ -20,4 +20,5 @@ fun Toast.showCustomToast(message: String, activity: Activity)
         view = layout
         show()
     }
+    return this
 }

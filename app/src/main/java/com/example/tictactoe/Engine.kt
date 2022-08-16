@@ -9,6 +9,7 @@ import android.graphics.Paint
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 
 class Engine(private val contextOfMainActivity: Context) {
@@ -224,28 +225,28 @@ class Engine(private val contextOfMainActivity: Context) {
 
         when(this.currentDifficulty){
             Difficulty.Hard -> {
-                when(gameOverCode){
+                currentToast = when(gameOverCode){
                     GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
                     GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
                     GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
                 }
             }
             Difficulty.Medium -> {
-                when(gameOverCode){
+                currentToast = when(gameOverCode){
                     GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
                     GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
                     GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
                 }
             }
             Difficulty.Easy -> {
-                when(gameOverCode){
+                currentToast = when(gameOverCode){
                     GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
                     GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
                     GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
                 }
             }
             Difficulty.None -> {
-                when(gameOverCode){
+                currentToast = when(gameOverCode){
                     GameOverCode.Win -> {
                         if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
                         else Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
@@ -259,6 +260,31 @@ class Engine(private val contextOfMainActivity: Context) {
                 }
             }
         }
+
+        this.contextOfMainActivity.findViewById<TextView>(R.id.textView28).text =
+            when(engine.currentDifficulty)
+            {
+                Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
+                Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
+                Difficulty.Hard -> "Wins: " + settings.stats.winsHard
+                else -> "Wins:"
+            }
+        this.contextOfMainActivity.findViewById<TextView>(R.id.textView29).text =
+            when(engine.currentDifficulty)
+            {
+                Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
+                Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
+                Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
+                else -> "Ties:"
+            }
+        this.contextOfMainActivity.findViewById<TextView>(R.id.textView30).text =
+            when(engine.currentDifficulty)
+            {
+                Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
+                Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
+                Difficulty.Hard -> "Losses: " + settings.stats.lossesHard
+                else -> "Losses:"
+            }
     }
 
     private fun drawWinningLine(winningLinePos: WinningLinePos){

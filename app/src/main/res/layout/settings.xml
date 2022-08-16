@@ -169,7 +169,7 @@
         app:layout_constraintBottom_toTopOf="@+id/chipGroup"
         app:layout_constraintEnd_toEndOf="@+id/chipGroup"
         app:layout_constraintStart_toStartOf="@+id/chipGroup"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
         app:layout_constraintVertical_bias="0.9" />
 
     <TextView
@@ -210,7 +210,7 @@
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="8sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -319,7 +319,7 @@
                 android:onClick="resetStats"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </TableRow>
 
         <TableRow
@@ -380,7 +380,7 @@
                 android:onClick="resetStats"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </TableRow>
 
         <TableRow
@@ -441,7 +441,7 @@
                 android:onClick="resetStats"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </TableRow>
     </TableLayout>
 

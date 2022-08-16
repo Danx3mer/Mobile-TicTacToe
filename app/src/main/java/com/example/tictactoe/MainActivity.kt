@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import com.google.android.material.chip.Chip
@@ -18,6 +16,7 @@ lateinit var engine: Engine
 val settings = Settings()
 enum class Difficulty{None,Easy,Medium,Hard}
 private var mediaPlayer: MediaPlayer? = null
+var currentToast: Toast? = null
 
 fun playSound(resource: Int, context: Context) {
     if(!settings.soundOn) return
@@ -59,8 +58,8 @@ class MainActivity : AppCompatActivity() {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
 
-        private val swipeThreshold = 350
-        private val swipeVelocityThreshold = 250
+        private val swipeThreshold = 250
+        private val swipeVelocityThreshold = 200
 
         override fun onFling(
             pointerDown: MotionEvent?,
@@ -101,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showStats() {
+    private fun showStats() {
         this.findViewById<TextView>(R.id.textView17).text = settings.stats.winsEasy.toString()
         this.findViewById<TextView>(R.id.textView18).text = settings.stats.lossesEasy.toString()
         this.findViewById<TextView>(R.id.textView19).text = settings.stats.tiesEasy.toString()
@@ -137,18 +136,44 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<Chip>(R.id.chip6).visibility = View.GONE
             this.findViewById<Chip>(R.id.chip7).visibility = View.GONE
             this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
+            this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.GONE
         }
         else {
             this.findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
             this.findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
             this.findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
             this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
+            this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.VISIBLE
+
+            this.findViewById<TextView>(R.id.textView28).text =
+                when(engine.currentDifficulty)
+                {
+                    Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
+                    Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
+                    Difficulty.Hard -> "Wins: " + settings.stats.winsHard
+                    else -> "Wins:"
+                }
+            this.findViewById<TextView>(R.id.textView29).text =
+                when(engine.currentDifficulty)
+                {
+                    Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
+                    Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
+                    Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
+                    else -> "Ties:"
+                }
+            this.findViewById<TextView>(R.id.textView30).text =
+                when(engine.currentDifficulty)
+                {
+                    Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
+                    Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
+                    Difficulty.Hard -> "Losses: " + settings.stats.lossesHard
+                    else -> "Losses:"
+                }
         }
     }
 
-    fun cellClick(view: View) = engine.fieldClick(view)
-
     fun newGame(view: View?) {
+        currentToast?.cancel()
         dataTracker.updateScreen(R.layout.activity_main, false)
         val difficulty = when(view!!.id) {
             this.findViewById<Chip>(R.id.chip5).id -> Difficulty.Easy
@@ -178,6 +203,8 @@ class MainActivity : AppCompatActivity() {
             else -> return
         }
     }
+
+    fun cellClick(view: View) = engine.fieldClick(view)
 
     fun switchFirstTurn(view: View) = startGame(engine.currentDifficulty, !engine.computerGoesFirst)
 
