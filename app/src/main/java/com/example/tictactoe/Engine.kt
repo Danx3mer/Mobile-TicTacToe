@@ -27,7 +27,7 @@ class Engine(private val contextOfMainActivity: Context) {
 
     private var threadRunning: Boolean = false
     private var threadEnd: Boolean = false
-    var thread: Thread? = null
+    private var thread: Thread? = null
     fun fullInit(imageButtons: Array<ImageButton>, imageView: ImageView, imageViewLineDrawer: ImageView){
         cells = arrayOf(Cell(imageButtons[0]),
             Cell(imageButtons[1]),
@@ -124,8 +124,9 @@ class Engine(private val contextOfMainActivity: Context) {
             if(this.threadEnd) {this.threadRunning = false; return@Thread}
             val computerPick = computer.pickCell(this.cells)
             if (computerPick == -1){ threadRunning = false; return@Thread }
-            playSound(R.raw.click, contextOfMainActivity)
+            if(this.threadEnd) {this.threadRunning = false; return@Thread}
             this.cells[computerPick].cellClick()
+            playSound(R.raw.click, contextOfMainActivity)
             if (++this.numOfMoves >= 5) {
                 val winCheckRes: WinningLinePos = this.winCheck()
                 if (winCheckRes != WinningLinePos.Fail) {
@@ -238,44 +239,44 @@ class Engine(private val contextOfMainActivity: Context) {
         this.isGameOver = true
         if(winningLinePos != null) this.drawWinningLine(winningLinePos)
         settings.stats.updateStats(gameOverCode, this.currentDifficulty)
-        (this.contextOfMainActivity as Activity).runOnUiThread(Runnable {
+        (this.contextOfMainActivity as Activity).runOnUiThread{
         when(this.currentDifficulty){
             Difficulty.Hard -> {
                 currentToast = when(gameOverCode){
-                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
-                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
-                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity)
+                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity)
                 }
             }
             Difficulty.Medium -> {
                 currentToast = when(gameOverCode){
-                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
-                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
-                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity)
+                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity)
                 }
             }
             Difficulty.Easy -> {
                 currentToast = when(gameOverCode){
-                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
-                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
-                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity)
+                    GameOverCode.Loss -> Toast(this.contextOfMainActivity).showCustomToast("Bot won!!!", this.contextOfMainActivity)
                 }
             }
             Difficulty.None -> {
                 currentToast = when(gameOverCode){
                     GameOverCode.Win -> {
-                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
-                        else Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity)
+                        else Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity)
                     }
-                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity)
 
                     GameOverCode.Loss -> {
-                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
-                        else Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity)
+                        else Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity)
                     }
                 }
             }
-        }})
+        }}
 
         this.contextOfMainActivity.findViewById<TextView>(R.id.textView28).text =
             when(engine.currentDifficulty)
