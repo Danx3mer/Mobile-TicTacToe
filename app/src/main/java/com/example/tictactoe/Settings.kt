@@ -2,30 +2,36 @@ package com.example.tictactoe
 
 import android.view.View
 
-class Settings {
+class Settings(contextOfMainActivity: MainActivity) {
     var soundOn: Boolean = false
+        set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "WINS", when(value){ false -> 0; true -> 1 })}
     var personIcon = Cell.ImageType.O
+        set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "LOSSES", when(value){ Cell.ImageType.O -> 0; else -> 1 })}
     var computerIcon = Cell.ImageType.X
     var defaultDifficulty: Difficulty = Difficulty.Medium
+        set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "TIES", when(value){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1 })}
+    private val dbManager = DataBaseManager(contextOfMainActivity)
+
     inner class Statistics{
         var winsHard = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("HARD", "WINS", value) }
         var winsMedium = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("MEDIUM", "WINS", value) }
         var winsEasy = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("EASY", "WINS", value) }
         var tiesHard = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("HARD", "TIES", value) }
         var tiesMedium = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("MEDIUM", "TIES", value) }
         var tiesEasy = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("EASY", "TIES", value) }
         var lossesHard = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("HARD", "LOSSES", value) }
         var lossesMedium = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("MEDIUM", "LOSSES", value) }
         var lossesEasy = 0
-            private set
+            set(value) { field = value; this@Settings.dbManager.overwriteValue("EASY", "LOSSES", value) }
+
         fun updateStats(gameOverCode: Engine.GameOverCode? = null, difficulty: Difficulty? = null, buttonResetView: View? = null) {
             if(buttonResetView != null) {
                 when(buttonResetView.id) {
@@ -88,10 +94,57 @@ class Settings {
     }
     val stats = Statistics()
 
-    fun loadSettings(){
+    private fun loadSettings() {
+        try{
+            val easyStats = dbManager.getSettings("EASY")
 
-    }
-    fun writeNewSettings(){
+        val mediumStats = dbManager.getSettings("MEDIUM")
+        val hardStats = dbManager.getSettings("HARD")
+        val loadedSettings = dbManager.getSettings("SETTINGS")
 
+        this.stats.winsEasy = easyStats[0]
+        this.stats.lossesEasy = 8888
+        this.stats.tiesEasy = 8888
+
+        this.stats.winsMedium = mediumStats[0]
+        this.stats.lossesMedium = mediumStats[1]
+        this.stats.tiesMedium = mediumStats[2]
+
+        this.stats.winsHard = hardStats[0]
+        this.stats.lossesHard = hardStats[1]
+        this.stats.tiesHard = hardStats[2]
+
+        this.soundOn = when(loadedSettings[0]) {
+            0 -> false
+            else -> true
+        }
+
+        this.personIcon = when(loadedSettings[1]) {
+            0 -> Cell.ImageType.O
+            else -> Cell.ImageType.X
+        }
+        this.computerIcon = when(loadedSettings[1]) {
+            0 -> Cell.ImageType.X
+            else -> Cell.ImageType.O
+        }
+
+        this.defaultDifficulty = when(loadedSettings[2]) {
+            0 -> Difficulty.Easy
+            1 -> Difficulty.Medium
+            2 -> Difficulty.Hard
+            else -> Difficulty.None
+        }
+        } catch(e: Exception) {this.writeNewSettings()}
     }
+
+    private fun writeNewSettings(){
+        dbManager.writeSettings("EASY", listOf(this.stats.winsEasy, this.stats.lossesEasy, this.stats.tiesEasy))
+        dbManager.writeSettings("MEDIUM", listOf(this.stats.winsMedium, this.stats.lossesMedium, this.stats.tiesMedium))
+        dbManager.writeSettings("HARD", listOf(this.stats.winsHard, this.stats.lossesHard, this.stats.tiesHard))
+        dbManager.writeSettings("SETTINGS", listOf(when(this.soundOn){ false -> 0; true -> 1},
+            when(this.personIcon){ Cell.ImageType.O -> 0; else -> 1 },
+            when(this.defaultDifficulty){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1}))
+    }
+
+    init { this.loadSettings() }
 }

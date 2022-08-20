@@ -1,6 +1,7 @@
 package com.example.tictactoe
 
 import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.GestureDetector
@@ -13,11 +14,10 @@ import com.google.android.material.chip.Chip
 import kotlin.math.abs
 
 lateinit var engine: Engine
-val settings = Settings()
-enum class Difficulty{None,Easy,Medium,Hard}
+lateinit var settings: Settings
+enum class Difficulty{None, Easy, Medium, Hard}
 private var mediaPlayer: MediaPlayer? = null
 var currentToast: Toast? = null
-
 fun playSound(resource: Int, context: Context) {
     if(!settings.soundOn) return
     stopAllSounds()
@@ -43,11 +43,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.title_screen)
         detector = GestureDetectorCompat(this,GestureListener())
         dataTracker = DataTracker(R.layout.title_screen)
+
+        SQLiteDatabase.openOrCreateDatabase("${this.filesDir.path}/Settings.db", null, null)
+        settings = Settings(this)
         engine = Engine(this)
     }
 
     override fun onStop() {
         super.onStop()
+        currentToast?.cancel()
         stopAllSounds()
     }
 
@@ -86,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         private set
 
         fun updateScreen(newScreen: Int, restartGame: Boolean = true) {
+            currentToast?.cancel()
             stopAllSounds()
             pastScreen = when(newScreen)
             {
@@ -116,7 +121,8 @@ class MainActivity : AppCompatActivity() {
 
     fun backToLastScreen(v:View? = null) = dataTracker.updateScreen(dataTracker.pastScreen)
 
-    private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false){
+    private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false) {
+        currentToast?.cancel()
         if(reInitEngine)
             engine.fullInit(arrayOf(this.findViewById(R.id.imageButton1),
                 this.findViewById(R.id.imageButton2),
@@ -144,6 +150,7 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
             this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
             this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.VISIBLE
+            this.findViewById<ToggleButton>(R.id.toggleButton).isChecked = !computerGoesFirst
 
             this.findViewById<TextView>(R.id.textView28).text =
                 when(engine.currentDifficulty)
@@ -173,7 +180,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun newGame(view: View?) {
-        currentToast?.cancel()
         dataTracker.updateScreen(R.layout.activity_main, false)
         val difficulty = when(view!!.id) {
             this.findViewById<Chip>(R.id.chip5).id -> Difficulty.Easy

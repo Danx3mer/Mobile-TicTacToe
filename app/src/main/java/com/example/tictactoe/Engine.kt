@@ -25,6 +25,9 @@ class Engine(private val contextOfMainActivity: Context) {
 
     var currentDifficulty: Difficulty = settings.defaultDifficulty
 
+    private var threadRunning: Boolean = false
+    private var threadEnd: Boolean = false
+    var thread: Thread? = null
     fun fullInit(imageButtons: Array<ImageButton>, imageView: ImageView, imageViewLineDrawer: ImageView){
         cells = arrayOf(Cell(imageButtons[0]),
             Cell(imageButtons[1]),
@@ -69,6 +72,7 @@ class Engine(private val contextOfMainActivity: Context) {
             val computerPick = computer.pickCell(this.cells)
             if(computerPick==-1) return
             this.cells[computerPick].cellClick()
+            playSound(R.raw.click, contextOfMainActivity)
             ++this.numOfMoves
             this.switchTurns()
         }
@@ -76,6 +80,7 @@ class Engine(private val contextOfMainActivity: Context) {
     }
 
     fun fieldClick(view: View){
+        if(this.threadRunning) return
         if(this.isGameOver) return
 
         //Player goes here
@@ -111,22 +116,31 @@ class Engine(private val contextOfMainActivity: Context) {
             }
         }
 
-        //Computer goes here
-        val computerPick = computer.pickCell(this.cells)
-        if (computerPick == -1) return
-        this.cells[computerPick].cellClick()
-        playSound(R.raw.click, contextOfMainActivity)
-        if (++this.numOfMoves >= 5) {
-            val winCheckRes: WinningLinePos = this.winCheck()
-            if (winCheckRes != WinningLinePos.Fail) {
-                gameOver(GameOverCode.Loss, winCheckRes)
-                playSound(R.raw.lose, contextOfMainActivity)
+        if(this.currentDifficulty == Difficulty.None) return
+        this.thread = Thread {
+            this.threadEnd = false
+            this.threadRunning = true
+            Thread.sleep(500)
+            if(this.threadEnd) {this.threadRunning = false; return@Thread}
+            val computerPick = computer.pickCell(this.cells)
+            if (computerPick == -1){ threadRunning = false; return@Thread }
+            playSound(R.raw.click, contextOfMainActivity)
+            this.cells[computerPick].cellClick()
+            if (++this.numOfMoves >= 5) {
+                val winCheckRes: WinningLinePos = this.winCheck()
+                if (winCheckRes != WinningLinePos.Fail) {
+                    gameOver(GameOverCode.Loss, winCheckRes)
+                    playSound(R.raw.lose, contextOfMainActivity)
+                }
+                else if (this.numOfMoves == 9) {
+                    gameOver(GameOverCode.Tie, winCheckRes)
+                }
             }
-            else if (this.numOfMoves == 9) {
-                gameOver(GameOverCode.Tie, winCheckRes)
-            }
+            this.switchTurns()
+            this.threadRunning = false
+            return@Thread
         }
-        this.switchTurns()
+        this.thread!!.start()
     }
 
     private fun switchTurns(){
@@ -143,6 +157,8 @@ class Engine(private val contextOfMainActivity: Context) {
     }
 
     fun startNewGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean){
+        this.threadEnd = true
+
         for(i in 0..8) this.cells[i].reset()
         this.isGameOver = false
         this.numOfMoves = 0
@@ -222,7 +238,7 @@ class Engine(private val contextOfMainActivity: Context) {
         this.isGameOver = true
         if(winningLinePos != null) this.drawWinningLine(winningLinePos)
         settings.stats.updateStats(gameOverCode, this.currentDifficulty)
-
+        (this.contextOfMainActivity as Activity).runOnUiThread(Runnable {
         when(this.currentDifficulty){
             Difficulty.Hard -> {
                 currentToast = when(gameOverCode){
@@ -259,7 +275,7 @@ class Engine(private val contextOfMainActivity: Context) {
                     }
                 }
             }
-        }
+        }})
 
         this.contextOfMainActivity.findViewById<TextView>(R.id.textView28).text =
             when(engine.currentDifficulty)
@@ -288,6 +304,7 @@ class Engine(private val contextOfMainActivity: Context) {
     }
 
     private fun drawWinningLine(winningLinePos: WinningLinePos){
+        if(winningLinePos == WinningLinePos.Fail) return
         val startX: Float = when(winningLinePos){
             WinningLinePos.VLeft -> 50F
             WinningLinePos.VMiddle -> 150F
