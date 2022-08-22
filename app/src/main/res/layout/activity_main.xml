@@ -5,234 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#231f20"
-    tools:context=".MainActivity">
-
-    <ImageButton
-        android:id="@+id/imageButtonSettings2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="#00FFFFFF"
-        android:contentDescription="This button is used to go back to the title screen."
-        android:onClick="setScreenSettings"
-        android:src="@android:drawable/ic_menu_preferences"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
-
-    <ImageButton
-        android:id="@+id/imageButton1"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 1st clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.3" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 2nd clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageViewFrame"
-        app:layout_constraintVertical_bias="0.25" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 3rd clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.3" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 4th clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 5th clickable cell (The middle)"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 6th clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 7th clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton8"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
-        app:layout_constraintVertical_bias="1" />
-
-    <ImageButton
-        android:id="@+id/imageButton8"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 8th clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
-        app:layout_constraintVertical_bias="0.75" />
-
-    <ImageButton
-        android:id="@+id/imageButton9"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="The 9th clickable cell"
-        android:onClick="cellClick"
-        android:scrollbarDefaultDelayBeforeFade="0"
-        android:scrollbarFadeDuration="0"
-        android:scrollbarSize="0dp"
-        android:src="@drawable/blank"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:contentDescription="The imageview that shows whose turn it is to go."
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/blank" />
-
-    <ImageView
-        android:id="@+id/imageViewFrame"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/tictactoeframe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57" />
-
-    <Button
-        android:id="@+id/buttonNewGame"
-        android:layout_width="150dp"
-        android:layout_height="65dp"
-        android:background="@drawable/fullyroundedbutton"
-        android:onClick="newGame"
-        android:text="New Game"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFrame" />
-
-    <ImageButton
-        android:id="@+id/imageButtonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:contentDescription="This button is used to go back to the title screen."
-        android:onClick="backToLastScreen"
-        android:src="@android:drawable/ic_menu_revert"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985" />
+    tools:context="kt.game.tictactoe.MainActivity">
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
@@ -289,7 +62,7 @@
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="345dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:background="@drawable/fullyroundedbutton"
         android:checked="true"
         android:clickable="true"
@@ -304,6 +77,189 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
         app:layout_constraintVertical_bias="0.38" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:contentDescription="Shows whose turn it is to go."
+        app:layout_constraintBottom_toTopOf="@+id/imageViewFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/blank" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 1st clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFrame"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFrame"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 2nd clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFrame"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 3rd clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFrame"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFrame"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 4th clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFrame"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 5th clickable cell (The middle)"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFrame"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFrame"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFrame"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFrame" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 6th clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFrame"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 7th clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton8"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFrame"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:layout_constraintVertical_bias="1" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 8th clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFrame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton5"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="The 9th clickable cell"
+        android:onClick="cellClick"
+        android:scrollbarDefaultDelayBeforeFade="0"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="0dp"
+        android:src="@drawable/blank"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFrame"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/imageButton8"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageViewFrame"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/tictactoeframe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFrame"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewFrame"
+        app:layout_constraintStart_toStartOf="@+id/imageViewFrame"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFrame" />
 
     <TableLayout
         android:id="@+id/tableLayout2"
@@ -361,5 +317,48 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/buttonNewGame"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:background="@drawable/fullyroundedbutton"
+        android:onClick="newGame"
+        android:text="New Game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFrame"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSettings2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Used to go to the settings screen."
+        android:onClick="setScreenSettings"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986" />
+
+    <ImageButton
+        android:id="@+id/imageButtonBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Used to go back to the title screen."
+        android:onClick="backToLastScreen"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

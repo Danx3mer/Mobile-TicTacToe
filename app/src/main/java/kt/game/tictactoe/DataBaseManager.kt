@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package kt.game.tictactoe
 
 import android.content.ContentValues
 import android.content.Context

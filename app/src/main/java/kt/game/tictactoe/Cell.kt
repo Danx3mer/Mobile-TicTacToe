@@ -1,16 +1,16 @@
-package com.example.tictactoe
+package kt.game.tictactoe
 
 import android.widget.ImageButton
 
 class Cell(imageButtonGiven:ImageButton){
     enum class ImageType{Blank,O,X}
-    var image:ImageType = ImageType.Blank
+    var image: ImageType = ImageType.Blank
     private set
 
     val boundImageButton = imageButtonGiven
 
     fun cellClick(): Boolean{
-        if(this.image==ImageType.Blank){
+        if(this.image== ImageType.Blank){
                 when(engine.currentTurn){
                     Engine.CurrentTurnType.X ->{
                         this.boundImageButton.setImageResource(R.drawable.x)

@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package kt.game.tictactoe
 
 import android.view.View
 
@@ -103,8 +103,8 @@ class Settings(contextOfMainActivity: MainActivity) {
         val loadedSettings = dbManager.getSettings("SETTINGS")
 
         this.stats.winsEasy = easyStats[0]
-        this.stats.lossesEasy = 8888
-        this.stats.tiesEasy = 8888
+        this.stats.lossesEasy = easyStats[1]
+        this.stats.tiesEasy = easyStats[2]
 
         this.stats.winsMedium = mediumStats[0]
         this.stats.lossesMedium = mediumStats[1]

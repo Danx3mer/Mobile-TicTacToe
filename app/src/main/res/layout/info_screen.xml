@@ -13,17 +13,20 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/imageButtonInfo"
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:background="#00FFFFFF"
-            android:contentDescription="This button is used to go back to the title screen."
+            android:contentDescription="Used to go back to the last screen."
             android:onClick="backToLastScreen"
-            android:src="?attr/homeAsUpIndicator" />
+            android:src="?attr/homeAsUpIndicator"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="10dp" />
 
         <TextView
             android:id="@+id/toolbarTextView"
@@ -56,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -71,8 +74,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="390dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Version: 1.0"
@@ -83,12 +86,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="390dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Developer: Daniel Manita"
@@ -101,8 +105,9 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="390dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="40dp"
         android:fontFamily="serif"
         android:gravity="center"
         android:text="Email: danielthedev5@gmail.com"

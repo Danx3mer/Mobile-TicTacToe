@@ -7,10 +7,10 @@
 
     <ImageButton
         android:id="@+id/imageButtonInfo"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="#00FFFFFF"
-        android:contentDescription="This button is used to go back to the title screen."
+        android:contentDescription="Used to go to the about screen."
         android:onClick="setScreenAbout"
         android:src="@android:drawable/ic_dialog_info"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,10 +22,10 @@
 
     <ImageButton
         android:id="@+id/imageButtonSettings"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="#00FFFFFF"
-        android:contentDescription="This button is used to go back to the title screen."
+        android:contentDescription="Used to go to the settings screen."
         android:onClick="setScreenSettings"
         android:src="@android:drawable/ic_menu_preferences"
         app:layout_constraintBottom_toBottomOf="parent"

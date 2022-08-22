@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package kt.game.tictactoe
 
 import android.app.Activity
 import android.content.Context
@@ -49,9 +49,11 @@ class Engine(private val contextOfMainActivity: Context) {
     enum class WinningLinePos{VLeft,VMiddle,VRight,HTop,HMiddle,HBottom,D1,D2,Fail}
 
     enum class CurrentTurnType{X,O}
-    var currentTurn:CurrentTurnType = CurrentTurnType.O
+    var currentTurn: CurrentTurnType = CurrentTurnType.O
 
     private var isGameOver = false
+
+    fun endThread() { this.threadEnd = true }
 
     fun swapIcons(): Boolean {
         val tempIcon = settings.personIcon
@@ -120,13 +122,20 @@ class Engine(private val contextOfMainActivity: Context) {
         this.thread = Thread {
             this.threadEnd = false
             this.threadRunning = true
+
             Thread.sleep(500)
+
             if(this.threadEnd) {this.threadRunning = false; return@Thread}
+
             val computerPick = computer.pickCell(this.cells)
             if (computerPick == -1){ threadRunning = false; return@Thread }
+
             if(this.threadEnd) {this.threadRunning = false; return@Thread}
             this.cells[computerPick].cellClick()
+
+            if(this.threadEnd) {this.threadRunning = false; return@Thread}
             playSound(R.raw.click, contextOfMainActivity)
+
             if (++this.numOfMoves >= 5) {
                 val winCheckRes: WinningLinePos = this.winCheck()
                 if (winCheckRes != WinningLinePos.Fail) {
@@ -184,7 +193,7 @@ class Engine(private val contextOfMainActivity: Context) {
         if(this.computerGoesFirst) this.firstMove()
     }
 
-    private fun winCheck() :WinningLinePos {
+    private fun winCheck() : WinningLinePos {
         var cellMatchCounter = 0
         val checkImage: Cell.ImageType = when(this.currentTurn){
             CurrentTurnType.O -> Cell.ImageType.O

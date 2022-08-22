@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package kt.game.tictactoe
 
 class Computer(private var difficulty: Difficulty) {
     private enum class Strategies{Diagonal, Middle, None}
@@ -38,7 +38,8 @@ class Computer(private var difficulty: Difficulty) {
             }
 
             Difficulty.Hard -> {
-                if(currentStrategy == Strategies.None) currentStrategy = arrayListOf(Strategies.Diagonal,Strategies.Middle).random() //Selecting which strategy to be executed if not picked already.
+                if(currentStrategy == Strategies.None) currentStrategy = arrayListOf(Strategies.Diagonal,
+                    Strategies.Middle).random() //Selecting which strategy to be executed if not picked already.
                 val strategyRes: Int = if(currentStrategy == Strategies.Diagonal) diagonalStrategy(cells, availableCells) //Executing strategy based on the "currentStrategy" variable
                 else middleStrategy(cells, availableCells)
 
@@ -218,7 +219,7 @@ class Computer(private var difficulty: Difficulty) {
                 return 4 //go to the middle in case if the user goes to the side edges
             }
             3 -> {
-                if((cells[2].image==settings.personIcon && cells[6].image==settings.personIcon) || (cells[0].image==settings.personIcon && cells[8].image==settings.personIcon)){
+                if((cells[2].image== settings.personIcon && cells[6].image== settings.personIcon) || (cells[0].image== settings.personIcon && cells[8].image== settings.personIcon)){
                     this.movesDone.add(arrayListOf(1,3,5,7).random())
                     return this.movesDone.last()
                 }
@@ -381,7 +382,7 @@ class Computer(private var difficulty: Difficulty) {
                 return this.movesDone.last()
             }
             3 -> {
-                if((cells[2].image==settings.personIcon && cells[6].image==settings.personIcon) || (cells[0].image==settings.personIcon && cells[8].image==settings.personIcon)){
+                if((cells[2].image== settings.personIcon && cells[6].image== settings.personIcon) || (cells[0].image== settings.personIcon && cells[8].image== settings.personIcon)){
                     this.movesDone.add(arrayListOf(1,3,5,7).random())
                     return this.movesDone.last()
                 }
@@ -446,20 +447,20 @@ class Computer(private var difficulty: Difficulty) {
                 if(this.checkForImage(cells, settings.personIcon) != -1) return this.checkForImage(cells, settings.personIcon)
                 when(this.movesDone[1]){
                     0 -> {
-                        if(cells[3].image==settings.personIcon) this.movesDone.add(2)
-                        else if(cells[1].image==settings.personIcon) this.movesDone.add(6)
+                        if(cells[3].image== settings.personIcon) this.movesDone.add(2)
+                        else if(cells[1].image== settings.personIcon) this.movesDone.add(6)
                     }
                     2 -> {
-                        if(cells[1].image==settings.personIcon) this.movesDone.add(8)
-                        else if(cells[5].image==settings.personIcon) this.movesDone.add(0)
+                        if(cells[1].image== settings.personIcon) this.movesDone.add(8)
+                        else if(cells[5].image== settings.personIcon) this.movesDone.add(0)
                     }
                     6 -> {
-                        if(cells[3].image==settings.personIcon) this.movesDone.add(8)
-                        else if(cells[7].image==settings.personIcon) this.movesDone.add(0)
+                        if(cells[3].image== settings.personIcon) this.movesDone.add(8)
+                        else if(cells[7].image== settings.personIcon) this.movesDone.add(0)
                     }
                     8 -> {
-                        if(cells[7].image==settings.personIcon) this.movesDone.add(2)
-                        else if(cells[5].image==settings.personIcon) this.movesDone.add(6)
+                        if(cells[7].image== settings.personIcon) this.movesDone.add(2)
+                        else if(cells[5].image== settings.personIcon) this.movesDone.add(6)
                     }
                 }
                 return this.movesDone.last()

@@ -15,8 +15,8 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintVertical_bias="0.6"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -61,7 +61,7 @@
     <ToggleButton
         android:id="@+id/toggleButton2"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/fullyroundedbutton"
         android:clickable="true"
         android:onClick="toggleSound"
@@ -82,11 +82,9 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints">
 
         <ImageButton
@@ -94,9 +92,11 @@
             android:layout_width="45dp"
             android:layout_height="35dp"
             android:background="#00FFFFFF"
-            android:contentDescription="This button is used to go back to the title screen."
+            android:contentDescription="Used to go back to the last screen."
             android:onClick="backToLastScreen"
-            android:src="?attr/homeAsUpIndicator" />
+            android:src="?attr/homeAsUpIndicator"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="10dp" />
 
         <TextView
             android:id="@+id/toolbarTextView"
@@ -116,8 +116,9 @@
 
     <ImageButton
         android:id="@+id/imageButtonIcon"
-        android:layout_width="110dp"
-        android:layout_height="115dp"
+        android:layout_width="105dp"
+        android:layout_height="110dp"
+        android:contentDescription="Changes the default player icon (By default it is O)"
         android:onClick="swapIcons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -254,6 +255,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="4"
+                android:contentDescription="Resets all statistics"
                 android:onClick="resetStats"
                 android:text=" Reset all"
                 android:textColor="@color/white"
@@ -268,7 +270,6 @@
                 android:id="@+id/textView16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -316,10 +317,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="4"
+                android:contentDescription="Resets all Easy Mode statistics"
                 android:onClick="resetStats"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </TableRow>
 
         <TableRow
@@ -377,10 +379,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="4"
+                android:contentDescription="Resets all Medium Mode statistics"
                 android:onClick="resetStats"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </TableRow>
 
         <TableRow
@@ -438,10 +441,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="4"
+                android:contentDescription="Resets all Hard Mode statistics"
                 android:onClick="resetStats"
                 android:text="Reset"
                 android:textColor="@color/white"
-                android:textSize="11sp" />
+                android:textSize="10sp" />
         </TableRow>
     </TableLayout>
 

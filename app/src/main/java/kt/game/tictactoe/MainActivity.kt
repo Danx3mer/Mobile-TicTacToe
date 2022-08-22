@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package kt.game.tictactoe
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return if(detector.onTouchEvent(event)) true
+        return if(detector.onTouchEvent(event!!)) true
         else super.onTouchEvent(event)
     }
 
@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         private set
 
         fun updateScreen(newScreen: Int, restartGame: Boolean = true) {
+            engine.endThread()
             currentToast?.cancel()
             stopAllSounds()
             pastScreen = when(newScreen)
@@ -218,7 +219,8 @@ class MainActivity : AppCompatActivity() {
     fun setScreenSettings(view :View) {
         dataTracker.updateScreen(R.layout.settings)
 
-        if(settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
+        if(settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(
+            R.drawable.x)
         this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = settings.soundOn
         when (settings.defaultDifficulty) {
             Difficulty.Easy -> this.findViewById<Chip>(R.id.chip8).isChecked = true

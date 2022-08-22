@@ -8,7 +8,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TicTacToe">
         <activity
-            android:name=".MainActivity"
+            android:name="kt.game.tictactoe.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"> <!--I put the last line down to lock the screen orientation to portrait mode only.-->
             <intent-filter>
