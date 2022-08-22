@@ -154,6 +154,7 @@ class Engine(private val contextOfMainActivity: Context) {
     }
 
     private fun switchTurns(){
+        if(this.isGameOver) return
         when(this.currentTurn){
             CurrentTurnType.O -> {
                 this.currentTurn = CurrentTurnType.X
@@ -248,6 +249,24 @@ class Engine(private val contextOfMainActivity: Context) {
         this.isGameOver = true
         if(winningLinePos != null) this.drawWinningLine(winningLinePos)
         settings.stats.updateStats(gameOverCode, this.currentDifficulty)
+
+        when(settings.personIcon){
+            Cell.ImageType.O -> {
+                when(gameOverCode) {
+                    GameOverCode.Win -> this.imageView.setImageResource(R.drawable.o_winner)
+                    GameOverCode.Tie -> this.imageView.setImageResource(R.drawable.tie)
+                    GameOverCode.Loss -> this.imageView.setImageResource(R.drawable.x_winner)
+                }
+            }
+            Cell.ImageType.X -> {
+                when(gameOverCode) {
+                    GameOverCode.Win -> this.imageView.setImageResource(R.drawable.x_winner)
+                    GameOverCode.Tie -> this.imageView.setImageResource(R.drawable.tie)
+                    GameOverCode.Loss -> this.imageView.setImageResource(R.drawable.o_winner)
+                }
+            }
+        }
+
         (this.contextOfMainActivity as Activity).runOnUiThread{
         when(this.currentDifficulty){
             Difficulty.Hard -> {

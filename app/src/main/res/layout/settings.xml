@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="@+id/imageButtonIcon"
         app:layout_constraintStart_toStartOf="@+id/imageButtonIcon"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -89,8 +89,8 @@
 
         <ImageButton
             android:id="@+id/imageButtonInfo"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="#00FFFFFF"
             android:contentDescription="Used to go back to the last screen."
             android:onClick="backToLastScreen"
@@ -191,9 +191,9 @@
         android:id="@+id/tableLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -252,7 +252,7 @@
             <Button
                 android:id="@+id/buttonReset1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:contentDescription="Resets all statistics"
@@ -270,11 +270,12 @@
                 android:id="@+id/textView16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="Easy"
-                android:textAlignment="textStart"
+                android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -314,7 +315,7 @@
             <Button
                 android:id="@+id/buttonReset2"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:contentDescription="Resets all Easy Mode statistics"
@@ -332,6 +333,7 @@
                 android:id="@+id/textView20"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -376,7 +378,7 @@
             <Button
                 android:id="@+id/buttonReset3"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:contentDescription="Resets all Medium Mode statistics"
@@ -394,6 +396,7 @@
                 android:id="@+id/textView24"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -438,7 +441,7 @@
             <Button
                 android:id="@+id/buttonReset4"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:contentDescription="Resets all Hard Mode statistics"

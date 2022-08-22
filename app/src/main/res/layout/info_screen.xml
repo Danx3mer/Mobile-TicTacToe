@@ -19,8 +19,8 @@
 
         <ImageButton
             android:id="@+id/imageButtonInfo"
-            android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="#00FFFFFF"
             android:contentDescription="Used to go back to the last screen."
             android:onClick="backToLastScreen"
