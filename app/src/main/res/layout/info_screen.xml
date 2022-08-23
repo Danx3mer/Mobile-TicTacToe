@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Version: 1.0"
+        android:text="Version: Closed Alpha 0.6"
         android:textAlignment="gravity"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

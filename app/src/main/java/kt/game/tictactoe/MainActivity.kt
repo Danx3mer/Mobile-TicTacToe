@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        engine.endThread()
+        engine.endCoroutine()
         currentToast?.cancel()
         stopAllSounds()
     }
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         private set
 
         fun updateScreen(newScreen: Int, restartGame: Boolean = true) {
-            engine.endThread()
+            engine.endCoroutine()
             currentToast?.cancel()
             stopAllSounds()
             pastScreen = when(newScreen)
