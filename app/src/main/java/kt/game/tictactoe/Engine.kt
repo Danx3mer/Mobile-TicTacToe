@@ -258,13 +258,18 @@ class Engine(private val contextOfMainActivity: Context) {
                     GameOverCode.Loss -> this.imageView.setImageResource(R.drawable.x_winner)
                 }
             }
-            Cell.ImageType.X -> {
+            else -> {
                 when(gameOverCode) {
                     GameOverCode.Win -> this.imageView.setImageResource(R.drawable.x_winner)
                     GameOverCode.Tie -> this.imageView.setImageResource(R.drawable.tie)
                     GameOverCode.Loss -> this.imageView.setImageResource(R.drawable.o_winner)
                 }
             }
+        }
+
+        if(this.threadRunning && this.threadEnd) {
+            this.threadRunning = false
+            return
         }
 
         (this.contextOfMainActivity as Activity).runOnUiThread{

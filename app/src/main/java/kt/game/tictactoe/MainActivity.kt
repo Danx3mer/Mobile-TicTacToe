@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        engine.endThread()
         currentToast?.cancel()
         stopAllSounds()
     }
