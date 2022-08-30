@@ -67,9 +67,8 @@ class Engine(private val contextOfMainActivity: Context) {
         }
     }
 
-    private fun firstMove(){
-        if(this.computerGoesFirst)
-        {
+    private fun firstMove() {
+        if(this.computerGoesFirst) {
             this.switchTurns() //To make sure that the computer is X
             //Computer goes here
             val computerPick = computer.pickCell(this.cells)
@@ -109,7 +108,7 @@ class Engine(private val contextOfMainActivity: Context) {
         }
     }
 
-    fun fieldClick(view: View){
+    fun fieldClick(view: View) {
         if(this.isGameOver || !this.coroutineEnded) return
 
         //Player goes here
@@ -146,42 +145,9 @@ class Engine(private val contextOfMainActivity: Context) {
         }
 
         if(this.currentDifficulty != Difficulty.None) this.computerMove()
-        /*this.thread = Thread {
-            this.threadEnd = false
-            this.threadRunning = true
-
-            Thread.sleep(500)
-
-            if(this.threadEnd) {this.threadRunning = false; return@Thread}
-
-            val computerPick = computer.pickCell(this.cells)
-            if (computerPick == -1){ threadRunning = false; return@Thread }
-
-            if(this.threadEnd) {this.threadRunning = false; return@Thread}
-            this.cells[computerPick].cellClick()
-
-            if(this.threadEnd) {this.threadRunning = false; return@Thread}
-            playSound(R.raw.click, contextOfMainActivity)
-
-            if (++this.numOfMoves >= 5) {
-                val winCheckRes: WinningLinePos = this.winCheck()
-                if (winCheckRes != WinningLinePos.Fail) {
-                    gameOver(GameOverCode.Loss, winCheckRes)
-                    playSound(R.raw.lose, contextOfMainActivity)
-                }
-                else if (this.numOfMoves == 9) {
-                    gameOver(GameOverCode.Tie, winCheckRes)
-                }
-            }
-            this.switchTurns()
-            this.threadRunning = false
-            return@Thread
-        }
-        this.thread!!.start()*/
-
     }
 
-    private fun switchTurns(){
+    private fun switchTurns() {
         if(this.isGameOver) return
         when(this.currentTurn){
             CurrentTurnType.O -> {
@@ -195,7 +161,7 @@ class Engine(private val contextOfMainActivity: Context) {
         }
     }
 
-    fun startNewGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean){
+    fun startNewGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean) {
         this.endCoroutine()
 
         for(i in 0..8) this.cells[i].reset()
@@ -273,7 +239,7 @@ class Engine(private val contextOfMainActivity: Context) {
         return WinningLinePos.Fail
     }
 
-    private fun gameOver(gameOverCode: GameOverCode, winningLinePos: WinningLinePos?){
+    private fun gameOver(gameOverCode: GameOverCode, winningLinePos: WinningLinePos?) {
         this.isGameOver = true
         if(winningLinePos != null) this.drawWinningLine(winningLinePos)
         settings.stats.updateStats(gameOverCode, this.currentDifficulty)
@@ -359,7 +325,7 @@ class Engine(private val contextOfMainActivity: Context) {
             }
     }
 
-    private fun drawWinningLine(winningLinePos: WinningLinePos){
+    private fun drawWinningLine(winningLinePos: WinningLinePos) {
         if(winningLinePos == WinningLinePos.Fail) return
         val startX: Float = when(winningLinePos){
             WinningLinePos.VLeft -> 50F
@@ -399,6 +365,5 @@ class Engine(private val contextOfMainActivity: Context) {
         canvas.drawLine(startX, startY, stopX, stopY, paint)
         imageViewLineDrawer.setImageBitmap(bitmap)
     }
-
 }
 

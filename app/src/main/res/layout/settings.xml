@@ -109,7 +109,8 @@
             android:text="Settings &amp; Statistics"
             android:textAppearance="@android:style/TextAppearance.WindowTitle"
             android:textSize="20sp"
-            android:visibility="visible" />
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="14dp" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -170,7 +171,7 @@
         app:layout_constraintBottom_toTopOf="@+id/chipGroup"
         app:layout_constraintEnd_toEndOf="@+id/chipGroup"
         app:layout_constraintStart_toStartOf="@+id/chipGroup"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
         app:layout_constraintVertical_bias="0.9" />
 
     <TextView
@@ -338,7 +339,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="Medium"
-                android:textAlignment="textStart"
+                android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -401,7 +402,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="Hard"
-                android:textAlignment="textStart"
+                android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 

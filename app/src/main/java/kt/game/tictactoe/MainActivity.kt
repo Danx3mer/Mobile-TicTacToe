@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
                 if(abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) //If this is a real swipe
                     if(diffX > 0) // l -> r (right) swipe
-                        this@MainActivity.backToLastScreen()
+                        this@MainActivity.dataTracker.updateScreen(this@MainActivity.dataTracker.pastScreen)
 
             return super.onFling(pointerDown, moveEvent, velocityX, velocityY)
         }
@@ -94,8 +94,7 @@ class MainActivity : AppCompatActivity() {
             engine.endCoroutine()
             currentToast?.cancel()
             stopAllSounds()
-            pastScreen = when(newScreen)
-            {
+            pastScreen = when(newScreen) {
                 R.layout.activity_main -> R.layout.title_screen
                 R.layout.title_screen -> R.layout.title_screen
                 else -> this.currentScreen
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         this.findViewById<TextView>(R.id.textView27).text = settings.stats.tiesHard.toString()
     }
 
-    fun backToLastScreen(v:View? = null) = dataTracker.updateScreen(dataTracker.pastScreen)
+    fun backToLastScreen(view:View) = this.dataTracker.updateScreen(this.dataTracker.pastScreen)
 
     private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false) {
         currentToast?.cancel()
@@ -145,6 +144,9 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<Chip>(R.id.chip7).visibility = View.GONE
             this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
             this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.GONE
+
+            this.findViewById<ImageView>(R.id.imageView7).visibility = View.VISIBLE
+            this.findViewById<TextView>(R.id.textView7).visibility = View.VISIBLE
         }
         else {
             this.findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
@@ -154,30 +156,31 @@ class MainActivity : AppCompatActivity() {
             this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.VISIBLE
             this.findViewById<ToggleButton>(R.id.toggleButton).isChecked = !computerGoesFirst
 
-            this.findViewById<TextView>(R.id.textView28).text =
-                when(engine.currentDifficulty)
-                {
-                    Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
-                    Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
-                    Difficulty.Hard -> "Wins: " + settings.stats.winsHard
-                    else -> "Wins:"
-                }
-            this.findViewById<TextView>(R.id.textView29).text =
-                when(engine.currentDifficulty)
-                {
-                    Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
-                    Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
-                    Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
-                    else -> "Ties:"
-                }
-            this.findViewById<TextView>(R.id.textView30).text =
-                when(engine.currentDifficulty)
-                {
-                    Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
-                    Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
-                    Difficulty.Hard -> "Losses: " + settings.stats.lossesHard
-                    else -> "Losses:"
-                }
+            this.findViewById<ImageView>(R.id.imageView7).visibility = View.GONE
+            this.findViewById<TextView>(R.id.textView7).visibility = View.GONE
+
+            this.findViewById<TextView>(R.id.textView28).text = when(engine.currentDifficulty) {
+                Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
+                Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
+                Difficulty.Hard -> "Wins: " + settings.stats.winsHard
+                else -> "Wins:"
+            }
+
+            this.findViewById<TextView>(R.id.textView29).text = when(engine.currentDifficulty)
+            {
+                Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
+                Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
+                Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
+                else -> "Ties:"
+            }
+
+            this.findViewById<TextView>(R.id.textView30).text = when(engine.currentDifficulty)
+            {
+                Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
+                Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
+                Difficulty.Hard -> "Losses: " + settings.stats.lossesHard
+                else -> "Losses:"
+            }
         }
     }
 

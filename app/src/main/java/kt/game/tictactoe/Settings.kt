@@ -70,7 +70,6 @@ class Settings(contextOfMainActivity: MainActivity) {
                         Difficulty.Easy -> this.winsEasy++
                         Difficulty.Medium -> this.winsMedium++
                         Difficulty.Hard -> this.winsHard++
-                        else -> return
                     }
                 }
                 Engine.GameOverCode.Tie -> {
@@ -78,7 +77,6 @@ class Settings(contextOfMainActivity: MainActivity) {
                         Difficulty.Easy -> this.tiesEasy++
                         Difficulty.Medium -> this.tiesMedium++
                         Difficulty.Hard -> this.tiesHard++
-                        else -> return
                     }
                 }
                 Engine.GameOverCode.Loss -> {
@@ -86,7 +84,6 @@ class Settings(contextOfMainActivity: MainActivity) {
                         Difficulty.Easy -> this.lossesEasy++
                         Difficulty.Medium -> this.lossesMedium++
                         Difficulty.Hard -> this.lossesHard++
-                        else -> return
                     }
                 }
             }
@@ -97,43 +94,43 @@ class Settings(contextOfMainActivity: MainActivity) {
     private fun loadSettings() {
         try{
             val easyStats = dbManager.getSettings("EASY")
+            val mediumStats = dbManager.getSettings("MEDIUM")
+            val hardStats = dbManager.getSettings("HARD")
+            val loadedSettings = dbManager.getSettings("SETTINGS")
 
-        val mediumStats = dbManager.getSettings("MEDIUM")
-        val hardStats = dbManager.getSettings("HARD")
-        val loadedSettings = dbManager.getSettings("SETTINGS")
+            this.stats.winsEasy = easyStats[0]
+            this.stats.lossesEasy = easyStats[1]
+            this.stats.tiesEasy = easyStats[2]
 
-        this.stats.winsEasy = easyStats[0]
-        this.stats.lossesEasy = easyStats[1]
-        this.stats.tiesEasy = easyStats[2]
+            this.stats.winsMedium = mediumStats[0]
+            this.stats.lossesMedium = mediumStats[1]
+            this.stats.tiesMedium = mediumStats[2]
 
-        this.stats.winsMedium = mediumStats[0]
-        this.stats.lossesMedium = mediumStats[1]
-        this.stats.tiesMedium = mediumStats[2]
+            this.stats.winsHard = hardStats[0]
+            this.stats.lossesHard = hardStats[1]
+            this.stats.tiesHard = hardStats[2]
 
-        this.stats.winsHard = hardStats[0]
-        this.stats.lossesHard = hardStats[1]
-        this.stats.tiesHard = hardStats[2]
+            this.soundOn = when(loadedSettings[0]) {
+                0 -> false
+                else -> true
+            }
 
-        this.soundOn = when(loadedSettings[0]) {
-            0 -> false
-            else -> true
-        }
+            this.personIcon = when(loadedSettings[1]) {
+                0 -> Cell.ImageType.O
+                else -> Cell.ImageType.X
+            }
 
-        this.personIcon = when(loadedSettings[1]) {
-            0 -> Cell.ImageType.O
-            else -> Cell.ImageType.X
-        }
-        this.computerIcon = when(loadedSettings[1]) {
-            0 -> Cell.ImageType.X
-            else -> Cell.ImageType.O
-        }
+            this.computerIcon = when(loadedSettings[1]) {
+                0 -> Cell.ImageType.X
+                else -> Cell.ImageType.O
+            }
 
-        this.defaultDifficulty = when(loadedSettings[2]) {
-            0 -> Difficulty.Easy
-            1 -> Difficulty.Medium
-            2 -> Difficulty.Hard
-            else -> Difficulty.None
-        }
+            this.defaultDifficulty = when(loadedSettings[2]) {
+                0 -> Difficulty.Easy
+                1 -> Difficulty.Medium
+                2 -> Difficulty.Hard
+                else -> Difficulty.None
+            }
         } catch(e: Exception) {this.writeNewSettings()}
     }
 
