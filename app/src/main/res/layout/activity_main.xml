@@ -7,33 +7,6 @@
     android:background="#231f20"
     tools:context="kt.game.tictactoe.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tictactoe_logo" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="8"
-        android:padding="10dp"
-        android:text="Tic Tac Toe"
-        android:textAlignment="textStart"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="@+id/chipGroup"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"
-        tools:ignore="RtlCompat" />
-
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
@@ -105,6 +78,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        app:checkedChip="@id/chip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00999999"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:checkable="true"
+            android:onClick="toggleAutoSwitch"
+            android:text="Automatically switch"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:checkable="true"
+            android:onClick="toggleAutoSwitch"
+            android:text="Manually Switch"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/buttonNewGame2"
+        android:layout_width="345dp"
+        android:layout_height="48dp"
+        android:background="@drawable/fullyroundedbutton"
+        android:onClick="swapPvpIcons"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="Switch turns"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup2"
         app:layout_constraintVertical_bias="0.38" />
 
     <ImageView

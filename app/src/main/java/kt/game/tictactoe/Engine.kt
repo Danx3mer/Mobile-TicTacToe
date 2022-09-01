@@ -284,16 +284,28 @@ class Engine(private val contextOfMainActivity: Context) {
                 }
             }
             Difficulty.None -> {
-                currentToast = when(gameOverCode){
+                when(gameOverCode){
                     GameOverCode.Win -> {
-                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
-                        else Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                        if(settings.personIcon == Cell.ImageType.O) {
+                            currentToast = Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                            if(settings.autoSwitch) settings.personIcon = Cell.ImageType.O
+                        }
+                        else{
+                            currentToast = Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                            if(settings.autoSwitch) settings.personIcon = Cell.ImageType.X
+                        }
                     }
-                    GameOverCode.Tie -> Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+                    GameOverCode.Tie -> currentToast = Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
 
                     GameOverCode.Loss -> {
-                        if(settings.personIcon == Cell.ImageType.O) Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
-                        else Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                        if(settings.personIcon == Cell.ImageType.O) {
+                            currentToast = Toast(this.contextOfMainActivity).showCustomToast("X won!!!", this.contextOfMainActivity as Activity)
+                            if(settings.autoSwitch) settings.personIcon = Cell.ImageType.X
+                        }
+                        else{
+                            currentToast = Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
+                            if(settings.autoSwitch) settings.personIcon = Cell.ImageType.O
+                        }
                     }
                 }
             }
@@ -305,7 +317,7 @@ class Engine(private val contextOfMainActivity: Context) {
                 Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
                 Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
                 Difficulty.Hard -> "Wins: " + settings.stats.winsHard
-                else -> "Wins:"
+                else -> "O Wins: ${settings.stats.oWins}"
             }
         this.contextOfMainActivity.findViewById<TextView>(R.id.textView29).text =
             when(engine.currentDifficulty)
@@ -313,7 +325,7 @@ class Engine(private val contextOfMainActivity: Context) {
                 Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
                 Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
                 Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
-                else -> "Ties:"
+                else -> "Ties: ${settings.stats.pvpTies}"
             }
         this.contextOfMainActivity.findViewById<TextView>(R.id.textView30).text =
             when(engine.currentDifficulty)
@@ -321,7 +333,7 @@ class Engine(private val contextOfMainActivity: Context) {
                 Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
                 Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
                 Difficulty.Hard -> "Losses: " + settings.stats.lossesHard
-                else -> "Losses:"
+                else -> "X Wins: ${settings.stats.xWins}"
             }
     }
 

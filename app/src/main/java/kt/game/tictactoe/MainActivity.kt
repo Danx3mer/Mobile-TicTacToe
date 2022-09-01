@@ -138,26 +138,35 @@ class MainActivity : AppCompatActivity() {
                 this.findViewById(R.id.imageView2))
         engine.startNewGame(difficulty, computerGoesFirst)
 
-        if(engine.currentDifficulty == Difficulty.None){
+        if(engine.currentDifficulty == Difficulty.None) {
             this.findViewById<Chip>(R.id.chip5).visibility = View.GONE
             this.findViewById<Chip>(R.id.chip6).visibility = View.GONE
             this.findViewById<Chip>(R.id.chip7).visibility = View.GONE
             this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
-            this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.GONE
 
-            this.findViewById<ImageView>(R.id.imageView7).visibility = View.VISIBLE
-            this.findViewById<TextView>(R.id.textView7).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.chip).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.chip2).visibility = View.VISIBLE
+
+            this.findViewById<Button>(R.id.buttonNewGame2).visibility = View.VISIBLE
+
+            this.findViewById<TextView>(R.id.textView28).text = "O Wins: ${settings.stats.oWins}"
+            this.findViewById<TextView>(R.id.textView29).text = "Ties: ${settings.stats.pvpTies}"
+            this.findViewById<TextView>(R.id.textView30).text = "X Wins: ${settings.stats.xWins}"
+
+            if(!settings.autoSwitch) this.findViewById<Chip>(R.id.chip2).isChecked = true
         }
         else {
             this.findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
             this.findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
             this.findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
             this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
-            this.findViewById<TableLayout>(R.id.tableLayout2).visibility = View.VISIBLE
-            this.findViewById<ToggleButton>(R.id.toggleButton).isChecked = !computerGoesFirst
 
-            this.findViewById<ImageView>(R.id.imageView7).visibility = View.GONE
-            this.findViewById<TextView>(R.id.textView7).visibility = View.GONE
+            this.findViewById<Chip>(R.id.chip).visibility = View.GONE
+            this.findViewById<Chip>(R.id.chip2).visibility = View.GONE
+
+            this.findViewById<Button>(R.id.buttonNewGame2).visibility = View.GONE
+
+            this.findViewById<ToggleButton>(R.id.toggleButton).isChecked = !computerGoesFirst
 
             this.findViewById<TextView>(R.id.textView28).text = when(engine.currentDifficulty) {
                 Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
@@ -255,8 +264,23 @@ class MainActivity : AppCompatActivity() {
         else if(res) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.o)
     }
 
+    fun swapPvpIcons(view: View) {
+        val res = engine.swapIcons()
+        if(!res) this.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.x)
+        else if(res) this.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.o)
+
+        this.restartGame()
+    }
+
     fun resetStats(view: View) {
         settings.stats.updateStats(buttonResetView = view)
         this.showStats()
+    }
+
+    fun toggleAutoSwitch(view: View) {
+        when(view.id) {
+            R.id.chip -> settings.autoSwitch = true
+            R.id.chip2 -> settings.autoSwitch = false
+        }
     }
 }

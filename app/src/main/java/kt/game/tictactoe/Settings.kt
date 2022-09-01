@@ -12,6 +12,8 @@ class Settings(contextOfMainActivity: MainActivity) {
         set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "TIES", when(value){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1 })}
     private val dbManager = DataBaseManager(contextOfMainActivity)
 
+    var autoSwitch = true
+
     inner class Statistics{
         var winsHard = 0
             set(value) { field = value; this@Settings.dbManager.overwriteValue("HARD", "WINS", value) }
@@ -31,6 +33,11 @@ class Settings(contextOfMainActivity: MainActivity) {
             set(value) { field = value; this@Settings.dbManager.overwriteValue("MEDIUM", "LOSSES", value) }
         var lossesEasy = 0
             set(value) { field = value; this@Settings.dbManager.overwriteValue("EASY", "LOSSES", value) }
+
+        var oWins = 0
+        var xWins = 0
+        var pvpTies = 0
+
 
         fun updateStats(gameOverCode: Engine.GameOverCode? = null, difficulty: Difficulty? = null, buttonResetView: View? = null) {
             if(buttonResetView != null) {
@@ -70,6 +77,9 @@ class Settings(contextOfMainActivity: MainActivity) {
                         Difficulty.Easy -> this.winsEasy++
                         Difficulty.Medium -> this.winsMedium++
                         Difficulty.Hard -> this.winsHard++
+                        Difficulty.None ->
+                            if(this@Settings.personIcon == Cell.ImageType.O) this.oWins++
+                            else this.xWins++
                     }
                 }
                 Engine.GameOverCode.Tie -> {
@@ -77,6 +87,7 @@ class Settings(contextOfMainActivity: MainActivity) {
                         Difficulty.Easy -> this.tiesEasy++
                         Difficulty.Medium -> this.tiesMedium++
                         Difficulty.Hard -> this.tiesHard++
+                        Difficulty.None -> this.pvpTies++
                     }
                 }
                 Engine.GameOverCode.Loss -> {
@@ -84,6 +95,9 @@ class Settings(contextOfMainActivity: MainActivity) {
                         Difficulty.Easy -> this.lossesEasy++
                         Difficulty.Medium -> this.lossesMedium++
                         Difficulty.Hard -> this.lossesHard++
+                        Difficulty.None ->
+                            if(this@Settings.personIcon == Cell.ImageType.O) this.xWins++
+                            else this.oWins++
                     }
                 }
             }
