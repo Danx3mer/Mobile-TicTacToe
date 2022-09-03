@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">TicTacToe Open Beta V0.7</string>
+    <string name="version">Version: Open Testing 0.7</string>
+    <string name="developer">Developer: Daniel Manita</string>
+    <string name="email">Email: danielthedev5@gmail.com</string>
+
+    <string name="Easy">Easy</string>
+    <string name="Medium">Medium</string>
+    <string name="Hard">Hard</string>
+
+    <string name="Wins">Wins</string>
+    <string name="Losses">Losses</string>
+    <string name="Ties">Ties</string>
+    <string name="OWins">O Wins:</string>
+    <string name="XWins">X Wins:</string>
+    <string name="Wins_colon">Wins:</string>
+    <string name="Losses_colon">Losses:</string>
+    <string name="Ties_colon">Ties:</string>
+
+    <string name="Reset">Reset</string>
+    <string name="Reset_all">Reset all</string>
+
+    <string name="On">On</string>
+    <string name="Off">Off</string>
+
+    <string name="Your_Icon">Your icon:</string>
+    <string name="Click_To_Change">(Click to change)</string>
+    <string name="Sound">Sound:</string>
+    <string name="Def_Bot_Diff">Default Bot Difficulty:</string>
+    <string name="settings_stats">Settings &amp; Statistics</string>
+
+    <string name="NewGamePVP">New Game VS Player</string>
+    <string name="NewGamePVE">New Game VS Bot</string>
+    <string name="NewGame">New Game</string>
+
+    <string name="TicTacToe">Tic Tac Toe</string>
+    <string name="Abt_TicTacToe">About Tic Tac Toe</string>
+
+    <string name="Bot_First">Bot Goes First</string>
+    <string name="Player_First">Player Goes First</string>
+    <string name="Auto_Switch">Automatically Switch</string>
+    <string name="Manual_Switch">Manually Switch</string>
+    <string name="Switch">Switch turns</string>
+
+    <string name="cd_newPVP">Creates a new game that you can play locally with your friend on this device.</string>
+    <string name="cd_newPVE">Creates a new game against a bot.</string>
+    <string name="cd_settings">Used to go to the settings screen.</string>
+    <string name="cd_info">Used to go to the about screen.</string>
+    <string name="cd_icon">Changes the default player icon (By default it is O).</string>
+    <string name="cd_back">Used to go back to the last screen.</string>
+    <string name="cd_reset_all">Resets all statistics.</string>
+    <string name="cd_reset_easy">Resets all easy mode statistics.</string>
+    <string name="cd_reset_medium">Resets all medium mode statistics.</string>
+    <string name="cd_reset_hard">Resets all hard mode statistics.</string>
+    <string name="cd_turn">Shows whose turn it is to go.</string>
+
+    <string name="cd_cell_1">The 1st clickable cell.</string>
+    <string name="cd_cell_2">The 2nd clickable cell.</string>
+    <string name="cd_cell_3">The 3rd clickable cell.</string>
+    <string name="cd_cell_4">The 4th clickable cell.</string>
+    <string name="cd_cell_5">The 5th clickable cell.</string>
+    <string name="cd_cell_6">The 6th clickable cell.</string>
+    <string name="cd_cell_7">The 7th clickable cell.</string>
+    <string name="cd_cell_8">The 8th clickable cell.</string>
+    <string name="cd_cell_9">The 9th clickable cell.</string>
 </resources>

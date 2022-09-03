@@ -94,6 +94,13 @@ class MainActivity : AppCompatActivity() {
             engine.endCoroutine()
             currentToast?.cancel()
             stopAllSounds()
+
+            if(currentScreen == R.layout.activity_main && newScreen != currentScreen && engine.currentDifficulty == Difficulty.None){
+                settings.stats.oWins = 0
+                settings.stats.xWins = 0
+                settings.stats.pvpTies = 0
+            }
+
             pastScreen = when(newScreen) {
                 R.layout.activity_main -> R.layout.title_screen
                 R.layout.title_screen -> R.layout.title_screen
@@ -107,75 +114,75 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showStats() {
-        this.findViewById<TextView>(R.id.textView17).text = settings.stats.winsEasy.toString()
-        this.findViewById<TextView>(R.id.textView18).text = settings.stats.lossesEasy.toString()
-        this.findViewById<TextView>(R.id.textView19).text = settings.stats.tiesEasy.toString()
+        this.findViewById<TextView>(R.id.tv_wins_easy).text = settings.stats.winsEasy.toString()
+        this.findViewById<TextView>(R.id.tv_losses_easy).text = settings.stats.lossesEasy.toString()
+        this.findViewById<TextView>(R.id.tv_ties_easy).text = settings.stats.tiesEasy.toString()
 
-        this.findViewById<TextView>(R.id.textView21).text = settings.stats.winsMedium.toString()
-        this.findViewById<TextView>(R.id.textView22).text = settings.stats.lossesMedium.toString()
-        this.findViewById<TextView>(R.id.textView23).text = settings.stats.tiesMedium.toString()
+        this.findViewById<TextView>(R.id.tv_wins_medium).text = settings.stats.winsMedium.toString()
+        this.findViewById<TextView>(R.id.tv_losses_medium).text = settings.stats.lossesMedium.toString()
+        this.findViewById<TextView>(R.id.tv_ties_medium).text = settings.stats.tiesMedium.toString()
 
         this.findViewById<TextView>(R.id.textView25).text = settings.stats.winsHard.toString()
-        this.findViewById<TextView>(R.id.textView26).text = settings.stats.lossesHard.toString()
-        this.findViewById<TextView>(R.id.textView27).text = settings.stats.tiesHard.toString()
+        this.findViewById<TextView>(R.id.tv_losses_hard).text = settings.stats.lossesHard.toString()
+        this.findViewById<TextView>(R.id.tv_ties_hard).text = settings.stats.tiesHard.toString()
     }
 
-    fun backToLastScreen(view:View) = this.dataTracker.updateScreen(this.dataTracker.pastScreen)
+    fun backToLastScreen(view: View) = this.dataTracker.updateScreen(this.dataTracker.pastScreen)
 
     private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false) {
         currentToast?.cancel()
         if(reInitEngine)
-            engine.fullInit(arrayOf(this.findViewById(R.id.imageButton1),
-                this.findViewById(R.id.imageButton2),
-                this.findViewById(R.id.imageButton3),
-                this.findViewById(R.id.imageButton4),
-                this.findViewById(R.id.imageButton5),
-                this.findViewById(R.id.imageButton6),
-                this.findViewById(R.id.imageButton7),
-                this.findViewById(R.id.imageButton8),
-                this.findViewById(R.id.imageButton9)),
-                this.findViewById(R.id.imageView),
-                this.findViewById(R.id.imageView2))
+            engine.fullInit(arrayOf(this.findViewById(R.id.ib_cell1),
+                this.findViewById(R.id.ib_cell2),
+                this.findViewById(R.id.ib_cell3),
+                this.findViewById(R.id.ib_cell4),
+                this.findViewById(R.id.ib_cell5),
+                this.findViewById(R.id.ib_cell6),
+                this.findViewById(R.id.ib_cell7),
+                this.findViewById(R.id.ib_cell8),
+                this.findViewById(R.id.ib_cell9)),
+                this.findViewById(R.id.iv_turn),
+                this.findViewById(R.id.iv_linedrawer))
         engine.startNewGame(difficulty, computerGoesFirst)
 
         if(engine.currentDifficulty == Difficulty.None) {
-            this.findViewById<Chip>(R.id.chip5).visibility = View.GONE
-            this.findViewById<Chip>(R.id.chip6).visibility = View.GONE
-            this.findViewById<Chip>(R.id.chip7).visibility = View.GONE
-            this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.GONE
+            this.findViewById<Chip>(R.id.cp_diff_easy).visibility = View.GONE
+            this.findViewById<Chip>(R.id.cp_diff_medium).visibility = View.GONE
+            this.findViewById<Chip>(R.id.cp_diff_hard).visibility = View.GONE
+            this.findViewById<ToggleButton>(R.id.tb_firstturn).visibility = View.GONE
 
-            this.findViewById<Chip>(R.id.chip).visibility = View.VISIBLE
-            this.findViewById<Chip>(R.id.chip2).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.cp_autoswitch).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.cp_manualswitch).visibility = View.VISIBLE
 
-            this.findViewById<Button>(R.id.buttonNewGame2).visibility = View.VISIBLE
+            this.findViewById<Button>(R.id.btn_switch_turn).visibility = View.VISIBLE
 
-            this.findViewById<TextView>(R.id.textView28).text = "O Wins: ${settings.stats.oWins}"
-            this.findViewById<TextView>(R.id.textView29).text = "Ties: ${settings.stats.pvpTies}"
-            this.findViewById<TextView>(R.id.textView30).text = "X Wins: ${settings.stats.xWins}"
+            this.findViewById<TextView>(R.id.tv_ministats_ties).text = "O Wins: ${settings.stats.oWins}"
+            this.findViewById<TextView>(R.id.tv_ministats_wins).text = "Ties: ${settings.stats.pvpTies}"
+            this.findViewById<TextView>(R.id.tv_ministats_losses).text = "X Wins: ${settings.stats.xWins}"
 
-            if(!settings.autoSwitch) this.findViewById<Chip>(R.id.chip2).isChecked = true
+            if(!settings.autoSwitch) this.findViewById<Chip>(R.id.cp_manualswitch).isChecked = true
         }
         else {
-            this.findViewById<Chip>(R.id.chip5).visibility = View.VISIBLE
-            this.findViewById<Chip>(R.id.chip6).visibility = View.VISIBLE
-            this.findViewById<Chip>(R.id.chip7).visibility = View.VISIBLE
-            this.findViewById<ToggleButton>(R.id.toggleButton).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.cp_diff_easy).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.cp_diff_medium).visibility = View.VISIBLE
+            this.findViewById<Chip>(R.id.cp_diff_hard).visibility = View.VISIBLE
+            this.findViewById<ToggleButton>(R.id.tb_firstturn).visibility = View.VISIBLE
 
-            this.findViewById<Chip>(R.id.chip).visibility = View.GONE
-            this.findViewById<Chip>(R.id.chip2).visibility = View.GONE
+            this.findViewById<Chip>(R.id.cp_autoswitch).visibility = View.GONE
+            this.findViewById<Chip>(R.id.cp_manualswitch).visibility = View.GONE
 
-            this.findViewById<Button>(R.id.buttonNewGame2).visibility = View.GONE
+            this.findViewById<Button>(R.id.btn_switch_turn).visibility = View.GONE
 
-            this.findViewById<ToggleButton>(R.id.toggleButton).isChecked = !computerGoesFirst
+            this.findViewById<ToggleButton>(R.id.tb_firstturn).isChecked = !computerGoesFirst
 
-            this.findViewById<TextView>(R.id.textView28).text = when(engine.currentDifficulty) {
+            this.findViewById<TextView>(R.id.tv_ministats_ties).text = when(engine.currentDifficulty) {
                 Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
                 Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
                 Difficulty.Hard -> "Wins: " + settings.stats.winsHard
                 else -> "Wins:"
             }
 
-            this.findViewById<TextView>(R.id.textView29).text = when(engine.currentDifficulty)
+            this.findViewById<TextView>(R.id.tv_ministats_wins).text = when(engine.currentDifficulty)
             {
                 Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
                 Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
@@ -183,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                 else -> "Ties:"
             }
 
-            this.findViewById<TextView>(R.id.textView30).text = when(engine.currentDifficulty)
+            this.findViewById<TextView>(R.id.tv_ministats_losses).text = when(engine.currentDifficulty)
             {
                 Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
                 Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
@@ -196,19 +203,19 @@ class MainActivity : AppCompatActivity() {
     fun newGame(view: View?) {
         dataTracker.updateScreen(R.layout.activity_main, false)
         val difficulty = when(view!!.id) {
-            this.findViewById<Chip>(R.id.chip5).id -> Difficulty.Easy
-            this.findViewById<Chip>(R.id.chip6).id -> Difficulty.Medium
-            this.findViewById<Chip>(R.id.chip7).id -> Difficulty.Hard
-            R.id.button2 -> Difficulty.None
-            R.id.buttonNewGame -> engine.currentDifficulty
+            this.findViewById<Chip>(R.id.cp_diff_easy).id -> Difficulty.Easy
+            this.findViewById<Chip>(R.id.cp_diff_medium).id -> Difficulty.Medium
+            this.findViewById<Chip>(R.id.cp_diff_hard).id -> Difficulty.Hard
+            R.id.btn_newPVP -> Difficulty.None
+            R.id.btn_newgame -> engine.currentDifficulty
             else -> settings.defaultDifficulty
         }
         startGame(difficulty, engine.computerGoesFirst, true)
 
         when (engine.currentDifficulty) {
-            Difficulty.Easy -> this.findViewById<Chip>(R.id.chip5).isChecked = true
-            Difficulty.Medium -> this.findViewById<Chip>(R.id.chip6).isChecked = true
-            Difficulty.Hard -> this.findViewById<Chip>(R.id.chip7).isChecked = true
+            Difficulty.Easy -> this.findViewById<Chip>(R.id.cp_diff_easy).isChecked = true
+            Difficulty.Medium -> this.findViewById<Chip>(R.id.cp_diff_medium).isChecked = true
+            Difficulty.Hard -> this.findViewById<Chip>(R.id.cp_diff_hard).isChecked = true
             Difficulty.None -> startGame(reInitEngine = true)
         }
     }
@@ -217,9 +224,9 @@ class MainActivity : AppCompatActivity() {
         startGame(engine.currentDifficulty, engine.computerGoesFirst, true)
 
         when (engine.currentDifficulty) {
-            Difficulty.Easy -> this.findViewById<Chip>(R.id.chip5).isChecked = true
-            Difficulty.Medium -> this.findViewById<Chip>(R.id.chip6).isChecked = true
-            Difficulty.Hard -> this.findViewById<Chip>(R.id.chip7).isChecked = true
+            Difficulty.Easy -> this.findViewById<Chip>(R.id.cp_diff_easy).isChecked = true
+            Difficulty.Medium -> this.findViewById<Chip>(R.id.cp_diff_medium).isChecked = true
+            Difficulty.Hard -> this.findViewById<Chip>(R.id.cp_diff_hard).isChecked = true
             else -> return
         }
     }
@@ -232,14 +239,14 @@ class MainActivity : AppCompatActivity() {
     fun setScreenSettings(view :View) {
         dataTracker.updateScreen(R.layout.settings)
 
-        if(settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(
+        if(settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.ib_usricon).setImageResource(
             R.drawable.x)
-        this.findViewById<ToggleButton>(R.id.toggleButton2).isChecked = settings.soundOn
+        this.findViewById<ToggleButton>(R.id.tb_sound).isChecked = settings.soundOn
         when (settings.defaultDifficulty) {
-            Difficulty.Easy -> this.findViewById<Chip>(R.id.chip8).isChecked = true
-            Difficulty.Medium -> this.findViewById<Chip>(R.id.chip9).isChecked = true
-            Difficulty.Hard -> this.findViewById<Chip>(R.id.chip10).isChecked = true
-            else -> this.findViewById<Chip>(R.id.chip9).isChecked = true
+            Difficulty.Easy -> this.findViewById<Chip>(R.id.cp_settings_easy).isChecked = true
+            Difficulty.Medium -> this.findViewById<Chip>(R.id.cp_settings_medium).isChecked = true
+            Difficulty.Hard -> this.findViewById<Chip>(R.id.cp_settings_hard).isChecked = true
+            else -> this.findViewById<Chip>(R.id.cp_settings_medium).isChecked = true
         }
 
         this.showStats()
@@ -249,25 +256,25 @@ class MainActivity : AppCompatActivity() {
 
     fun setDefaultDifficulty(view: View) {
         when(view){
-            this.findViewById<Chip>(R.id.chip8) -> settings.defaultDifficulty = Difficulty.Easy
-            this.findViewById<Chip>(R.id.chip9) -> settings.defaultDifficulty = Difficulty.Medium
-            this.findViewById<Chip>(R.id.chip10) -> settings.defaultDifficulty = Difficulty.Hard
+            this.findViewById<Chip>(R.id.cp_settings_easy) -> settings.defaultDifficulty = Difficulty.Easy
+            this.findViewById<Chip>(R.id.cp_settings_medium) -> settings.defaultDifficulty = Difficulty.Medium
+            this.findViewById<Chip>(R.id.cp_settings_hard) -> settings.defaultDifficulty = Difficulty.Hard
         }
     }
 
     fun swapIcons(view: View) {
         val res = engine.swapIcons()
         if(!res){
-            this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.x)
+            this.findViewById<ImageButton>(R.id.ib_usricon).setImageResource(R.drawable.x)
             return
         }
-        else if(res) this.findViewById<ImageButton>(R.id.imageButtonIcon).setImageResource(R.drawable.o)
+        else if(res) this.findViewById<ImageButton>(R.id.ib_usricon).setImageResource(R.drawable.o)
     }
 
     fun swapPvpIcons(view: View) {
         val res = engine.swapIcons()
-        if(!res) this.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.x)
-        else if(res) this.findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.o)
+        if(!res) this.findViewById<ImageView>(R.id.iv_turn).setImageResource(R.drawable.x)
+        else if(res) this.findViewById<ImageView>(R.id.iv_turn).setImageResource(R.drawable.o)
 
         this.restartGame()
     }
@@ -279,8 +286,8 @@ class MainActivity : AppCompatActivity() {
 
     fun toggleAutoSwitch(view: View) {
         when(view.id) {
-            R.id.chip -> settings.autoSwitch = true
-            R.id.chip2 -> settings.autoSwitch = false
+            R.id.cp_autoswitch -> settings.autoSwitch = true
+            R.id.cp_manualswitch -> settings.autoSwitch = false
         }
     }
 }

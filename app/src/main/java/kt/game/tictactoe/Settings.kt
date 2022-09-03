@@ -42,7 +42,7 @@ class Settings(contextOfMainActivity: MainActivity) {
         fun updateStats(gameOverCode: Engine.GameOverCode? = null, difficulty: Difficulty? = null, buttonResetView: View? = null) {
             if(buttonResetView != null) {
                 when(buttonResetView.id) {
-                    R.id.buttonReset1 -> {
+                    R.id.btn_resetall -> {
                         this.winsHard = 0
                         this.winsMedium = 0
                         this.winsEasy = 0
@@ -53,17 +53,17 @@ class Settings(contextOfMainActivity: MainActivity) {
                         this.lossesMedium = 0
                         this.lossesEasy = 0
                     }
-                    R.id.buttonReset2 -> {
+                    R.id.btn_reset_easy -> {
                         this.winsEasy = 0
                         this.tiesEasy = 0
                         this.lossesEasy = 0
                     }
-                    R.id.buttonReset3 -> {
+                    R.id.btn_reset_medium -> {
                         this.winsMedium = 0
                         this.tiesMedium = 0
                         this.lossesMedium = 0
                     }
-                    R.id.buttonReset4 -> {
+                    R.id.btn_reset_hard -> {
                         this.winsHard = 0
                         this.tiesHard = 0
                         this.lossesHard = 0
