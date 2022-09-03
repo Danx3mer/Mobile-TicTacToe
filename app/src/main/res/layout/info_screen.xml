@@ -7,7 +7,7 @@
     android:background="#212121">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/tlb_about"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -18,28 +18,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButtonInfo"
+            android:id="@+id/ib_about_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="#00FFFFFF"
-            android:contentDescription="Used to go back to the last screen."
+            android:contentDescription="@string/cd_back"
             android:onClick="backToLastScreen"
             android:src="?attr/homeAsUpIndicator"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="10dp" />
 
         <TextView
-            android:id="@+id/toolbarTextView"
+            android:id="@+id/tlb_tv_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="About TicTacToe"
+            android:text="@string/Abt_TicTacToe"
             android:textAppearance="@android:style/TextAppearance.WindowTitle"
             android:textSize="20sp"
-            android:visibility="visible"
             tools:layout_editor_absoluteX="72dp"
             tools:layout_editor_absoluteY="18dp" />
 
@@ -47,75 +46,75 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_tictactoe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
-        android:text="TicTacToe"
+        android:text="@string/TicTacToe"
         android:textColor="#FFFFFF"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintTop_toBottomOf="@+id/tlb_about"
         app:layout_constraintVertical_bias="0.050000012" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iv_tictactoe_logo"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:src="@drawable/tictactoe_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tictactoe"
         app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_version"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Version: Open Testing 0.7"
+        android:text="@string/version"
         android:textAlignment="gravity"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/iv_tictactoe_logo"
         app:layout_constraintVertical_bias="0.100000024" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_dev"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Developer: Daniel Manita"
+        android:text="@string/developer"
         android:textAlignment="gravity"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_version" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="40dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="Email: danielthedev5@gmail.com"
+        android:text="@string/email"
         android:textAlignment="gravity"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_dev" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

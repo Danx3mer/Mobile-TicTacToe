@@ -6,11 +6,11 @@
     android:background="@drawable/tictactoe">
 
     <ImageButton
-        android:id="@+id/imageButtonInfo"
+        android:id="@+id/ib_about_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="#00FFFFFF"
-        android:contentDescription="Used to go to the about screen."
+        android:contentDescription="@string/cd_info"
         android:onClick="setScreenAbout"
         android:src="@android:drawable/ic_dialog_info"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,11 +21,11 @@
         app:layout_constraintVertical_bias="0.00999999" />
 
     <ImageButton
-        android:id="@+id/imageButtonSettings"
+        android:id="@+id/ib_title_settings"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="#00FFFFFF"
-        android:contentDescription="Used to go to the settings screen."
+        android:contentDescription="@string/cd_settings"
         android:onClick="setScreenSettings"
         android:src="@android:drawable/ic_menu_preferences"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,38 +36,38 @@
         app:layout_constraintVertical_bias="0.00999999" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_newPVE"
         android:layout_width="172dp"
         android:layout_height="76dp"
         android:background="@drawable/buttonroundedright"
         android:backgroundTint="#AF8FE9"
-        android:contentDescription="Creates a new game against a bot."
+        android:contentDescription="@string/NewGamePVE"
         android:onClick="newGame"
-        android:text="New Game VS Bot"
+        android:text="@string/NewGamePVE"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+        app:layout_constraintStart_toEndOf="@+id/iv_placeholder" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_newPVP"
         android:layout_width="172dp"
         android:layout_height="76dp"
         android:background="@drawable/buttonroundedleft"
-        android:contentDescription="Creates a new game that you can play locally with your friend on this device."
+        android:contentDescription="@string/cd_newPVP"
         android:onClick="newGame"
-        android:text="New Game VS Player"
+        android:text="@string/NewGamePVP"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_placeholder"
+        app:layout_constraintEnd_toStartOf="@+id/iv_placeholder"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iv_placeholder"
         android:layout_width="5dp"
         android:layout_height="76dp"
         android:background="#212121"
@@ -80,4 +80,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
         app:srcCompat="@drawable/middleline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

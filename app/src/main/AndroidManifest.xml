@@ -13,7 +13,6 @@
             android:screenOrientation="portrait"> <!--I put the last line down to lock the screen orientation to portrait mode only.-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

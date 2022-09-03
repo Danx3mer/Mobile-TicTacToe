@@ -261,7 +261,7 @@ class Engine(private val contextOfMainActivity: Context) {
             }
         }
 
-        when(this.currentDifficulty){
+        when(this.currentDifficulty) {
             Difficulty.Hard -> {
                 currentToast = when(gameOverCode){
                     GameOverCode.Win -> Toast(this.contextOfMainActivity).showCustomToast("You won!!!", this.contextOfMainActivity as Activity)
@@ -284,7 +284,7 @@ class Engine(private val contextOfMainActivity: Context) {
                 }
             }
             Difficulty.None -> {
-                when(gameOverCode){
+                when(gameOverCode) {
                     GameOverCode.Win -> {
                         if(settings.personIcon == Cell.ImageType.O) {
                             currentToast = Toast(this.contextOfMainActivity).showCustomToast("O won!!!", this.contextOfMainActivity as Activity)
@@ -295,7 +295,11 @@ class Engine(private val contextOfMainActivity: Context) {
                             if(settings.autoSwitch) settings.personIcon = Cell.ImageType.X
                         }
                     }
-                    GameOverCode.Tie -> currentToast = Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+
+                    GameOverCode.Tie -> {
+                        currentToast = Toast(this.contextOfMainActivity).showCustomToast("It's a tie!!!", this.contextOfMainActivity as Activity)
+                        if(settings.autoSwitch) settings.personIcon = Cell.ImageType.X
+                    }
 
                     GameOverCode.Loss -> {
                         if(settings.personIcon == Cell.ImageType.O) {
@@ -311,7 +315,7 @@ class Engine(private val contextOfMainActivity: Context) {
             }
         }
 
-        this.contextOfMainActivity.findViewById<TextView>(R.id.textView28).text =
+        this.contextOfMainActivity.findViewById<TextView>(R.id.tv_ministats_ties).text =
             when(engine.currentDifficulty)
             {
                 Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
@@ -319,7 +323,7 @@ class Engine(private val contextOfMainActivity: Context) {
                 Difficulty.Hard -> "Wins: " + settings.stats.winsHard
                 else -> "O Wins: ${settings.stats.oWins}"
             }
-        this.contextOfMainActivity.findViewById<TextView>(R.id.textView29).text =
+        this.contextOfMainActivity.findViewById<TextView>(R.id.tv_ministats_wins).text =
             when(engine.currentDifficulty)
             {
                 Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
@@ -327,7 +331,7 @@ class Engine(private val contextOfMainActivity: Context) {
                 Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
                 else -> "Ties: ${settings.stats.pvpTies}"
             }
-        this.contextOfMainActivity.findViewById<TextView>(R.id.textView30).text =
+        this.contextOfMainActivity.findViewById<TextView>(R.id.tv_ministats_losses).text =
             when(engine.currentDifficulty)
             {
                 Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy

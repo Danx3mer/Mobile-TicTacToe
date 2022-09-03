@@ -7,51 +7,51 @@
     android:background="#231f20">
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/cpgp_settings_defdiff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
-        app:checkedChip="@id/chip9"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+        app:checkedChip="@id/cp_settings_medium"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sound"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintTop_toBottomOf="@+id/table_stats"
         app:layout_constraintVertical_bias="0.6"
         app:selectionRequired="true"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip8"
+            android:id="@+id/cp_settings_easy"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="100dp"
             android:layout_height="52dp"
             android:checkable="true"
             android:onClick="setDefaultDifficulty"
-            android:text="Easy"
+            android:text="@string/Easy"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip9"
+            android:id="@+id/cp_settings_medium"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="130dp"
             android:layout_height="52dp"
             android:checkable="true"
             android:onClick="setDefaultDifficulty"
-            android:text="Medium"
+            android:text="@string/Medium"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip10"
+            android:id="@+id/cp_settings_hard"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="100dp"
             android:layout_height="52dp"
             android:checkable="true"
             android:onClick="setDefaultDifficulty"
-            android:text="Hard"
+            android:text="@string/Hard"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -59,24 +59,24 @@
     </com.google.android.material.chip.ChipGroup>
 
     <ToggleButton
-        android:id="@+id/toggleButton2"
+        android:id="@+id/tb_sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/fullyroundedbutton"
         android:clickable="true"
         android:onClick="toggleSound"
         android:soundEffectsEnabled="true"
-        android:textOff="Off"
-        android:textOn="On"
+        android:textOff="@string/Off"
+        android:textOn="@string/On"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonIcon"
-        app:layout_constraintEnd_toEndOf="@+id/imageButtonIcon"
-        app:layout_constraintStart_toStartOf="@+id/imageButtonIcon"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/ib_usricon"
+        app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
+        app:layout_constraintStart_toStartOf="@+id/ib_usricon"
+        app:layout_constraintTop_toBottomOf="@+id/tlb_settings"
         app:layout_constraintVertical_bias="0.9" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tlb_settings"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -88,25 +88,25 @@
         tools:ignore="MissingConstraints">
 
         <ImageButton
-            android:id="@+id/imageButtonInfo"
+            android:id="@+id/ib_settings_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="#00FFFFFF"
-            android:contentDescription="Used to go back to the last screen."
+            android:contentDescription="@string/cd_back"
             android:onClick="backToLastScreen"
             android:src="?attr/homeAsUpIndicator"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="10dp" />
 
         <TextView
-            android:id="@+id/toolbarTextView"
+            android:id="@+id/tlb_tv_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="Settings &amp; Statistics"
+            android:text="@string/settings_stats"
             android:textAppearance="@android:style/TextAppearance.WindowTitle"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="64dp"
@@ -116,10 +116,10 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageButton
-        android:id="@+id/imageButtonIcon"
+        android:id="@+id/ib_usricon"
         android:layout_width="105dp"
         android:layout_height="110dp"
-        android:contentDescription="Changes the default player icon (By default it is O)"
+        android:contentDescription="@string/cd_icon"
         android:onClick="swapIcons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,66 +130,66 @@
         app:srcCompat="@drawable/o" />
 
     <TextView
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/tv_youricon"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:text="Your icon:"
+        android:text="@string/Your_Icon"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButtonIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/ib_usricon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonIcon" />
+        app:layout_constraintTop_toTopOf="@+id/ib_usricon" />
 
     <TextView
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/tv_clcktochange"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:text="Sound:"
+        android:text="@string/Click_To_Change"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toggleButton2"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
         app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toTopOf="@+id/toggleButton2" />
+        app:layout_constraintStart_toStartOf="@+id/tv_youricon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_youricon" />
 
     <TextView
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/tv_sound"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:text="@string/Sound"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_sound"
+        app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/tv_youricon"
+        app:layout_constraintTop_toTopOf="@+id/tb_sound" />
+
+    <TextView
+        android:id="@+id/tv_defdiff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center"
-        android:text="Default Bot Difficulty:"
+        android:text="@string/Def_Bot_Diff"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/chipGroup"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
-        app:layout_constraintStart_toStartOf="@+id/chipGroup"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintBottom_toTopOf="@+id/cpgp_settings_defdiff"
+        app:layout_constraintEnd_toEndOf="@+id/cpgp_settings_defdiff"
+        app:layout_constraintStart_toStartOf="@+id/cpgp_settings_defdiff"
+        app:layout_constraintTop_toBottomOf="@+id/table_stats"
         app:layout_constraintVertical_bias="0.9" />
 
-    <TextView
-        android:id="@+id/editTextTextPersonName7"
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center"
-        android:text="(Click to change)"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
-
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/table_stats"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -197,14 +197,15 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/tlb_settings">
 
         <TableRow
+            android:id="@+id/table_stats_mainrow"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_placeholder"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -215,73 +216,74 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/tv_settings_wins"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:text="Wins"
+                android:text="@string/Wins"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/tv_settings_losses"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:text="Losses"
+                android:text="@string/Losses"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/tv_settings_ties"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:padding="10dp"
-                android:text="Ties"
+                android:text="@string/Ties"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/buttonReset1"
+                android:id="@+id/btn_resetall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
-                android:contentDescription="Resets all statistics"
+                android:contentDescription="@string/cd_reset_all"
                 android:onClick="resetStats"
-                android:text=" Reset all"
+                android:text="@string/Reset_all"
                 android:textColor="@color/white"
                 android:textSize="8sp" />
         </TableRow>
 
         <TableRow
+            android:id="@+id/table_stats_easyrow"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tv_settings_easy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Easy"
+                android:text="@string/Easy"
                 android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/tv_wins_easy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -292,7 +294,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/tv_losses_easy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -303,7 +305,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tv_ties_easy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -314,37 +316,38 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/buttonReset2"
+                android:id="@+id/btn_reset_easy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
-                android:contentDescription="Resets all Easy Mode statistics"
+                android:contentDescription="@string/cd_reset_easy"
                 android:onClick="resetStats"
-                android:text="Reset"
+                android:text="@string/Reset"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
         </TableRow>
 
         <TableRow
+            android:id="@+id/table_stats_medium_row"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/tv_settings_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Medium"
+                android:text="@string/Medium"
                 android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tv_wins_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -355,7 +358,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/tv_losses_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -366,7 +369,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/tv_ties_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -377,31 +380,32 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/buttonReset3"
+                android:id="@+id/btn_reset_medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
-                android:contentDescription="Resets all Medium Mode statistics"
+                android:contentDescription="@string/cd_reset_medium"
                 android:onClick="resetStats"
-                android:text="Reset"
+                android:text="@string/Reset"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
         </TableRow>
 
         <TableRow
+            android:id="@+id/table_stats_hardrow"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/tv_settings_hard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:text="Hard"
+                android:text="@string/Hard"
                 android:textAlignment="gravity"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -418,7 +422,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/tv_losses_hard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -429,7 +433,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/tv_ties_hard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -440,14 +444,14 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/buttonReset4"
+                android:id="@+id/btn_reset_hard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="4"
-                android:contentDescription="Resets all Hard Mode statistics"
+                android:contentDescription="@string/cd_reset_hard"
                 android:onClick="resetStats"
-                android:text="Reset"
+                android:text="@string/Reset"
                 android:textColor="@color/white"
                 android:textSize="10sp" />
         </TableRow>

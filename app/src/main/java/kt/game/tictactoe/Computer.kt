@@ -14,8 +14,8 @@ class Computer(private var difficulty: Difficulty) {
 
             Difficulty.Easy -> {
                 val offenseRes = this.checkForImage(cells, settings.computerIcon) /*I send in the image that the function is checking for. For attack,
-                                                                              I put in X (because it is looking for it's own cells),
-                                                                              but for defense I put O (because it is checking for the user's cells.)*/
+                                                                              I put in the computer's icon (because it is looking for it's own cells),
+                                                                              but for defense I put the user's icon (because it is checking for the user's cells.)*/
                 if(offenseRes != -1) return offenseRes
 
                 return availableCells.random()
@@ -25,13 +25,13 @@ class Computer(private var difficulty: Difficulty) {
                 if(availableCells.contains(4)) return 4 //This is the middle
 
                 val offenseRes = this.checkForImage(cells, settings.computerIcon) /*I send in the image that the function is checking for. For attack,
-                                                                              I put in X (because it is looking for it's own cells),
-                                                                              but for defense I put O (because it is checking for the user's cells.)*/
+                                                                              I put in the computer's icon (because it is looking for it's own cells),
+                                                                              but for defense I put the user's icon (because it is checking for the user's cells.)*/
                 if(offenseRes != -1) return offenseRes
 
                 val defendRes = this.checkForImage(cells, settings.personIcon) /*I send in the image that the function is checking for. For attack,
-                                                                              I put in O (because it is checking for the user's cells),
-                                                                              but for offense I put X (because it is looking for it's own cells.)*/
+                                                                              I put in the user's icon (because it is checking for the user's cells),
+                                                                              but for offense I put the computer's icon (because it is looking for it's own cells.)*/
                 if(defendRes != -1) return defendRes
 
                 return availableCells.random()
