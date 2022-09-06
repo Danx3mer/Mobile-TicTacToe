@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GestureDetectorCompat
 import com.google.android.material.chip.Chip
 import kotlin.math.abs
@@ -62,7 +63,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener(){
-
         private val swipeThreshold = 250
         private val swipeVelocityThreshold = 200
 
@@ -156,9 +156,9 @@ class MainActivity : AppCompatActivity() {
 
             this.findViewById<Button>(R.id.btn_switch_turn).visibility = View.VISIBLE
 
-            this.findViewById<TextView>(R.id.tv_ministats_ties).text = "O Wins: ${settings.stats.oWins}"
-            this.findViewById<TextView>(R.id.tv_ministats_wins).text = "Ties: ${settings.stats.pvpTies}"
-            this.findViewById<TextView>(R.id.tv_ministats_losses).text = "X Wins: ${settings.stats.xWins}"
+            this.findViewById<TextView>(R.id.tv_ministats_ties).text = getString(R.string.Ties_colon) + " " + settings.stats.pvpTies
+            this.findViewById<TextView>(R.id.tv_ministats_wins).text = getString(R.string.OWins) + " " + settings.stats.oWins
+            this.findViewById<TextView>(R.id.tv_ministats_losses).text = getString(R.string.XWins) + " " + settings.stats.xWins
 
             if(!settings.autoSwitch) this.findViewById<Chip>(R.id.cp_manualswitch).isChecked = true
         }
@@ -175,27 +175,27 @@ class MainActivity : AppCompatActivity() {
 
             this.findViewById<ToggleButton>(R.id.tb_firstturn).isChecked = !computerGoesFirst
 
-            this.findViewById<TextView>(R.id.tv_ministats_ties).text = when(engine.currentDifficulty) {
-                Difficulty.Easy -> "Wins: " + settings.stats.winsEasy
-                Difficulty.Medium -> "Wins: " + settings.stats.winsMedium
-                Difficulty.Hard -> "Wins: " + settings.stats.winsHard
-                else -> "Wins:"
+            this.findViewById<TextView>(R.id.tv_ministats_wins).text = when(engine.currentDifficulty) {
+                Difficulty.Easy -> getString(R.string.Wins_colon) + " " + settings.stats.winsEasy
+                Difficulty.Medium -> getString(R.string.Wins_colon) + " " + settings.stats.winsMedium
+                Difficulty.Hard -> getString(R.string.Wins_colon) + " " + settings.stats.winsHard
+                else -> getString(R.string.Wins_colon)
             }
 
-            this.findViewById<TextView>(R.id.tv_ministats_wins).text = when(engine.currentDifficulty)
+            this.findViewById<TextView>(R.id.tv_ministats_ties).text = when(engine.currentDifficulty)
             {
-                Difficulty.Easy -> "Ties: " + settings.stats.tiesEasy
-                Difficulty.Medium -> "Ties: " + settings.stats.tiesMedium
-                Difficulty.Hard -> "Ties: " + settings.stats.tiesHard
-                else -> "Ties:"
+                Difficulty.Easy -> getString(R.string.Ties_colon) + " " + settings.stats.tiesEasy
+                Difficulty.Medium -> getString(R.string.Ties_colon) + " " + settings.stats.tiesMedium
+                Difficulty.Hard -> getString(R.string.Ties_colon) + " " + settings.stats.tiesHard
+                else -> getString(R.string.Ties_colon)
             }
 
             this.findViewById<TextView>(R.id.tv_ministats_losses).text = when(engine.currentDifficulty)
             {
-                Difficulty.Easy -> "Losses: " + settings.stats.lossesEasy
-                Difficulty.Medium -> "Losses: " + settings.stats.lossesMedium
-                Difficulty.Hard -> "Losses: " + settings.stats.lossesHard
-                else -> "Losses:"
+                Difficulty.Easy -> getString(R.string.Losses_colon) + " " + settings.stats.lossesEasy
+                Difficulty.Medium -> getString(R.string.Losses_colon) + " " + settings.stats.lossesMedium
+                Difficulty.Hard -> getString(R.string.Losses_colon) + " " + settings.stats.lossesHard
+                else -> getString(R.string.Losses_colon)
             }
         }
     }
@@ -233,7 +233,8 @@ class MainActivity : AppCompatActivity() {
 
     fun cellClick(view: View) = engine.fieldClick(view)
 
-    fun switchFirstTurn(view: View) = startGame(engine.currentDifficulty, !engine.computerGoesFirst)
+    fun switchFirstTurn(view: View) =
+        startGame(engine.currentDifficulty, !engine.computerGoesFirst)
 
     fun setScreenAbout(view :View) = dataTracker.updateScreen(R.layout.info_screen)
     fun setScreenSettings(view :View) {
@@ -250,9 +251,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         this.showStats()
+        this.findViewById<ToggleButton>(R.id.tb_theme).isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
     }
 
     fun toggleSound(view: View) { settings.soundOn = !settings.soundOn }
+
+    fun toggleTheme(view: View) {
+        if(findViewById<ToggleButton>(R.id.tb_theme).isChecked)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else if(!findViewById<ToggleButton>(R.id.tb_theme).isChecked)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        this.setContentView(R.layout.settings)
+    }
 
     fun setDefaultDifficulty(view: View) {
         when(view){

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">TicTacToe Open Beta V0.7</string>
-    <string name="version">Version: Open Testing 0.7</string>
+    <string name="app_name">Tic Tac Toe Open Test V0.9</string>
+    <string name="version">Version: Open Test 0.9</string>
     <string name="developer">Developer: Daniel Manita</string>
     <string name="email">Email: danielthedev5@gmail.com</string>
 
@@ -38,9 +38,16 @@
 
     <string name="Bot_First">Bot Goes First</string>
     <string name="Player_First">Player Goes First</string>
-    <string name="Auto_Switch">Automatically Switch</string>
+    <string name="Auto_Switch">Auto Switch</string>
     <string name="Manual_Switch">Manually Switch</string>
     <string name="Switch">Switch turns</string>
+
+    <string name="You_Won_MSG">You won!!!</string>
+    <string name="Bot_Won_MSG">Bot won!!!</string>
+    <string name="Its_tie_MSG">It\'s a tie!!!</string>
+
+    <string name="O_Won_MSG">O won!!!</string>
+    <string name="X_Won_MSG">X won!!!</string>
 
     <string name="cd_newPVP">Creates a new game that you can play locally with your friend on this device.</string>
     <string name="cd_newPVE">Creates a new game against a bot.</string>

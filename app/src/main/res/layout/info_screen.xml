@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#212121">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tlb_about"
@@ -51,7 +50,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:text="@string/TicTacToe"
-        android:textColor="#FFFFFF"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +77,6 @@
         android:gravity="center"
         android:text="@string/version"
         android:textAlignment="gravity"
-        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +93,6 @@
         android:gravity="center"
         android:text="@string/developer"
         android:textAlignment="gravity"
-        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +107,6 @@
         android:gravity="center"
         android:text="@string/email"
         android:textAlignment="gravity"
-        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

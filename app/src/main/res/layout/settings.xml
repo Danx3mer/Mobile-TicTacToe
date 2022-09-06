@@ -3,20 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#231f20">
+    android:layout_height="match_parent">
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/cpgp_settings_defdiff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Material3.DynamicColors.Dark"
         app:checkedChip="@id/cp_settings_medium"
         app:layout_constraintBottom_toTopOf="@+id/tv_sound"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/table_stats"
-        app:layout_constraintVertical_bias="0.6"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -57,23 +54,6 @@
             android:textStyle="bold" />
 
     </com.google.android.material.chip.ChipGroup>
-
-    <ToggleButton
-        android:id="@+id/tb_sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/fullyroundedbutton"
-        android:clickable="true"
-        android:onClick="toggleSound"
-        android:soundEffectsEnabled="true"
-        android:textOff="@string/Off"
-        android:textOn="@string/On"
-        android:theme="@style/Theme.Material3.DynamicColors.Dark"
-        app:layout_constraintBottom_toTopOf="@+id/ib_usricon"
-        app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
-        app:layout_constraintStart_toStartOf="@+id/ib_usricon"
-        app:layout_constraintTop_toBottomOf="@+id/tlb_settings"
-        app:layout_constraintVertical_bias="0.9" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tlb_settings"
@@ -127,7 +107,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
-        app:srcCompat="@drawable/o" />
+        app:srcCompat="@drawable/o"
+        android:background="@null"/>
 
     <TextView
         android:id="@+id/tv_youricon"
@@ -136,7 +117,6 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Your_Icon"
-        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/ib_usricon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +131,6 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Click_To_Change"
-        android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
         app:layout_constraintHorizontal_bias="0.25"
@@ -165,13 +144,59 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Sound"
-        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/tb_sound"
         app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/tv_youricon"
         app:layout_constraintTop_toTopOf="@+id/tb_sound" />
+
+    <ToggleButton
+        android:id="@+id/tb_sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fullyroundedbutton"
+        android:clickable="true"
+        android:onClick="toggleSound"
+        android:soundEffectsEnabled="true"
+        android:textOff="@string/Off"
+        android:textOn="@string/On"
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        app:layout_constraintBottom_toTopOf="@+id/ib_usricon"
+        app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
+        app:layout_constraintStart_toStartOf="@+id/ib_usricon"
+        app:layout_constraintTop_toBottomOf="@+id/tlb_settings"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/tv_theme"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:text="Theme:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_theme"
+        app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="@+id/tv_youricon"
+        app:layout_constraintTop_toTopOf="@+id/tb_theme" />
+
+    <ToggleButton
+        android:id="@+id/tb_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fullyroundedbutton"
+        android:clickable="true"
+        android:onClick="toggleTheme"
+        android:soundEffectsEnabled="true"
+        android:textOff="Light"
+        android:textOn="Dark"
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        app:layout_constraintBottom_toTopOf="@+id/tb_sound"
+        app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
+        app:layout_constraintStart_toStartOf="@+id/ib_usricon"
+        app:layout_constraintTop_toBottomOf="@+id/cpgp_settings_defdiff" />
 
     <TextView
         android:id="@+id/tv_defdiff"
@@ -180,7 +205,6 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Def_Bot_Diff"
-        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/cpgp_settings_defdiff"
         app:layout_constraintEnd_toEndOf="@+id/cpgp_settings_defdiff"
@@ -224,7 +248,6 @@
                 android:padding="10dp"
                 android:text="@string/Wins"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -236,7 +259,6 @@
                 android:padding="10dp"
                 android:text="@string/Losses"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -248,7 +270,6 @@
                 android:padding="10dp"
                 android:text="@string/Ties"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <Button
@@ -260,7 +281,6 @@
                 android:contentDescription="@string/cd_reset_all"
                 android:onClick="resetStats"
                 android:text="@string/Reset_all"
-                android:textColor="@color/white"
                 android:textSize="8sp" />
         </TableRow>
 
@@ -279,7 +299,6 @@
                 android:paddingBottom="10dp"
                 android:text="@string/Easy"
                 android:textAlignment="gravity"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -290,7 +309,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -301,7 +319,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -312,7 +329,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <Button
@@ -324,7 +340,6 @@
                 android:contentDescription="@string/cd_reset_easy"
                 android:onClick="resetStats"
                 android:text="@string/Reset"
-                android:textColor="@color/white"
                 android:textSize="10sp" />
         </TableRow>
 
@@ -343,7 +358,6 @@
                 android:paddingBottom="10dp"
                 android:text="@string/Medium"
                 android:textAlignment="gravity"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -354,7 +368,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -365,7 +378,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -376,7 +388,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <Button
@@ -388,7 +399,6 @@
                 android:contentDescription="@string/cd_reset_medium"
                 android:onClick="resetStats"
                 android:text="@string/Reset"
-                android:textColor="@color/white"
                 android:textSize="10sp" />
         </TableRow>
 
@@ -407,7 +417,6 @@
                 android:paddingBottom="10dp"
                 android:text="@string/Hard"
                 android:textAlignment="gravity"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -418,7 +427,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -429,7 +437,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -440,7 +447,6 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <Button
@@ -452,7 +458,6 @@
                 android:contentDescription="@string/cd_reset_hard"
                 android:onClick="resetStats"
                 android:text="@string/Reset"
-                android:textColor="@color/white"
                 android:textSize="10sp" />
         </TableRow>
     </TableLayout>

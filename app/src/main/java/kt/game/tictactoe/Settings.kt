@@ -111,6 +111,7 @@ class Settings(contextOfMainActivity: MainActivity) {
             val mediumStats = dbManager.getSettings("MEDIUM")
             val hardStats = dbManager.getSettings("HARD")
             val loadedSettings = dbManager.getSettings("SETTINGS")
+            //val loadedThemeSettings = dbManager.getSettings("THEME_SETTINGS")
 
             this.stats.winsEasy = easyStats[0]
             this.stats.lossesEasy = easyStats[1]
