@@ -1,6 +1,7 @@
 package kt.game.tictactoe
 
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 
 class Settings(contextOfMainActivity: MainActivity) {
     var soundOn: Boolean = false
@@ -13,6 +14,13 @@ class Settings(contextOfMainActivity: MainActivity) {
     private val dbManager = DataBaseManager(contextOfMainActivity)
 
     var autoSwitch = true
+    var currentTheme: Boolean = false
+    private set
+
+    fun changeTheme(theme: Boolean = !currentTheme) {
+        this.writeThemeSettings()
+        currentTheme = theme
+    }
 
     inner class Statistics{
         var winsHard = 0
@@ -111,7 +119,7 @@ class Settings(contextOfMainActivity: MainActivity) {
             val mediumStats = dbManager.getSettings("MEDIUM")
             val hardStats = dbManager.getSettings("HARD")
             val loadedSettings = dbManager.getSettings("SETTINGS")
-            //val loadedThemeSettings = dbManager.getSettings("THEME_SETTINGS")
+            val loadedThemeSettings = dbManager.getSettings("THEME_SETTINGS")
 
             this.stats.winsEasy = easyStats[0]
             this.stats.lossesEasy = easyStats[1]
@@ -146,7 +154,13 @@ class Settings(contextOfMainActivity: MainActivity) {
                 2 -> Difficulty.Hard
                 else -> Difficulty.None
             }
-        } catch(e: Exception) {this.writeNewSettings()}
+
+            this.currentTheme = when(loadedThemeSettings[0]) {
+                AppCompatDelegate.MODE_NIGHT_NO -> false
+                else -> true
+            }
+            dataTracker.setScreens(loadedThemeSettings[1], loadedThemeSettings[2])
+        } catch(e: Exception) { this.writeNewSettings(); this.loadSettings() }
     }
 
     private fun writeNewSettings(){
@@ -156,6 +170,17 @@ class Settings(contextOfMainActivity: MainActivity) {
         dbManager.writeSettings("SETTINGS", listOf(when(this.soundOn){ false -> 0; true -> 1},
             when(this.personIcon){ Cell.ImageType.O -> 0; else -> 1 },
             when(this.defaultDifficulty){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1}))
+        dbManager.writeSettings("THEME_SETTINGS",
+            listOf(when(AppCompatDelegate.getDefaultNightMode()) {
+                AppCompatDelegate.MODE_NIGHT_NO -> 1
+                else -> 0 },
+            dataTracker.currentScreen, dataTracker.pastScreen))
+    }
+
+    private fun writeThemeSettings() {
+        this@Settings.dbManager.overwriteValue("THEME_SETTINGS", "WINS", when(this.currentTheme){ false -> 0; true -> 1 })
+        this@Settings.dbManager.overwriteValue("THEME_SETTINGS", "LOSSES", dataTracker.currentScreen)
+        this@Settings.dbManager.overwriteValue("THEME_SETTINGS", "TIES", dataTracker.pastScreen)
     }
 
     init { this.loadSettings() }

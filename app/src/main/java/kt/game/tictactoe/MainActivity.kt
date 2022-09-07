@@ -19,6 +19,8 @@ lateinit var settings: Settings
 enum class Difficulty{None, Easy, Medium, Hard}
 private var mediaPlayer: MediaPlayer? = null
 var currentToast: Toast? = null
+lateinit var dataTracker: MainActivity.DataTracker
+
 fun playSound(resource: Int, context: Context) {
     if(!settings.soundOn) return
     stopAllSounds()
@@ -37,16 +39,26 @@ fun stopAllSounds(){
 
 class MainActivity : AppCompatActivity() {
     private lateinit var detector: GestureDetectorCompat
-    private lateinit var dataTracker: DataTracker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.title_screen)
-        detector = GestureDetectorCompat(this,GestureListener())
-        dataTracker = DataTracker(R.layout.title_screen)
 
         SQLiteDatabase.openOrCreateDatabase("${this.filesDir.path}/Settings.db", null, null)
+        dataTracker = DataTracker(R.layout.title_screen)
         settings = Settings(this)
+
+        AppCompatDelegate.setDefaultNightMode(when (settings.currentTheme) {
+            false -> AppCompatDelegate.MODE_NIGHT_NO
+            true -> AppCompatDelegate.MODE_NIGHT_YES
+        })
+        if(dataTracker.currentScreen == R.layout.settings) {
+            this.setScreenSettings(null)
+        }
+        else {
+            setContentView(R.layout.title_screen)
+            dataTracker = DataTracker(R.layout.title_screen)
+        }
+        detector = GestureDetectorCompat(this,GestureListener())
         engine = Engine(this)
     }
 
@@ -77,20 +89,25 @@ class MainActivity : AppCompatActivity() {
             if(abs(diffX) > abs(diffY)) //If this is a horizontal swipe
                 if(abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) //If this is a real swipe
                     if(diffX > 0) // l -> r (right) swipe
-                        this@MainActivity.dataTracker.updateScreen(this@MainActivity.dataTracker.pastScreen)
+                        dataTracker.updateScreen(dataTracker.pastScreen)
 
             return super.onFling(pointerDown, moveEvent, velocityX, velocityY)
         }
     }
 
-    private inner class DataTracker(initialScreen: Int) {
+    inner class DataTracker(initialScreen: Int) {
         var currentScreen: Int = initialScreen
         private set
 
         var pastScreen: Int = initialScreen
         private set
 
-        fun updateScreen(newScreen: Int, restartGame: Boolean = true) {
+        fun setScreens(currentScreen: Int, pastScreen: Int) {
+            this.currentScreen = currentScreen
+            this.pastScreen = pastScreen
+        }
+
+        fun updateScreen(newScreen: Int, restartGame: Boolean = true, replaceLastScreen: Boolean = true) {
             engine.endCoroutine()
             currentToast?.cancel()
             stopAllSounds()
@@ -101,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                 settings.stats.pvpTies = 0
             }
 
-            pastScreen = when(newScreen) {
+            if(replaceLastScreen) pastScreen = when(newScreen) {
                 R.layout.activity_main -> R.layout.title_screen
                 R.layout.title_screen -> R.layout.title_screen
                 else -> this.currentScreen
@@ -127,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         this.findViewById<TextView>(R.id.tv_ties_hard).text = settings.stats.tiesHard.toString()
     }
 
-    fun backToLastScreen(view: View) = this.dataTracker.updateScreen(this.dataTracker.pastScreen)
+    fun backToLastScreen(view: View) = dataTracker.updateScreen(dataTracker.pastScreen)
 
     private fun startGame(difficulty: Difficulty = Difficulty.None, computerGoesFirst: Boolean = false, reInitEngine: Boolean = false) {
         currentToast?.cancel()
@@ -156,9 +173,9 @@ class MainActivity : AppCompatActivity() {
 
             this.findViewById<Button>(R.id.btn_switch_turn).visibility = View.VISIBLE
 
-            this.findViewById<TextView>(R.id.tv_ministats_ties).text = getString(R.string.Ties_colon) + " " + settings.stats.pvpTies
-            this.findViewById<TextView>(R.id.tv_ministats_wins).text = getString(R.string.OWins) + " " + settings.stats.oWins
-            this.findViewById<TextView>(R.id.tv_ministats_losses).text = getString(R.string.XWins) + " " + settings.stats.xWins
+            this.findViewById<TextView>(R.id.tv_ministats_ties).text = this.getString(R.string.Ties_colon) + " " + settings.stats.pvpTies
+            this.findViewById<TextView>(R.id.tv_ministats_wins).text = this.getString(R.string.OWins) + " " + settings.stats.oWins
+            this.findViewById<TextView>(R.id.tv_ministats_losses).text = this.getString(R.string.XWins) + " " + settings.stats.xWins
 
             if(!settings.autoSwitch) this.findViewById<Chip>(R.id.cp_manualswitch).isChecked = true
         }
@@ -237,8 +254,9 @@ class MainActivity : AppCompatActivity() {
         startGame(engine.currentDifficulty, !engine.computerGoesFirst)
 
     fun setScreenAbout(view :View) = dataTracker.updateScreen(R.layout.info_screen)
-    fun setScreenSettings(view :View) {
-        dataTracker.updateScreen(R.layout.settings)
+    fun setScreenSettings(view :View?) {
+        if(view == null) dataTracker.updateScreen(R.layout.settings, replaceLastScreen = false)
+        else dataTracker.updateScreen(R.layout.settings)
 
         if(settings.personIcon == Cell.ImageType.X) this.findViewById<ImageButton>(R.id.ib_usricon).setImageResource(
             R.drawable.x)
@@ -251,17 +269,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         this.showStats()
-        this.findViewById<ToggleButton>(R.id.tb_theme).isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+        this.findViewById<ToggleButton>(R.id.tb_theme).isChecked = settings.currentTheme
     }
 
     fun toggleSound(view: View) { settings.soundOn = !settings.soundOn }
 
     fun toggleTheme(view: View) {
+        settings.changeTheme()
         if(findViewById<ToggleButton>(R.id.tb_theme).isChecked)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else if(!findViewById<ToggleButton>(R.id.tb_theme).isChecked)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        this.setContentView(R.layout.settings)
     }
 
     fun setDefaultDifficulty(view: View) {
