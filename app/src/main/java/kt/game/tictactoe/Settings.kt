@@ -160,6 +160,8 @@ class Settings(contextOfMainActivity: MainActivity) {
                 else -> true
             }
             dataTracker.setScreens(loadedThemeSettings[1], loadedThemeSettings[2])
+            this.dbManager.overwriteValue("THEME_SETTINGS", "LOSSES", R.layout.title_screen)
+            this.dbManager.overwriteValue("THEME_SETTINGS", "TIES", R.layout.title_screen)
         } catch(e: Exception) { this.writeNewSettings(); this.loadSettings() }
     }
 
@@ -178,9 +180,11 @@ class Settings(contextOfMainActivity: MainActivity) {
     }
 
     private fun writeThemeSettings() {
-        this@Settings.dbManager.overwriteValue("THEME_SETTINGS", "WINS", when(this.currentTheme){ false -> 0; true -> 1 })
-        this@Settings.dbManager.overwriteValue("THEME_SETTINGS", "LOSSES", dataTracker.currentScreen)
-        this@Settings.dbManager.overwriteValue("THEME_SETTINGS", "TIES", dataTracker.pastScreen)
+        this.dbManager.overwriteValue("THEME_SETTINGS", "WINS", when(this.currentTheme){ false -> 0; true -> 1 })
+        this.dbManager.overwriteValue("THEME_SETTINGS", "LOSSES", dataTracker.currentScreen)
+        this.dbManager.overwriteValue("THEME_SETTINGS", "TIES",
+            if(engine.currentDifficulty == Difficulty.None) pvpActivityMain
+            else dataTracker.pastScreen)
     }
 
     init { this.loadSettings() }

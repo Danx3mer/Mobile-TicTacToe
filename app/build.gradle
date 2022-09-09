@@ -10,8 +10,8 @@ android {
         applicationId "kt.game.tictactoe"
         minSdk 27
         targetSdk 32
-        versionCode 12
-        versionName "0.9"
+        versionCode 17
+        versionName "0.9.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -20,6 +20,7 @@ enum class Difficulty{None, Easy, Medium, Hard}
 private var mediaPlayer: MediaPlayer? = null
 var currentToast: Toast? = null
 lateinit var dataTracker: MainActivity.DataTracker
+val pvpActivityMain = 1
 
 fun playSound(resource: Int, context: Context) {
     if(!settings.soundOn) return
@@ -52,14 +53,15 @@ class MainActivity : AppCompatActivity() {
             true -> AppCompatDelegate.MODE_NIGHT_YES
         })
         if(dataTracker.currentScreen == R.layout.settings) {
+            engine = Engine(this)
             this.setScreenSettings(null)
         }
         else {
+            engine = Engine(this)
             setContentView(R.layout.title_screen)
             dataTracker = DataTracker(R.layout.title_screen)
         }
         detector = GestureDetectorCompat(this,GestureListener())
-        engine = Engine(this)
     }
 
     override fun onStop() {
@@ -120,13 +122,18 @@ class MainActivity : AppCompatActivity() {
 
             if(replaceLastScreen) pastScreen = when(newScreen) {
                 R.layout.activity_main -> R.layout.title_screen
+                pvpActivityMain -> R.layout.title_screen
                 R.layout.title_screen -> R.layout.title_screen
                 else -> this.currentScreen
             }
-            this.currentScreen = newScreen
-            setContentView(newScreen)
+            if(newScreen != pvpActivityMain)
+                this.currentScreen = newScreen
+            else this.currentScreen = R.layout.activity_main
 
-            if(newScreen == R.layout.activity_main && restartGame) restartGame()
+            setContentView(this.currentScreen)
+
+            if(newScreen == pvpActivityMain) engine.currentDifficulty = Difficulty.None
+            if((newScreen == R.layout.activity_main && restartGame) || newScreen == pvpActivityMain) restartGame()
         }
     }
 

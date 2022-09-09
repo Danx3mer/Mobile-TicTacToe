@@ -161,6 +161,7 @@
         android:soundEffectsEnabled="true"
         android:textOff="@string/Off"
         android:textOn="@string/On"
+        android:textColor="@color/white"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
         app:layout_constraintBottom_toTopOf="@+id/ib_usricon"
         app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
@@ -192,6 +193,7 @@
         android:soundEffectsEnabled="true"
         android:textOff="@string/Light"
         android:textOn="@string/Dark"
+        android:textColor="@color/white"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
         app:layout_constraintBottom_toTopOf="@+id/tb_sound"
         app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
@@ -280,6 +282,7 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_all"
                 android:onClick="resetStats"
+                android:textColor="@color/white"
                 android:text="@string/Reset_all"
                 android:textSize="8sp" />
         </TableRow>
@@ -339,6 +342,7 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_easy"
                 android:onClick="resetStats"
+                android:textColor="@color/white"
                 android:text="@string/Reset"
                 android:textSize="10sp" />
         </TableRow>
@@ -398,6 +402,7 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_medium"
                 android:onClick="resetStats"
+                android:textColor="@color/white"
                 android:text="@string/Reset"
                 android:textSize="10sp" />
         </TableRow>
@@ -457,6 +462,7 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_hard"
                 android:onClick="resetStats"
+                android:textColor="@color/white"
                 android:text="@string/Reset"
                 android:textSize="10sp" />
         </TableRow>

@@ -315,7 +315,6 @@
             android:padding="10dp"
             android:text="@string/Wins_colon"
             android:textAlignment="center"
-            android:textColor="@color/white"
             android:textSize="16sp"
             tools:layout_editor_absoluteX="150dp"
             tools:layout_editor_absoluteY="694dp" />
@@ -329,7 +328,6 @@
             android:padding="10dp"
             android:text="@string/Ties_colon"
             android:textAlignment="center"
-            android:textColor="@color/white"
             android:textSize="16sp"
             tools:ignore="RtlCompat"
             tools:layout_editor_absoluteX="25dp"
@@ -344,7 +342,6 @@
             android:padding="10dp"
             android:text="@string/Losses_colon"
             android:textAlignment="center"
-            android:textColor="@color/white"
             android:textSize="16sp"
             tools:ignore="RtlCompat"
             tools:layout_editor_absoluteX="260dp"
