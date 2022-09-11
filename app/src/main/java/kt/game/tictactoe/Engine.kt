@@ -58,7 +58,11 @@ class Engine(private val contextOfMainActivity: Context) {
 
     fun swapIcons(): Boolean {
         val tempIcon = settings.personIcon
-        settings.personIcon = settings.computerIcon
+        settings.personIcon = when(settings.personIcon) {
+            Cell.ImageType.O -> Cell.ImageType.X
+            Cell.ImageType.X -> Cell.ImageType.O
+            else -> return false
+        }
         settings.computerIcon = tempIcon
 
         if(this.currentDifficulty != Difficulty.None)
@@ -175,7 +179,7 @@ class Engine(private val contextOfMainActivity: Context) {
         this.imageView.setImageResource(when(settings.personIcon){
             Cell.ImageType.O -> R.drawable.o
             Cell.ImageType.X -> R.drawable.x
-            else -> R.drawable.o
+            else -> R.drawable.blank
         })
 
         this.currentTurn = when(settings.personIcon) {
