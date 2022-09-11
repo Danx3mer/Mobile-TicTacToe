@@ -20,7 +20,7 @@ enum class Difficulty{None, Easy, Medium, Hard}
 private var mediaPlayer: MediaPlayer? = null
 var currentToast: Toast? = null
 lateinit var dataTracker: MainActivity.DataTracker
-val pvpActivityMain = 1
+const val pvpActivityMain = 1
 
 fun playSound(resource: Int, context: Context) {
     if(!settings.soundOn) return
@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                 settings.stats.oWins = 0
                 settings.stats.xWins = 0
                 settings.stats.pvpTies = 0
+                settings.personIcon = settings.pveIcon
             }
 
             if(replaceLastScreen) pastScreen = when(newScreen) {

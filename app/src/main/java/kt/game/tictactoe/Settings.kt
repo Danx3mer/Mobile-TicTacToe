@@ -9,6 +9,7 @@ class Settings(contextOfMainActivity: MainActivity) {
     var personIcon = Cell.ImageType.O
         set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "LOSSES", when(value){ Cell.ImageType.O -> 0; else -> 1 })}
     var computerIcon = Cell.ImageType.X
+    var pveIcon = personIcon
     var defaultDifficulty: Difficulty = Difficulty.Medium
         set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "TIES", when(value){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1 })}
     private val dbManager = DataBaseManager(contextOfMainActivity)
@@ -142,6 +143,7 @@ class Settings(contextOfMainActivity: MainActivity) {
                 0 -> Cell.ImageType.O
                 else -> Cell.ImageType.X
             }
+            pveIcon = personIcon
 
             this.computerIcon = when(loadedSettings[1]) {
                 0 -> Cell.ImageType.X

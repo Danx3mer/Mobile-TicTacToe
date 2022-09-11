@@ -60,6 +60,10 @@ class Engine(private val contextOfMainActivity: Context) {
         val tempIcon = settings.personIcon
         settings.personIcon = settings.computerIcon
         settings.computerIcon = tempIcon
+
+        if(this.currentDifficulty != Difficulty.None)
+            settings.pveIcon = settings.personIcon
+
         return when(settings.personIcon){
             Cell.ImageType.O -> true
             Cell.ImageType.X -> false
@@ -298,7 +302,7 @@ class Engine(private val contextOfMainActivity: Context) {
 
                     GameOverCode.Tie -> {
                         currentToast = Toast(this.contextOfMainActivity).showCustomToast(this.contextOfMainActivity.getString(R.string.Its_tie_MSG), this.contextOfMainActivity as Activity)
-                        if(settings.autoSwitch) settings.personIcon = Cell.ImageType.X
+                        if(settings.autoSwitch) this.swapIcons()
                     }
 
                     GameOverCode.Loss -> {
