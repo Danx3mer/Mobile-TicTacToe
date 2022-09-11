@@ -115,9 +115,11 @@ class MainActivity : AppCompatActivity() {
             stopAllSounds()
 
             if(currentScreen == R.layout.activity_main && newScreen != currentScreen && engine.currentDifficulty == Difficulty.None){
-                settings.stats.oWins = 0
-                settings.stats.xWins = 0
-                settings.stats.pvpTies = 0
+                if(newScreen != R.layout.settings) {
+                    settings.stats.oWins = 0
+                    settings.stats.xWins = 0
+                    settings.stats.pvpTies = 0
+                }
                 settings.personIcon = settings.pveIcon
             }
 

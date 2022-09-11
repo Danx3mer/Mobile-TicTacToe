@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatDelegate
 class Settings(contextOfMainActivity: MainActivity) {
     var soundOn: Boolean = false
         set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "WINS", when(value){ false -> 0; true -> 1 })}
-    var personIcon = Cell.ImageType.O
+    var personIcon = Cell.ImageType.X
         set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "LOSSES", when(value){ Cell.ImageType.O -> 0; else -> 1 })}
-    var computerIcon = Cell.ImageType.X
+    var computerIcon = Cell.ImageType.O
     var pveIcon = personIcon
     var defaultDifficulty: Difficulty = Difficulty.Medium
         set(value) { field = value; this@Settings.dbManager.overwriteValue("SETTINGS", "TIES", when(value){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1 })}
