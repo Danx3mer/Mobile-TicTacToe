@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Tic Tac Toe Open Beta V0.9.6</string>
-    <string name="version">Version: Open Beta 0.9.6</string>
+    <string name="app_name">Tic Tac Toe</string>
+    <string name="version">Version: 1.0</string>
     <string name="developer">Developer: Daniel Manita</string>
     <string name="email">Email: danielthedev5@gmail.com</string>
 

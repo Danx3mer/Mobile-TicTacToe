@@ -176,8 +176,9 @@ class Settings(contextOfMainActivity: MainActivity) {
             when(this.defaultDifficulty){ Difficulty.Easy -> 0; Difficulty.Medium -> 1; Difficulty.Hard -> 2; else -> -1}))
         dbManager.writeSettings("THEME_SETTINGS",
             listOf(when(AppCompatDelegate.getDefaultNightMode()) {
-                AppCompatDelegate.MODE_NIGHT_NO -> 1
-                else -> 0 },
+                AppCompatDelegate.MODE_NIGHT_YES -> 0
+                else -> 1
+                                                                 },
             dataTracker.currentScreen, dataTracker.pastScreen))
     }
 

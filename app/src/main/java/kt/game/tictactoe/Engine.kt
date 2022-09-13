@@ -380,7 +380,7 @@ class Engine(private val contextOfMainActivity: Context) {
         val bitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         val paint = Paint()
-        paint.color = Color.BLACK
+        paint.color = Color.rgb(36,37,38)
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 8F
         paint.isAntiAlias = true

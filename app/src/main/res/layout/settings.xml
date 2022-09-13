@@ -9,8 +9,10 @@
         android:id="@+id/cpgp_settings_defdiff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:checkedChip="@id/cp_settings_medium"
-        app:layout_constraintBottom_toTopOf="@+id/tv_sound"
+        app:layout_constraintBottom_toTopOf="@+id/tb_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/table_stats"
@@ -20,37 +22,37 @@
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_settings_easy"
             style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:checkable="true"
             android:onClick="setDefaultDifficulty"
             android:text="@string/Easy"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_settings_medium"
             style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:checkable="true"
             android:onClick="setDefaultDifficulty"
             android:text="@string/Medium"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_settings_hard"
             style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:checkable="true"
             android:onClick="setDefaultDifficulty"
             android:text="@string/Hard"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
     </com.google.android.material.chip.ChipGroup>
@@ -88,7 +90,7 @@
             android:maxLines="1"
             android:text="@string/settings_stats"
             android:textAppearance="@android:style/TextAppearance.WindowTitle"
-            android:textSize="20sp"
+            android:textSize="20dp"
             tools:layout_editor_absoluteX="64dp"
             tools:layout_editor_absoluteY="14dp" />
 
@@ -99,6 +101,7 @@
         android:id="@+id/ib_usricon"
         android:layout_width="105dp"
         android:layout_height="110dp"
+        android:background="@null"
         android:contentDescription="@string/cd_icon"
         android:onClick="swapIcons"
         android:scaleType="fitCenter"
@@ -108,8 +111,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
-        app:srcCompat="@drawable/o"
-        android:background="@null"/>
+        app:srcCompat="@drawable/o" />
 
     <TextView
         android:id="@+id/tv_youricon"
@@ -118,7 +120,7 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Your_Icon"
-        android:textSize="24sp"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/ib_usricon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
@@ -132,7 +134,7 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Click_To_Change"
-        android:textSize="14sp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="@+id/tv_youricon"
@@ -145,7 +147,7 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Sound"
-        android:textSize="24sp"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/tb_sound"
         app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
         app:layout_constraintHorizontal_bias="0.25"
@@ -160,9 +162,10 @@
         android:clickable="true"
         android:onClick="toggleSound"
         android:soundEffectsEnabled="true"
+        android:textColor="@color/white"
         android:textOff="@string/Off"
         android:textOn="@string/On"
-        android:textColor="@color/white"
+        android:textSize="14dp"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
         app:layout_constraintBottom_toTopOf="@+id/ib_usricon"
         app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
@@ -177,7 +180,7 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Theme"
-        android:textSize="24sp"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/tb_theme"
         app:layout_constraintEnd_toEndOf="@+id/tv_youricon"
         app:layout_constraintHorizontal_bias="0.25"
@@ -188,18 +191,21 @@
         android:id="@+id/tb_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/fullyroundedbutton"
         android:clickable="true"
         android:onClick="toggleTheme"
         android:soundEffectsEnabled="true"
+        android:textColor="@color/white"
         android:textOff="@string/Light"
         android:textOn="@string/Dark"
-        android:textColor="@color/white"
+        android:textSize="14dp"
         android:theme="@style/Theme.Material3.DynamicColors.Dark"
         app:layout_constraintBottom_toTopOf="@+id/tb_sound"
         app:layout_constraintEnd_toEndOf="@+id/ib_usricon"
         app:layout_constraintStart_toStartOf="@+id/ib_usricon"
-        app:layout_constraintTop_toBottomOf="@+id/cpgp_settings_defdiff" />
+        app:layout_constraintTop_toBottomOf="@+id/table_stats"
+        app:layout_constraintVertical_bias="0.84000003" />
 
     <TextView
         android:id="@+id/tv_defdiff"
@@ -208,7 +214,7 @@
         android:ems="10"
         android:gravity="center"
         android:text="@string/Def_Bot_Diff"
-        android:textSize="24sp"
+        android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/cpgp_settings_defdiff"
         app:layout_constraintEnd_toEndOf="@+id/cpgp_settings_defdiff"
         app:layout_constraintStart_toStartOf="@+id/cpgp_settings_defdiff"
@@ -240,7 +246,7 @@
                 android:padding="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_settings_wins"
@@ -251,7 +257,7 @@
                 android:padding="10dp"
                 android:text="@string/Wins"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_settings_losses"
@@ -262,7 +268,7 @@
                 android:padding="10dp"
                 android:text="@string/Losses"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_settings_ties"
@@ -273,7 +279,7 @@
                 android:padding="10dp"
                 android:text="@string/Ties"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/btn_resetall"
@@ -283,9 +289,9 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_all"
                 android:onClick="resetStats"
-                android:textColor="@color/white"
                 android:text="@string/Reset_all"
-                android:textSize="8sp" />
+                android:textColor="@color/white"
+                android:textSize="8dp" />
         </TableRow>
 
         <TableRow
@@ -303,7 +309,7 @@
                 android:paddingBottom="10dp"
                 android:text="@string/Easy"
                 android:textAlignment="gravity"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_wins_easy"
@@ -313,7 +319,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_losses_easy"
@@ -323,7 +329,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_ties_easy"
@@ -333,7 +339,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/btn_reset_easy"
@@ -343,9 +349,9 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_easy"
                 android:onClick="resetStats"
-                android:textColor="@color/white"
                 android:text="@string/Reset"
-                android:textSize="10sp" />
+                android:textColor="@color/white"
+                android:textSize="8dp" />
         </TableRow>
 
         <TableRow
@@ -363,7 +369,7 @@
                 android:paddingBottom="10dp"
                 android:text="@string/Medium"
                 android:textAlignment="gravity"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_wins_medium"
@@ -373,7 +379,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_losses_medium"
@@ -383,7 +389,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_ties_medium"
@@ -393,7 +399,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/btn_reset_medium"
@@ -403,9 +409,9 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_medium"
                 android:onClick="resetStats"
-                android:textColor="@color/white"
                 android:text="@string/Reset"
-                android:textSize="10sp" />
+                android:textColor="@color/white"
+                android:textSize="8dp" />
         </TableRow>
 
         <TableRow
@@ -423,7 +429,7 @@
                 android:paddingBottom="10dp"
                 android:text="@string/Hard"
                 android:textAlignment="gravity"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -433,7 +439,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_losses_hard"
@@ -443,7 +449,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tv_ties_hard"
@@ -453,7 +459,7 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/btn_reset_hard"
@@ -463,9 +469,9 @@
                 android:layout_weight="4"
                 android:contentDescription="@string/cd_reset_hard"
                 android:onClick="resetStats"
-                android:textColor="@color/white"
                 android:text="@string/Reset"
-                android:textSize="10sp" />
+                android:textColor="@color/white"
+                android:textSize="8dp" />
         </TableRow>
     </TableLayout>
 
